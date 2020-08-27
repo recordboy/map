@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MapSearch from "./components/MapSearch";
 import MapList from "./components/MapList";
+import MapRandom from "./components/MapRandom";
 import "./App.css";
 
 declare global {
@@ -15,18 +16,18 @@ interface State {
   longitude: number;
   address: string;
   keyword: string;
-  itemList: {}[];
+  selectItem: number;
+  itemList: any;
+  randomIdx: number;
 }
 
 let latitude: number;
 let longitude: number;
 let address: string = "";
-
 let map: any;
 let infowindow: any;
 let ps: any;
 let geocoder: any;
-
 let markerList: any[] = [];
 
 class App extends Component<Props, State> {
@@ -37,7 +38,9 @@ class App extends Component<Props, State> {
       longitude: 0,
       address: "",
       keyword: "",
+      selectItem: 0,
       itemList: [],
+      randomIdx: 0,
     };
   }
 
@@ -79,8 +82,6 @@ class App extends Component<Props, State> {
     });
   };
 
-  ////////////////////////////////////////////////////////////////////////////////////
-
   // 좌표로 주소 정보 요청
   searchAddrFromCoords = (coords: any, callback: any) => {
     geocoder.coord2RegionCode(longitude, latitude, callback);
@@ -88,9 +89,7 @@ class App extends Component<Props, State> {
 
   // 키워드 검색 완료 시 호출되는 콜백함수
   placesSearchCB = (data: any, status: any, pagination: any) => {
-    
     let itemList: {}[] = [];
-    let key: number = 0;
 
     // 마커를 생성하고 지도에 표시
     let marker = new window.kakao.maps.Marker();
@@ -107,13 +106,16 @@ class App extends Component<Props, State> {
         }
       }
 
+      // 기존 마커 리스트 삭제
+      markerList = [];
+
       // 마커 생성
       for (let i = 0; i < data.length; i++) {
-        this.displayMarker(data[i]);
+        this.displayMarker(data[i], i);
         bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
         itemList.push({
-          key: i,
-          name: data[i].place_name
+          id: i,
+          place: data[i],
         });
       }
 
@@ -122,31 +124,44 @@ class App extends Component<Props, State> {
 
       // 검색된 장소 리스트
       this.setState({
-        itemList: itemList
+        itemList: itemList,
       });
-      console.log(itemList);
     }
-
   };
 
   // 지도에 마커를 표시하는 함수
-  displayMarker = (place: any) => {
+  displayMarker = (place: any, id: number) => {
+    const that = this;
+
     // 마커를 생성하고 지도에 표시
     let marker = new window.kakao.maps.Marker({
       map: map,
       position: new window.kakao.maps.LatLng(place.y, place.x),
     });
+
+    // 마커에 id 추가
+    marker.id = id;
+
+    // 마커 리스트 생성
     markerList.push(marker);
+
     // 마커에 클릭이벤트를 등록
     window.kakao.maps.event.addListener(marker, "click", function () {
       // 마커를 클릭하면 장소명이 인포윈도우에 표출
-      infowindow.setContent(
-        '<div style="padding:5px;font-size:12px;">' +
-          place.place_name +
-          "</div>"
-      );
-      infowindow.open(map, marker);
+      that.selectMarker(marker.id);
     });
+  };
+
+  // 마커에 장소명 출력
+  selectMarker = (id: number) => {
+    infowindow.setContent(
+      "<div style='padding:5px;font-size:12px;'>" +
+        this.state.itemList[id].place.place_name +
+        "</div>"
+    );
+    infowindow.open(map, markerList[id]);
+    console.log('마커리스트 아이디', markerList[id]);
+    console.log('리스트 아이디', this.state.itemList[id]);
   };
 
   // 키워드 버튼으로 장소를 검색
@@ -164,7 +179,6 @@ class App extends Component<Props, State> {
           address: address,
           keyword: keyword,
         });
-        console.log(data);
       }
     });
   };
@@ -177,8 +191,24 @@ class App extends Component<Props, State> {
     }
   };
 
-  render() {
+  // 섞인 리스트 세팅
+  setShuffleList = (shuffleArr: number[]) => {
+    let itemList: {}[] = [];
+    itemList = shuffleArr.map((idx: number): any => {
+      return this.state.itemList[idx]
+    });
+     
+    markerList = shuffleArr.map((idx: number): any => {
+      return markerList[idx].id
+    });
+    
+    this.setState({
+      itemList: itemList
+    });
+    console.log(this.state.itemList);
+  };
 
+  render() {
     return (
       <div>
         <div id="map" />
@@ -186,7 +216,14 @@ class App extends Component<Props, State> {
           handleKeywordSearch={this.handleKeywordSearch}
           handleInputSearch={this.handleInputSearch}
         />
-        <MapList itemList={this.state.itemList} />
+        <MapList
+          itemList={this.state.itemList}
+          selectMarker={this.selectMarker}
+        />
+        <MapRandom
+          itemList={this.state.itemList}
+          setShuffleList={this.setShuffleList}
+        />
       </div>
     );
   }
