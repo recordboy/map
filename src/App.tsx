@@ -109,6 +109,9 @@ class App extends Component<Props, State> {
       // 기존 마커 리스트 삭제
       markerList = [];
 
+      // 기존 인포윈도우 삭제
+      infowindow.close();
+
       // 마커 생성
       for (let i = 0; i < data.length; i++) {
         this.displayMarker(data[i], i);
@@ -155,12 +158,12 @@ class App extends Component<Props, State> {
   // 마커에 장소명 출력
   selectMarker = (id: number) => {
     infowindow.setContent(
-      "<div style='padding:5px;font-size:12px;'>" +
+      "<div style='padding:5px;font-size:12px;' class='infowindow'>" +
         this.state.itemList[id].place.place_name +
         "</div>"
     );
     infowindow.open(map, markerList[id]);
-    console.log('마커리스트 아이디', markerList[id]);
+    console.log('마커리스트 아이디', markerList[id].id);
     console.log('리스트 아이디', this.state.itemList[id]);
   };
 
@@ -193,19 +196,31 @@ class App extends Component<Props, State> {
 
   // 섞인 리스트 세팅
   setShuffleList = (shuffleArr: number[]) => {
-    let itemList: {}[] = [];
-    itemList = shuffleArr.map((idx: number): any => {
+
+    let itemList = shuffleArr.map((idx: number): any => {
       return this.state.itemList[idx]
     });
-     
-    markerList = shuffleArr.map((idx: number): any => {
-      return markerList[idx].id
+
+    let newMarkerList = shuffleArr.map((idx: number): any => {
+      let result: any = {};
+      for (let i = 0; i < markerList.length; i++) {
+        if (markerList[i].id === idx) {
+          result = markerList[i];
+        }
+      }
+      return result;
     });
-    
+    markerList = newMarkerList;
+
+    // console.log(itemList);
+    // console.log(shuffleArr[0]);
+    // console.log(itemList[0]);
+    // console.log(markerList[0].id);
+
     this.setState({
       itemList: itemList
     });
-    console.log(this.state.itemList);
+    
   };
 
   render() {
