@@ -89,7 +89,7 @@ class App extends Component<Props, State> {
 
   // 키워드 검색 완료 시 호출되는 콜백함수
   placesSearchCB = (data: any, status: any, pagination: any) => {
-    let itemList: {}[] = [];
+    let itemList: any = [];
 
     // 마커를 생성하고 지도에 표시
     let marker = new window.kakao.maps.Marker();
@@ -113,14 +113,14 @@ class App extends Component<Props, State> {
       infowindow.close();
 
       // 마커 생성
-      for (let i = 0; i < data.length; i++) {
-        this.displayMarker(data[i], i);
-        bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
+      data.forEach((item: any, idx: number) => {
+        this.displayMarker(item, idx);
+        bounds.extend(new window.kakao.maps.LatLng(item.y, item.x));
         itemList.push({
-          id: i,
-          place: data[i],
+          id: idx,
+          place: item,
         });
-      }
+      });
 
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정
       map.setBounds(bounds);
@@ -142,8 +142,9 @@ class App extends Component<Props, State> {
       position: new window.kakao.maps.LatLng(place.y, place.x),
     });
 
-    // 마커에 id 추가
+    // 마커에 id, 장소명 추가
     marker.id = id;
+    marker.place_name = place.place_name;
 
     // 마커 리스트 생성
     markerList.push(marker);
@@ -163,8 +164,12 @@ class App extends Component<Props, State> {
         "</div>"
     );
     infowindow.open(map, markerList[id]);
-    console.log('마커리스트 아이디', markerList[id].id);
-    console.log('리스트 아이디', this.state.itemList[id]);
+    console.log("마커리스트: ", markerList[id].id, markerList[id].place_name);
+    console.log(
+      "리스트: ",
+      this.state.itemList[id].id,
+      this.state.itemList[id].place.place_name
+    );
   };
 
   // 키워드 버튼으로 장소를 검색
@@ -197,30 +202,36 @@ class App extends Component<Props, State> {
   // 섞인 리스트 세팅
   setShuffleList = (shuffleArr: number[]) => {
 
-    let itemList = shuffleArr.map((idx: number): any => {
-      return this.state.itemList[idx]
-    });
+    
 
-    let newMarkerList = shuffleArr.map((idx: number): any => {
-      let result: any = {};
-      for (let i = 0; i < markerList.length; i++) {
-        if (markerList[i].id === idx) {
-          result = markerList[i];
-        }
-      }
-      return result;
-    });
-    markerList = newMarkerList;
+    // let itemList = shuffleArr.map((idx: number): any => {
+    //   return this.state.itemList[idx]
+    // });
 
     // console.log(itemList);
-    // console.log(shuffleArr[0]);
-    // console.log(itemList[0]);
-    // console.log(markerList[0].id);
 
-    this.setState({
-      itemList: itemList
-    });
-    
+    // let newMarkerList = shuffleArr.map((idx: number): any => {
+    //   let result: any = {};
+    //   for (let i = 0; i < markerList.length; i++) {
+    //     if (markerList[i].id === idx) {
+    //       result = markerList[i];
+    //     }
+    //   }
+    //   return result;
+    // });
+    // markerList = newMarkerList;
+
+    // markerList.forEach((item: any)=>{
+    //   console.log(item.id);
+    // });
+
+    // itemList.forEach((item: any)=>{
+    //   console.log(item.id, item.place.place_name);
+    // });
+
+    // this.setState({
+    //   itemList: itemList
+    // });
   };
 
   render() {
