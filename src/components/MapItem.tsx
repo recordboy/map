@@ -12,22 +12,22 @@ const MapItem = (props: {
   const { id, place, selectMarker } = props;
   const getItemInfo = (url: string) => {
 
-    async function getHTML() {
-      try {
-        return await axios.get('https://recordboy.github.io/');
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    // async function getHTML() {
+    //   try {
+    //     return await axios.get('https://recordboy.github.io/');
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
 
-    getHTML()
-      .then((html) => {
-        console.log(url);
-        const $ = cheerio.load(html.data);
-        const bodyList = $(".link-muted").text();
-        return bodyList;
-      })
-      .then((res) => console.log(res));
+    // getHTML()
+    //   .then((html) => {
+    //     console.log(url);
+    //     const $ = cheerio.load(html.data);
+    //     const bodyList = $(".link-muted").text();
+    //     return bodyList;
+    //   })
+    //   .then((res) => console.log(res));
   }
 
   getItemInfo(place.place_url);
