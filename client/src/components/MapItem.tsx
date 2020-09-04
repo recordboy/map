@@ -12,6 +12,10 @@ const MapItem = (props: {
   const { id, place, selectMarker } = props;
   const getItemInfo = (url: string) => {
 
+    // fetch('http://localhost:3001/api')
+    //     .then(res=>res.json())
+    //     .then(data=>console.log(data));
+
     // async function getHTML() {
     //   try {
     //     return await axios.get('https://recordboy.github.io/');
@@ -28,7 +32,10 @@ const MapItem = (props: {
     //     return bodyList;
     //   })
     //   .then((res) => console.log(res));
+    
   }
+
+  console.log(place);
 
   getItemInfo(place.place_url);
 
@@ -39,7 +46,7 @@ const MapItem = (props: {
       }}
     >
       <div className="name">{place.place_name}</div>
-      {/* <div className="name">{place.place_name}</div> */}
+      {/* <div className="address">{place.road_address_name}</div> */}
       {/* <a href={"tel:" + place.phone}>전화: {place.phone}</a> */}
     </div>
   );
