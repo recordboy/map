@@ -67,14 +67,14 @@ const MapSort = (props: {
 
   return (
     <div>
-      {/* <button
+      <button
         type="button"
         onClick={() => {
           randomShuffle();
         }}
       >
         섞기
-      </button> */}
+      </button>
       <button
         type="button"
         onClick={() => {

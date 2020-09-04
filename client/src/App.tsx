@@ -208,6 +208,11 @@ class App extends Component<Props, State> {
 
     console.log(itemList);
 
+    fetch('http://localhost:3001/api')
+        .then(res=>res.json())
+        .then(data=>console.log(data));
+    
+
     // console.log(itemList);
 
     // let newMarkerList = shuffleArr.map((idx: number): any => {
