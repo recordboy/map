@@ -12,6 +12,8 @@ const MapItem = (props: {
   const { id, place, selectMarker } = props;
   const getItemInfo = (url: string) => {
 
+    
+
     // fetch('http://localhost:3001/api')
     //     .then(res=>res.json())
     //     .then(data=>console.log(data));
