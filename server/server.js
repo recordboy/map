@@ -20,12 +20,8 @@ app.listen(port, ()=>{
 
 const webdriver = require('selenium-webdriver');
 const By = require('selenium-webdriver').By;
-
 const driver = new webdriver.Builder();
-
 console.log(driver);
-
-
 
 // async function getHTML() {
 //     try {
