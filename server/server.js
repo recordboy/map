@@ -22,19 +22,19 @@ const webdriver = require('selenium-webdriver');
 const By = require('selenium-webdriver').By;
 const driver = new webdriver.Builder();
 
-// async function getHTML() {
-//     try {
-//     return await axios.get('https://place.map.kakao.com/26307427');
-//     } catch (error) {
-//     console.error(error);
-//     }
-// }
+async function getHTML() {
+    try {
+    return await axios.get('https://place.map.kakao.com/26307427');
+    } catch (error) {
+    console.error(error);
+    }
+}
 
-// getHTML()
-//     .then((html) => {
-//     const $ = cheerio.load(html);
-//     console.log(html);
-//     const bodyList = $(".tit_location").text();
-//     return bodyList;
-//     })
-//     .then((res) => console.log(res));
+getHTML()
+    .then((html) => {
+    const $ = cheerio.load(html);
+    console.log(html);
+    const bodyList = $(".tit_location").text();
+    return bodyList;
+    })
+    .then((res) => console.log(res));
