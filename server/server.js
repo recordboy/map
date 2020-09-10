@@ -35,5 +35,3 @@ getHTML()
     return bodyList;
     })
     .then((res) => console.log(res));
-
-    
