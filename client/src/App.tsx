@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import MapSearch from "./components/MapSearch";
 import MapList from "./components/MapList";
-import MapRandom from "./components/MapRandom";
+import MapSort from "./components/MapSort";
 import "./App.css";
 
 declare global {
@@ -198,15 +198,15 @@ class App extends Component<Props, State> {
       console.log(data);
     }
   };
-
+  
   // 섞인 리스트 세팅
   setShuffleList = (shuffleArr: number[]) => {
 
-    
+    let itemList = shuffleArr.map((idx: number): any => {
+      return this.state.itemList[idx]
+    });
 
-    // let itemList = shuffleArr.map((idx: number): any => {
-    //   return this.state.itemList[idx]
-    // });
+    console.log(itemList);
 
     // console.log(itemList);
 
@@ -234,10 +234,15 @@ class App extends Component<Props, State> {
     // });
   };
 
+  setAlphabeticalSort = (alphabeArr: number[]) => {
+
+    console.log(alphabeArr);
+  };
+
   render() {
     return (
-      <div>
-        <div id="map" />
+      <div className="App">
+        <div id="map" className="map" />
         <MapSearch
           handleKeywordSearch={this.handleKeywordSearch}
           handleInputSearch={this.handleInputSearch}
@@ -246,9 +251,10 @@ class App extends Component<Props, State> {
           itemList={this.state.itemList}
           selectMarker={this.selectMarker}
         />
-        <MapRandom
+        <MapSort
           itemList={this.state.itemList}
           setShuffleList={this.setShuffleList}
+          setAlphabeticalSort={this.setAlphabeticalSort}
         />
       </div>
     );
