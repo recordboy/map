@@ -40,7 +40,7 @@ const MapSort = (props: {
     let alphabeList: any[] = [];
     var alphabeId: any = [];
 
-    alphabeList = itemList.map((item: any, idx: number)=>{
+    alphabeList = itemList.map((item: any, idx: number) => {
       return item.place.place_name;
     });
 
@@ -53,9 +53,9 @@ const MapSort = (props: {
         return a > b ? -1 : a < b ? 1 : 0;
       });
     }
-    
-    alphabeList.forEach((name: string)=>{
-      itemList.forEach((item: any)=>{
+
+    alphabeList.forEach((name: string) => {
+      itemList.forEach((item: any) => {
         if (item.place.place_name === name) {
           alphabeId.push(item.id);
         }
@@ -63,6 +63,11 @@ const MapSort = (props: {
     });
 
     setAlphabeticalSort(alphabeId);
+
+    // 요청 추가
+    fetch("http://localhost:3001/api")
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   }
 
   return (
