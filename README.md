@@ -30,6 +30,11 @@ app.listen(port, ()=>{
 })
 ```
 
+server 디렉토리에 `.gitignore` 추가한 뒤 아래 코드 추가
+```
+/node_modules
+```
+
 서버 실행
 
 http://localhost:3001/api 에 {"username":"bryan"} 나오면 됨
