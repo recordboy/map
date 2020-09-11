@@ -21,6 +21,7 @@ app.listen(port, () => {
 const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 
+
 const getData = (url) => {
   (async () => {
     const browser = await puppeteer.launch();

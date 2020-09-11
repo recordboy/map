@@ -6,14 +6,7 @@ const MapSort = (props: {
   setAlphabeticalSort: (listArr: number[]) => void;
 }) => {
   const { itemList, setShuffleList, setAlphabeticalSort } = props;
-
-
   let alphabe = false;
-
-
-  // const randomNumber = () => {
-  //   const randomNumber = Math.floor(Math.random() * 15);
-  // };
 
   const randomShuffle = () => {
     let random: number[] = [];
