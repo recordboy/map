@@ -7,9 +7,10 @@
 create-react-app client --use-npm --template typescript
 ```
 
-server 폴더 생성하고 server 에 익스프레스 설치
+server 폴더 생성하고 npm 초기화 뒤 익스프레스 설치
 
 ```
+npm init
 npm add express --save
 ```
 
