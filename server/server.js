@@ -7,23 +7,20 @@ const fetch = require("node-fetch");
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/api", (req, res) => {
-  getData();
-  // res.json({ username: "bryan" });
-});
-
 app.listen(port, () => {
   console.log(`express is running on ${port}`);
 });
 
-fetch("https://place.map.kakao.com/m/main/v/20615157")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (myJson) {
-    const data = JSON.parse(JSON.stringify(myJson));
-    console.log(data.blogReview.list[0].contents);
-  });
+app.use("/api", (req, res) => {
+  fetch("https://place.map.kakao.com/m/main/v/20615157")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (myJson) {
+      const data = JSON.parse(JSON.stringify(myJson));
+      res.json(data.blogReview.list[0].contents);
+    });
+});
 
 // const puppeteer = require("puppeteer");
 // const cheerio = require("cheerio");
