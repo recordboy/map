@@ -59,8 +59,12 @@ const MapSort = (props: {
 
     // 요청 추가
     fetch("http://localhost:3001/api")
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((res) => {
+        res.json()
+      })
+      .then((data) => {
+        console.log(data)
+      });
   }
 
   return (
