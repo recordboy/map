@@ -1,6 +1,7 @@
 # Map
+카카오맵 API를 이용한 주변 장소 정보 가져오기
 
-프로젝트 폴더 생성
+## 프로젝트 폴더 생성
 
 클라이언트 영역 리액트 프로젝트로 생성
 ```
@@ -100,48 +101,6 @@ app.listen(port, () => {
 });
 
 //////////////////////////////////////////////////////////////////////
-app.use("/static", express.static("public"));
-//////////////////////////////////////////////////////////////////////
-
-const axios = require("axios");
-const cheerio = require('cheerio');
-
-// 퍼펫티어
-// const puppeteer = require('puppeteer');
-// (async () => {
-//   const browser = await puppeteer.launch();
-//   const page = await browser.newPage();
-//   // await page.goto('https://www.goodchoice.kr/product/search/2');
-//   await page.goto('https://place.map.kakao.com/m/20615157');
-  
-//   const content = await page.content();
-//   const $ = cheerio.load(content);
-//   console.log($.text());
-//   const lists = $(".cont_evaluation").text();
-//   console.log(lists);
-
-//   await browser.close();
-// })();
-
-// 크롤링
-// async function getHTML() {
-//     try {
-//       return await axios.get("http://localhost:3001/static/index.html");
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-
-//   getHTML()
-//     .then((html) => {
-//       // console.log(html);
-//       const $ = cheerio.load(html.data);
-//       const bodyList = $("#data").text();
-//       return bodyList;
-//     })
-//     .then((res) => console.log(res));
-
-```
 
 서버에 정적 파일 추가할거면 public 디렉토리 만들고 서버 아래 코드 추가
 ```
