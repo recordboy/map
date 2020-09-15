@@ -12,6 +12,20 @@ app.listen(port, () => {
 });
 
 app.use("/api", (req, res) => {
+
+
+
+  var url = require('url');
+
+  
+
+
+  var queryData = url.parse(userId.url, true).query;
+
+  console.log(queryData)
+
+
+
   fetch("https://place.map.kakao.com/m/main/v/20615157")
     .then(function (response) {
       return response.json();
@@ -21,6 +35,8 @@ app.use("/api", (req, res) => {
       res.json(data.blogReview.list[0].contents);
     });
 });
+
+
 
 // const puppeteer = require("puppeteer");
 // const cheerio = require("cheerio");
