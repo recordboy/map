@@ -1,28 +1,25 @@
 import React, { useState } from "react";
+
 const MapItem = (props: {
   id: number;
   place: any;
   selectMarker: (id: number) => void;
+  
 }) => {
+
   const { id, place, selectMarker } = props;
   const getItemInfo = (url: string) => {
 
-    // async function getHTML() {
-    //   try {
-    //     return await axios.get('https://recordboy.github.io/');
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
+    // 장소 id
+    const urlId: string = url.substr(27, 20);
 
-    // getHTML()
-    //   .then((html) => {
-    //     console.log(url);
-    //     const $ = cheerio.load(html.data);
-    //     const bodyList = $(".link-muted").text();
-    //     return bodyList;
-    //   })
-    //   .then((res) => console.log(res));
+    // 로컬 서버에 요청
+    fetch(`http://localhost:3001/api?id=${urlId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // debugger
+      });
   }
 
   getItemInfo(place.place_url);

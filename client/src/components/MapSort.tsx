@@ -57,12 +57,12 @@ const MapSort = (props: {
 
     setAlphabeticalSort(alphabeId);
 
-    // 요청 추가
-    fetch("http://localhost:3001/api?id=20615157")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-      });
+    // // 요청 추가
+    // fetch("http://localhost:3001/api?id=20615157")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data)
+    //   });
       
   }
 
