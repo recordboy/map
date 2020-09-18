@@ -22,7 +22,7 @@ app.use("/api", (req, res) => {
     })
     .then(function (myJson) {
       const data = JSON.parse(JSON.stringify(myJson));
-      res.json(data.blogReview.list[0].contents);
+      res.json(data);
     });
 });
 
