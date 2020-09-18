@@ -7,22 +7,8 @@ const MapItem = (props: {
   
 }) => {
 
+  let txt = '';
   const { id, place, selectMarker } = props;
-  const getItemInfo = (url: string) => {
-
-    // 장소 id
-    const urlId: string = url.substr(27, 20);
-
-    // 로컬 서버에 요청
-    fetch(`http://localhost:3001/api?id=${urlId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        // debugger
-      });
-  }
-
-  getItemInfo(place.place_url);
 
   return (
     <div
@@ -31,6 +17,7 @@ const MapItem = (props: {
       }}
     >
       <div className="name">{place.place_name}</div>
+      <div>{txt}</div>
       {/* <div className="name">{place.place_name}</div> */}
       {/* <a href={"tel:" + place.phone}>전화: {place.phone}</a> */}
     </div>

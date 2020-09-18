@@ -164,12 +164,11 @@ class App extends Component<Props, State> {
         "</div>"
     );
     infowindow.open(map, markerList[id]);
-    console.log("마커리스트: ", markerList[id].id, markerList[id].place_name);
-    console.log(
-      "리스트: ",
-      this.state.itemList[id].id,
-      this.state.itemList[id].place.place_name
-    );
+
+
+    // 장소 상세 정보
+    this.getItemInfo(this.state.itemList[id].place.place_url);
+    
   };
 
   // 키워드 버튼으로 장소를 검색
@@ -198,6 +197,22 @@ class App extends Component<Props, State> {
       console.log(data);
     }
   };
+
+  // 장소 상세 정보 얻기
+  getItemInfo = (url: string) => {
+
+    // 장소 id
+    const urlId: string = url.substr(27, 20);
+
+    // 로컬 서버에 요청
+    fetch(`http://localhost:3001/api?id=${urlId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
+  //////////////////////////////////////////////////////////////////////
   
   // 섞인 리스트 세팅
   setShuffleList = (shuffleArr: number[]) => {
@@ -238,6 +253,8 @@ class App extends Component<Props, State> {
 
     console.log(alphabeArr);
   };
+  
+  //////////////////////////////////////////////////////////////////////
 
   render() {
     return (
