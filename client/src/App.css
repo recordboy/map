@@ -3,8 +3,14 @@
 }
 
 .App .list > div {
-    border-top: 1px solid #e0e0e0;
+    position: relative;
+    border-top: 1px dashed #e0e0e0;
     padding: 10px;
+    cursor: pointer;
+}
+
+.App .list > div:hover {
+    background-color: #f7f7f7;
 }
 
 .App .list .tag > span {
@@ -13,13 +19,39 @@
     padding: 3px 5px;
     font-size: 11px;
     background-color: #E3E8ED;
+    color: #999;
 }
 
 .App .list .name {
+    margin-top: 8px;
     font-size: 18px;
     font-weight: bold;
 }
 
+.App .list .address {
+    font-size: 12px;
+    color: #999;
+}
+
+.App .list .phone {
+    font-size: 12px;
+    text-decoration: none;
+    color: #999;
+}
+
+.App .list .url {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 3px 5px;
+    background-color: #009BC1;
+    color: #fff;
+}
 
 #map {
     height: 500px

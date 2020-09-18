@@ -9,6 +9,8 @@ const MapItem = (props: {
 
   const { id, place, selectMarker } = props;
 
+
+  console.log(place.category_name);
   // 관련 태그
   let tagArr: string[] = [];
   let tag: string = place.category_name;
@@ -33,7 +35,7 @@ const MapItem = (props: {
       <div className="name">{place.place_name}</div>
       <div className="address">{place.road_address_name}</div>
       <a href={'tel:' + phone} className="phone">{phone}</a>
-      <a href={place.place_url} className="url">More</a>
+      <a href={place.place_url} className="url" target="_balnk">More</a>
       {/* <div className="name">{place.place_name}</div> */}
       {/* <a href={"tel:" + place.phone}>전화: {place.phone}</a> */}
     </div>
