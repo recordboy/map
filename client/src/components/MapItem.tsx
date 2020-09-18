@@ -8,9 +8,7 @@ const MapItem = (props: {
 }) => {
 
   const { id, place, selectMarker } = props;
-
-
-  console.log(place.category_name);
+  
   // 관련 태그
   let tagArr: string[] = [];
   let tag: string = place.category_name;
