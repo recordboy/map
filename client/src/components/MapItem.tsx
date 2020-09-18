@@ -15,6 +15,10 @@ const MapItem = (props: {
   tag = tag.replace(/(\s*)/g, "");
   tagArr = tag.split('>');
 
+  // 전화번호
+  let phone: string = '';
+  place.phone !== '' && (phone += place.phone);
+
   return (
     <div
       onClick={() => {
@@ -27,6 +31,9 @@ const MapItem = (props: {
         <span>{tagArr[2]}</span>
       </div>
       <div className="name">{place.place_name}</div>
+      <div className="address">{place.road_address_name}</div>
+      <a href={'tel:' + phone} className="phone">{phone}</a>
+      <a href={place.place_url} className="url">More</a>
       {/* <div className="name">{place.place_name}</div> */}
       {/* <a href={"tel:" + place.phone}>전화: {place.phone}</a> */}
     </div>
