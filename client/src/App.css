@@ -1,10 +1,17 @@
+.App {
+    position: relative;
+    padding-top: 300px;
+}
+
 .App .controller {
     padding: 10px;
 }
 
-.App .controller .sort > button {
+.App .controller .sort button {
     margin: 1.25% 0 0 1.25%;
-    border: 2px solid #e0e0e0;
+    border: none;
+    border-right: 2px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
     border-radius: 3px;
     width: 24%;
     height: 35px;
@@ -12,7 +19,11 @@
     background-color: #f7f7f7;
 }
 
-.App .controller .sort > button:nth-child(4n + 1) {
+.App .controller .sort .title {
+    font-size: 11px;
+}
+
+.App .controller .sort button:nth-child(4n + 1) {
     margin-left: 0;
 }
 
@@ -45,10 +56,6 @@
     height: 35px;
     font-size: 18px;
     color: #999;
-}
-
-.App .list {
-    margin-top: 20px;
 }
 
 .App .list > div {
@@ -103,5 +110,10 @@
 }
 
 #map {
-    height: 300px
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 300px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 }

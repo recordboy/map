@@ -12,36 +12,39 @@ const MapSearch = (props: {
   return (
     <div className="controller">
       <div className="sort">
-        <button
-          type="button"
-          onClick={(e) => {
-            clickKeywordBtn(e);
-          }}
-        >
-          한식
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            clickKeywordBtn(e);
-          }}
-        >
-          일식
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            clickKeywordBtn(e);
-          }}
-        >
-          중식
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            clickKeywordBtn(e);
-          }}
-        >
+        <div className="box">
+          <div className="title">음식</div>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            한식
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            일식
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            중식
+          </button>
+        </div>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
           커피
         </button>
         <button
