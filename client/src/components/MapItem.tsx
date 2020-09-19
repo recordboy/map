@@ -28,14 +28,12 @@ const MapItem = (props: {
       <div className="tag">
         <span>{tagArr[0]}</span>
         <span>{tagArr[1]}</span>
-        <span>{tagArr[2]}</span>
+        {tagArr[2] !== undefined && <span>{tagArr[2]}</span>}
       </div>
       <div className="name">{place.place_name}</div>
       <div className="address">{place.road_address_name}</div>
       <a href={'tel:' + phone} className="phone">{phone}</a>
       <a href={place.place_url} className="url" target="_balnk">More</a>
-      {/* <div className="name">{place.place_name}</div> */}
-      {/* <a href={"tel:" + place.phone}>전화: {place.phone}</a> */}
     </div>
   );
 };

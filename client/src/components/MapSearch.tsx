@@ -10,7 +10,7 @@ const MapSearch = (props: {
     handleKeywordSearch(e.target.innerText);
   };
   return (
-    <div>
+    <div className="controller">
       <div>
         <button
           type="button"
