@@ -65,6 +65,18 @@ class App extends Component<Props, State> {
 
       // 주소 좌표 변환 객체 생성
       geocoder = new window.kakao.maps.services.Geocoder();
+      
+      // 내 위치 마커
+      var markerPosition  = new window.kakao.maps.LatLng(latitude, longitude); 
+
+      // 내 위치 마커 생성
+      var marker = new window.kakao.maps.Marker({
+          position: markerPosition
+      });
+      
+      // 내 위치 마커 세팅
+      marker.setMap(map);
+
     });
   }
 
