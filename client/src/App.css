@@ -1,11 +1,32 @@
-
-
-
 .App .controller {
     padding: 10px;
 }
 
+.App .controller .sort > button {
+    margin: 1.25% 0 0 1.25%;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    width: 24%;
+    height: 35px;
+    font-size: 15px;
+    background-color: #f7f7f7;
+}
 
+.App .controller .sort > button:nth-child(4n + 1) {
+    margin-left: 0;
+}
+
+.App .controller .serach > button {
+    margin: 1.25% 0 0 1.25%;
+    border: none;
+    border-radius: 3px;
+    width: 24%;
+    height: 35px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #86D6D0;
+    color: #fff;
+}
 
 .App .list {
     margin-top: 20px;
@@ -58,7 +79,7 @@
     font-size: 12px;
     text-decoration: none;
     border-radius: 3px;
-    background-color: #009BC1;
+    background-color: #86D6D0;
     color: #fff;
 }
 

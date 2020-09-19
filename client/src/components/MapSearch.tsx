@@ -11,14 +11,14 @@ const MapSearch = (props: {
   };
   return (
     <div className="controller">
-      <div>
+      <div className="sort">
         <button
           type="button"
           onClick={(e) => {
             clickKeywordBtn(e);
           }}
         >
-          식당
+          한식
         </button>
         <button
           type="button"
@@ -26,7 +26,7 @@ const MapSearch = (props: {
             clickKeywordBtn(e);
           }}
         >
-          술집
+          일식
         </button>
         <button
           type="button"
@@ -34,7 +34,15 @@ const MapSearch = (props: {
             clickKeywordBtn(e);
           }}
         >
-          카페
+          중식
+        </button>
+        <button
+          type="button"
+          onClick={(e) => {
+            clickKeywordBtn(e);
+          }}
+        >
+          커피
         </button>
         <button
           type="button"
@@ -50,7 +58,7 @@ const MapSearch = (props: {
             clickKeywordBtn(e);
           }}
         >
-          관광명소
+          공원
         </button>
         <button
           type="button"
@@ -58,10 +66,18 @@ const MapSearch = (props: {
             clickKeywordBtn(e);
           }}
         >
-          숙박
+          숙소
+        </button>
+        <button
+          type="button"
+          onClick={(e) => {
+            clickKeywordBtn(e);
+          }}
+        >
+          화장실
         </button>
       </div>
-      <div>
+      <div className="search">
         <input
           type="text"
           placeholder="직접 입력"
