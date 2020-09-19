@@ -38,48 +38,144 @@ const MapSearch = (props: {
           >
             중식
           </button>
-        </div>
           <button
             type="button"
             onClick={(e) => {
               clickKeywordBtn(e);
             }}
           >
-          커피
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            clickKeywordBtn(e);
-          }}
-        >
-          편의점
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            clickKeywordBtn(e);
-          }}
-        >
-          공원
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            clickKeywordBtn(e);
-          }}
-        >
-          숙소
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            clickKeywordBtn(e);
-          }}
-        >
-          화장실
-        </button>
+            분식
+          </button>
+        </div>
+        <div className="box">
+          <div className="title">술집</div>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            호프
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            이자카야
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            치킨
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            와인
+          </button>
+        </div>
+        <div className="box">
+          <div className="title">디저트</div>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            커피
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            음료
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            과자
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            케잌
+          </button>
+        </div>
+        <div className="box">
+          <div className="title">편의 시설</div>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            편의점
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            마트
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            약국
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            화장실
+          </button>
+        </div>
+        <div className="box">
+          <div className="title">숙박</div>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            호텔
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            모텔
+          </button>
+        </div>
       </div>
+
+
+
+      
       <div className="search">
         <input
           type="text"
