@@ -91,7 +91,7 @@ const MapSearch = (props: {
             handleInputSearch(inputData);
           }}
         >
-          검색
+          <i className="fa fa-search"></i>
         </button>
       </div>
     </div>
