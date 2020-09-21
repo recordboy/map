@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-interface Props {}
+interface Props { }
 interface State {
   latitude: number;
   longitude: number;
@@ -65,15 +65,15 @@ class App extends Component<Props, State> {
 
       // 주소 좌표 변환 객체 생성
       geocoder = new window.kakao.maps.services.Geocoder();
-      
+
       // 내 위치 마커
-      var markerPosition  = new window.kakao.maps.LatLng(latitude, longitude); 
+      var markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
 
       // 내 위치 마커 생성
       var marker = new window.kakao.maps.Marker({
-          position: markerPosition
+        position: markerPosition
       });
-      
+
       // 내 위치 마커 세팅
       marker.setMap(map);
 
@@ -172,15 +172,14 @@ class App extends Component<Props, State> {
   selectMarker = (id: number) => {
     infowindow.setContent(
       "<div style='padding:5px;font-size:12px;' class='infowindow'>" +
-        this.state.itemList[id].place.place_name +
-        "</div>"
+      this.state.itemList[id].place.place_name +
+      "</div>"
     );
     infowindow.open(map, markerList[id]);
 
-
     // 장소 상세 정보
     this.getItemInfo(this.state.itemList[id].place.place_url);
-    
+
   };
 
   // 키워드 버튼으로 장소를 검색
@@ -222,10 +221,11 @@ class App extends Component<Props, State> {
       .then((data) => {
         console.log(data);
       });
+
   };
 
   //////////////////////////////////////////////////////////////////////
-  
+
   // 섞인 리스트 세팅
   setShuffleList = (shuffleArr: number[]) => {
 
@@ -265,7 +265,7 @@ class App extends Component<Props, State> {
 
     console.log(alphabeArr);
   };
-  
+
   //////////////////////////////////////////////////////////////////////
 
   render() {
