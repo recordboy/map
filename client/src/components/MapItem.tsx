@@ -9,6 +9,9 @@ const MapItem = (props: {
 
   const { id, place, selectMarker } = props;
 
+  // 장소 정보
+  const [placeInfo, setPlaceInfo] = useState({});
+
   // 관련 태그
   let tagArr: string[] = [];
   let tag: string = place.category_name;
@@ -20,12 +23,16 @@ const MapItem = (props: {
   place.phone !== '' && (phone += place.phone);
 
   // 로컬 서버에 장소 정보 요청
-  const setPlaceInfo = (place: any) => {
+  const getPlaceInfo = (place: any) => {
 
     fetch(`http://localhost:3001/api?id=${place.id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setPlaceInfo(data);
+
+        console.log(placeInfo)
+
+        // console.log(placeInfo);
       });
   }
   
@@ -33,7 +40,9 @@ const MapItem = (props: {
     <div
       onClick={() => {
         selectMarker(id);
-        setPlaceInfo(place);
+        getPlaceInfo(place);
+
+        console.log(placeInfo);
       }}
     >
       <div className="tag">
@@ -45,6 +54,8 @@ const MapItem = (props: {
       <div className="address">{place.road_address_name}</div>
       <a href={'tel:' + phone} className="phone">{phone}</a>
       <a href={place.place_url} className="url" target="_balnk">More</a>
+    {/* <div>{placeInfo.basicInfo.placenamefull}</div> */}
+    {/* <div>{console.log(1)}</div> */}
     </div>
   );
 };
