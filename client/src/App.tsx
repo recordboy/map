@@ -18,6 +18,7 @@ interface State {
   keyword: string;
   selectItem: number;
   itemList: any;
+  itemInfo: any;
   randomIdx: number;
 }
 
@@ -40,6 +41,7 @@ class App extends Component<Props, State> {
       keyword: "",
       selectItem: 0,
       itemList: [],
+      itemInfo: {},
       randomIdx: 0,
     };
   }
@@ -219,7 +221,12 @@ class App extends Component<Props, State> {
     fetch(`http://localhost:3001/api?id=${urlId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        
+        // 장소 정보 세팅
+        this.setState({
+          itemInfo: data
+        });
+        console.log(this.state.itemInfo);
       });
 
   };
