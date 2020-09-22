@@ -18,7 +18,6 @@ interface State {
   keyword: string;
   selectItem: number;
   itemList: any;
-  itemInfo: any;
   randomIdx: number;
 }
 
@@ -41,7 +40,6 @@ class App extends Component<Props, State> {
       keyword: "",
       selectItem: 0,
       itemList: [],
-      itemInfo: {},
       randomIdx: 0,
     };
   }
@@ -180,7 +178,7 @@ class App extends Component<Props, State> {
     infowindow.open(map, markerList[id]);
 
     // 장소 상세 정보
-    this.getItemInfo(this.state.itemList[id].place.place_url);
+    // this.getItemInfo(this.state.itemList[id].place.place_url);
 
   };
 
@@ -212,24 +210,19 @@ class App extends Component<Props, State> {
   };
 
   // 장소 상세 정보 얻기
-  getItemInfo = (url: string) => {
+  // getItemInfo = (url: string) => {
 
-    // 장소 id
-    const urlId: string = url.substr(27, 20);
+  //   // 장소 id
+  //   const urlId: string = url.substr(27, 20);
 
-    // 로컬 서버에 요청
-    fetch(`http://localhost:3001/api?id=${urlId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        
-        // 장소 정보 세팅
-        this.setState({
-          itemInfo: data
-        });
-        console.log(this.state.itemInfo);
-      });
+  //   // 로컬 서버에 요청
+  //   fetch(`http://localhost:3001/api?id=${urlId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     });
 
-  };
+  // };
 
   //////////////////////////////////////////////////////////////////////
 

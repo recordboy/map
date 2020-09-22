@@ -19,10 +19,21 @@ const MapItem = (props: {
   let phone: string = '';
   place.phone !== '' && (phone += place.phone);
 
+  // 로컬 서버에 장소 정보 요청
+  const setPlaceInfo = (place: any) => {
+
+    fetch(`http://localhost:3001/api?id=${place.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+  
   return (
     <div
       onClick={() => {
         selectMarker(id);
+        setPlaceInfo(place);
       }}
     >
       <div className="tag">
