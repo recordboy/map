@@ -8,23 +8,26 @@ const MapItem = (props: {
 }) => {
   const { id, place, selectMarker } = props;
 
+  const [introduction, setIntroduction] = useState(''); // 소개
+  const [score, setScore] = useState(0); // 평점
+
   // 장소 정보 초기화
-  const [placeData, setPlaceData] = useState({
-    introduction: "",
-    holidayName: "",
-    score: 0,
-    menuInfo: [
-      {
-        menu: "",
-        price: "",
-      },
-    ],
-    photoList: [
-      {
-        orgurl: "",
-      },
-    ],
-  });
+  // const [placeData, setPlaceData] = useState({
+  //   introduction: "",
+  //   holidayName: "",
+  //   score: 0,
+  //   menuInfo: [
+  //     {
+  //       menu: "",
+  //       price: "",
+  //     },
+  //   ],
+  //   photoList: [
+  //     {
+  //       orgurl: "",
+  //     },
+  //   ],
+  // });
 
   // 장소 정보 보여짐 유무
   const [isOn, setIsOn] = useState(false);
@@ -45,49 +48,53 @@ const MapItem = (props: {
   const getPlaceInfo = (place: any) => {
     fetch(`http://localhost:3001/api?id=${place.id}`)
       .then((res) => res.json())
-      .then((dataJSON) => {
-        
-        // 이곳에 있는 정보로 데이터 세팅
-        // console.log(dataJSON);
+      .then((data) => {
 
         // 장소 정보 세팅
-        setPlaceInfo(dataJSON);
+        setPlaceInfo(data);
       });
   };
 
   // 장소 정보 세팅
-  const setPlaceInfo = (dataJSON: any) => {
+  const setPlaceInfo = (data: any) => {
 
     // 소개
-    const introduction: string = dataJSON.basicInfo.introduction;
-
-    // 휴무일
-    const holidayName: string = dataJSON.basicInfo.openHour.offdayList[0].holidayName;
+    setIntroduction(data.basicInfo.introduction);
 
     // 평점
-    const scoreCnt: number = dataJSON.comment.scorecnt;
-    const scoreSum: number = dataJSON.comment.scoresum;
-    const score: number = Math.floor((scoreSum / scoreCnt) * 10) / 10;
+    const scoreCnt: number = data.comment.scorecnt;
+    const scoreSum: number = data.comment.scoresum;
+    setScore(Math.floor((scoreSum / scoreCnt) * 10) / 10);
 
-    // 메뉴
-    const menuInfo: any[] = dataJSON.menuInfo.bottomList;
+    console.log(data);
 
-    // 사진
-    const photoList: any[] = dataJSON.photo.photoList;
+    // 휴무일
+    // const holidayName: string = data.basicInfo.openHour.offdayList[0].holidayName;
 
-    setPlaceData({
-      introduction: introduction,
-      holidayName: holidayName,
-      score: score,
-      menuInfo: [...menuInfo],
-      photoList: [...photoList],
-    });
+    // // 평점
+    // const scoreCnt: number = data.comment.scorecnt;
+    // const scoreSum: number = data.comment.scoresum;
+    // const score: number = Math.floor((scoreSum / scoreCnt) * 10) / 10;
 
-    photoList.forEach((item: any, idx: number) => {
-      list.push(<MapPhotoItem key={idx} />);
-    })
+    // // 메뉴
+    // const menuInfo: any[] = data.menuInfo.bottomList;
 
-    setIsOn(true);
+    // // 사진
+    // const photoList: any[] = data.photo.photoList;
+
+    // setPlaceData({
+    //   introduction: introduction,
+    //   holidayName: holidayName,
+    //   score: score,
+    //   menuInfo: [...menuInfo],
+    //   photoList: [...photoList],
+    // });
+
+    // photoList.forEach((item: any, idx: number) => {
+    //   list.push(<MapPhotoItem key={idx} />);
+    // })
+
+    // setIsOn(true);
   };
 
   return (
@@ -120,11 +127,11 @@ const MapItem = (props: {
             {/* <img src={placeData.photoList[1].orgurl} /> */}
           </div>
         </div>
-        <div>{placeData.introduction}</div>
-        <div>{placeData.score}</div>
-        <div>{placeData.holidayName}</div>
+        <div>{introduction}</div>
+        <div>{score}</div>
+        {/* <div>{placeData.holidayName}</div>
         <div>{placeData.menuInfo[0].menu}</div>
-        <div>{placeData.menuInfo[0].price}</div>
+        <div>{placeData.menuInfo[0].price}</div> */}
       </div>
     </div>
   );
