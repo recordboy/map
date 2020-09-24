@@ -80,26 +80,3 @@ npm i axios cheerio --save
 npm i puppeteer cheerio --save
 ```
 
-아래는 서버에 들어가는 전체 코드
-```
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const port = process.env.PORT || 3001;
-
-app.use(cors());
-
-app.use(bodyParser.json());
-app.use("/api", (req, res) => res.json({ username: "bryan" }));
-
-app.listen(port, () => {
-  console.log(`express is running on ${port}`);
-});
-
-//////////////////////////////////////////////////////////////////////
-
-서버에 정적 파일 추가할거면 public 디렉토리 만들고 서버 아래 코드 추가
-```
-app.use("/static", express.static("public"));
-```
