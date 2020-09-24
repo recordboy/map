@@ -45,7 +45,7 @@ fetch("http://localhost:3001/api")
   .then((data) => console.log(data));
 ```
 
-서버쪽에 크로스 모듈 추가
+서버에 크로스 모듈 추가
 
 npm install cors --save
 
