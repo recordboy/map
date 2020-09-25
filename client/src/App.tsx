@@ -10,15 +10,12 @@ declare global {
   }
 }
 
-interface Props { }
+interface Props {}
 interface State {
-  latitude: number;
-  longitude: number;
-  address: string;
-  keyword: string;
-  selectItem: number;
-  itemList: any;
-  randomIdx: number;
+  latitude: number; // 위도
+  longitude: number; // 경도
+  address: string; // 주소 정보
+  itemList: any; // 검색된 각 장소
 }
 
 let latitude: number;
@@ -37,14 +34,11 @@ class App extends Component<Props, State> {
       latitude: 0,
       longitude: 0,
       address: "",
-      keyword: "",
-      selectItem: 0,
       itemList: [],
-      randomIdx: 0,
     };
   }
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     this.setLocation((latitude: number, longitude: number) => {
       const options = {
         center: new window.kakao.maps.LatLng(latitude, longitude),
@@ -71,12 +65,11 @@ class App extends Component<Props, State> {
 
       // 내 위치 마커 생성
       var marker = new window.kakao.maps.Marker({
-        position: markerPosition
+        position: markerPosition,
       });
 
       // 내 위치 마커 세팅
       marker.setMap(map);
-
     });
   }
 
@@ -108,6 +101,7 @@ class App extends Component<Props, State> {
     marker.setMap(null);
 
     if (status === window.kakao.maps.services.Status.OK) {
+
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가
       let bounds = new window.kakao.maps.LatLngBounds();
 
@@ -117,7 +111,7 @@ class App extends Component<Props, State> {
           markerList[i].setMap(null);
         }
       }
-
+      
       // 기존 마커 리스트 삭제
       markerList = [];
 
@@ -137,7 +131,7 @@ class App extends Component<Props, State> {
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정
       map.setBounds(bounds);
 
-      // 검색된 장소 리스트
+      // 검색된 장소 리스트 세팅
       this.setState({
         itemList: itemList,
       });
@@ -163,6 +157,7 @@ class App extends Component<Props, State> {
 
     // 마커에 클릭이벤트를 등록
     window.kakao.maps.event.addListener(marker, "click", function () {
+
       // 마커를 클릭하면 장소명이 인포윈도우에 표출
       that.selectMarker(marker.id);
     });
@@ -172,32 +167,25 @@ class App extends Component<Props, State> {
   selectMarker = (id: number) => {
     infowindow.setContent(
       "<div style='padding:5px;font-size:12px;' class='infowindow'>" +
-      this.state.itemList[id].place.place_name +
-      "</div>"
+        this.state.itemList[id].place.place_name +
+        "</div>"
     );
     infowindow.open(map, markerList[id]);
 
     // 장소 상세 정보
     // this.getItemInfo(this.state.itemList[id].place.place_url);
-
   };
 
   // 키워드 버튼으로 장소를 검색
   handleKeywordSearch = (keyword: string) => {
     this.searchAddrFromCoords(map.getCenter(), (result: any, status: any) => {
-      // 좌표 주소 정보
+      // 현재 좌표 주소와 키워드를 통해 검색
       address = result[1].address_name;
-      if (this.state.keyword !== keyword) {
-        const data: string = address + " " + keyword;
-        ps.keywordSearch(data, this.placesSearchCB, {
-          x: latitude,
-          y: longitude,
-        });
-        this.setState({
-          address: address,
-          keyword: keyword,
-        });
-      }
+      const data: string = address + " " + keyword;
+      ps.keywordSearch(data, this.placesSearchCB, {
+        x: latitude,
+        y: longitude,
+      });
     });
   };
 
@@ -209,62 +197,13 @@ class App extends Component<Props, State> {
     }
   };
 
-  // 장소 상세 정보 얻기
-  // getItemInfo = (url: string) => {
-
-  //   // 장소 id
-  //   const urlId: string = url.substr(27, 20);
-
-  //   // 로컬 서버에 요청
-  //   fetch(`http://localhost:3001/api?id=${urlId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     });
-
-  // };
-
   //////////////////////////////////////////////////////////////////////
 
-  // 섞인 리스트 세팅
-  setShuffleList = (shuffleArr: number[]) => {
+  // 셔플
+  setShuffleList = (shuffleArr: number[]) => {};
 
-    let itemList = shuffleArr.map((idx: number): any => {
-      return this.state.itemList[idx]
-    });
-
-    console.log(itemList);
-
-    // console.log(itemList);
-
-    // let newMarkerList = shuffleArr.map((idx: number): any => {
-    //   let result: any = {};
-    //   for (let i = 0; i < markerList.length; i++) {
-    //     if (markerList[i].id === idx) {
-    //       result = markerList[i];
-    //     }
-    //   }
-    //   return result;
-    // });
-    // markerList = newMarkerList;
-
-    // markerList.forEach((item: any)=>{
-    //   console.log(item.id);
-    // });
-
-    // itemList.forEach((item: any)=>{
-    //   console.log(item.id, item.place.place_name);
-    // });
-
-    // this.setState({
-    //   itemList: itemList
-    // });
-  };
-
-  setAlphabeticalSort = (alphabeArr: number[]) => {
-
-    console.log(alphabeArr);
-  };
+  // 가나다순
+  setAlphabeticalSort = (alphabeArr: number[]) => {};
 
   //////////////////////////////////////////////////////////////////////
 
