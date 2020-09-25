@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import MapPhotoItem from "./MapPhotoItem";
+import React, { useEffect, useState } from "react";
 
 const MapItem = (props: {
   id: number;
@@ -8,31 +7,25 @@ const MapItem = (props: {
 }) => {
   const { id, place, selectMarker } = props;
 
-  const [introduction, setIntroduction] = useState(''); // 소개
-  const [score, setScore] = useState(0); // 평점
+  // 정보
+  const [info, setInfo] = useState({
+    introduction: '',
+    score: '',
+    holidayName: '',
+    adress: '',
+    photoUrl: [''],
+    menu: [''],
+  });
 
-  // 장소 정보 초기화
-  // const [placeData, setPlaceData] = useState({
-  //   introduction: "",
-  //   holidayName: "",
-  //   score: 0,
-  //   menuInfo: [
-  //     {
-  //       menu: "",
-  //       price: "",
-  //     },
-  //   ],
-  //   photoList: [
-  //     {
-  //       orgurl: "",
-  //     },
-  //   ],
-  // });
+  // UI 컨트롤
+  const [view, setView] = useState({
+    isOn: false,
+    photoListWidth: 0
+  });
 
-  // 장소 정보 보여짐 유무
-  const [isOn, setIsOn] = useState(false);
-  
-  const list: any = [];
+  useEffect(() => {
+    console.log(11)
+  });
 
   // 관련 태그
   let tagArr: string[] = [];
@@ -49,52 +42,87 @@ const MapItem = (props: {
     fetch(`http://localhost:3001/api?id=${place.id}`)
       .then((res) => res.json())
       .then((data) => {
+        // 데이터 저장
+        const dataJSON = JSON.parse(data);
+
+        // 이곳에 있는 정보로 데이터 세팅
+        // console.log(placeData.basicInfo.placenamefull);
 
         // 장소 정보 세팅
-        setPlaceInfo(data);
+        setPlaceInfo(dataJSON);
       });
   };
 
   // 장소 정보 세팅
   const setPlaceInfo = (data: any) => {
 
+    // 정보
+    let introduction: string = '';
+    let score: string = '';
+    let holidayName: string = '';
+    let adress: string = '';
+    let photoUrl: string[] = [];
+    let menu: string[] = [];
+
+    // UI 컨트롤
+    let photoListWidth: number =  0;
+
     // 소개
-    setIntroduction(data.basicInfo.introduction);
+    if (data.basicInfo.hasOwnProperty('introduction')) {
+      introduction = data.basicInfo.introduction;
+    }
 
     // 평점
-    const scoreCnt: number = data.comment.scorecnt;
-    const scoreSum: number = data.comment.scoresum;
-    setScore(Math.floor((scoreSum / scoreCnt) * 10) / 10);
-
-    console.log(data);
+    if (data.comment.scorecnt !== 0) {
+      const scoreCnt: number = data.comment.scorecnt;
+      const scoreSum: number = data.comment.scoresum;
+      score = String(Math.floor((scoreSum / scoreCnt) * 10) / 10);
+    }
 
     // 휴무일
-    // const holidayName: string = data.basicInfo.openHour.offdayList[0].holidayName;
+    if (data.basicInfo.hasOwnProperty("openHour")) {
+      holidayName = data.basicInfo.openHour.offdayList[0].holidayName;
+    }
 
-    // // 평점
-    // const scoreCnt: number = data.comment.scorecnt;
-    // const scoreSum: number = data.comment.scoresum;
-    // const score: number = Math.floor((scoreSum / scoreCnt) * 10) / 10;
+    // 주소
+    if (data.basicInfo.hasOwnProperty('address')) {
+      const newaddrfullname: string = data.basicInfo.address.region.newaddrfullname; // 지역
+      const newaddrfull: string = data.basicInfo.address.newaddr.newaddrfull; // 도로명
+      const bsizonno: string = data.basicInfo.address.newaddr.bsizonno; // 우편번호
+      let addrdetail: string = ''; // 상세 주소
+      if (data.basicInfo.address.hasOwnProperty('addrdetail')) {
+        addrdetail = data.basicInfo.address.addrdetail;
+      }
+      adress = newaddrfullname + ' ' + newaddrfull + ' ' + addrdetail + ' (우)' + bsizonno;
+    }
 
-    // // 메뉴
-    // const menuInfo: any[] = data.menuInfo.bottomList;
+    // 사진
+    if (data.photo.photoCount !== 0) {
+      const photoUrlArr: string[] = [];
+      photoUrl = data.photo.photoList.map((item: any) => {
+        return item.orgurl;
+      });
+      photoListWidth = photoUrl.length * 130;
+    }
 
-    // // 사진
-    // const photoList: any[] = data.photo.photoList;
+    // 메뉴
+    if (data.hasOwnProperty('menuInfo')) {
+      menu = data.menuInfo.bottomList;
+    }
 
-    // setPlaceData({
-    //   introduction: introduction,
-    //   holidayName: holidayName,
-    //   score: score,
-    //   menuInfo: [...menuInfo],
-    //   photoList: [...photoList],
-    // });
+    setInfo({
+      introduction: introduction,
+      score: score,
+      holidayName: holidayName,
+      adress: adress,
+      photoUrl: photoUrl,
+      menu: menu,
+    });
 
-    // photoList.forEach((item: any, idx: number) => {
-    //   list.push(<MapPhotoItem key={idx} />);
-    // })
-
-    // setIsOn(true);
+    setView({
+      isOn: true,
+      photoListWidth: photoListWidth,
+    });
   };
 
   return (
@@ -104,7 +132,7 @@ const MapItem = (props: {
         getPlaceInfo(place);
       }}
     >
-      <div className="basic">
+      <div className={view.isOn ? "basic on" : "basic"}>
         <div className="tag">
           <span>{tagArr[0]}</span>
           <span>{tagArr[1]}</span>
@@ -119,19 +147,23 @@ const MapItem = (props: {
           More
         </a>
       </div>
-      <div className={isOn ? "detail on" : "detail"}>
-
+      <div className={view.isOn ? "detail on" : "detail"}>
         <div className="photo">
-          <div className="inner">
-            {list}
-            {/* <img src={placeData.photoList[1].orgurl} /> */}
+          <div className="inner" style={{ width: view.photoListWidth + "px" }}>
+            {info.photoUrl[0] !== "" && info.photoUrl.map((item: any, idx: number) => {
+              return <img key={idx} src={item} />;
+            })}
           </div>
         </div>
-        <div>{introduction}</div>
-        <div>{score}</div>
-        {/* <div>{placeData.holidayName}</div>
-        <div>{placeData.menuInfo[0].menu}</div>
-        <div>{placeData.menuInfo[0].price}</div> */}
+        <div>{info.introduction}</div>
+        <div>{info.adress}</div>
+        <div>{info.score}</div>
+        <div>{info.holidayName}</div>
+        <div>
+          {info.menu.map((item: any, idx: number) => {
+            return <div key={idx}>{item.menu}: <strong>{item.price}원</strong></div>
+          })}
+        </div>
       </div>
     </div>
   );
