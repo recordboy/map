@@ -1,22 +1,21 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const MapItem = (props: {
   id: number;
-  isChange: boolean;
   place: any;
   selectMarker: (id: number) => void;
 }) => {
-  const { id, isChange, place, selectMarker } = props;
+  const { id, place, selectMarker } = props;
 
   // 정보 더보기
   const [info, setInfo] = useState({
-    introduction: '',
-    score: '',
-    holidayName: '',
-    adress: '',
-    photoUrl: [''],
+    introduction: "",
+    score: 0,
+    holidayName: "",
+    adress: "",
+    photoUrl: [""],
     photoListWidth: 0,
-    menu: [''],
+    menu: [""],
   });
 
   // 정보 더보기 보여짐 유무
@@ -55,20 +54,19 @@ const MapItem = (props: {
 
   // 장소 더보기 세팅
   const setPlaceInfo = (data: any) => {
-
     // 더보기 항목
-    let introduction: string = '';
-    let score: string = '';
-    let holidayName: string = '';
-    let adress: string = '';
+    let introduction: string = "";
+    let score: number = 0;
+    let holidayName: string = "";
+    let adress: string = "";
     let photoUrl: string[] = [];
     let menu: string[] = [];
 
     // UI 컨트롤
-    let photoListWidth: number =  0;
+    let photoListWidth: number = 0;
 
     // 소개
-    if (data.basicInfo.hasOwnProperty('introduction')) {
+    if (data.basicInfo.hasOwnProperty("introduction")) {
       introduction = data.basicInfo.introduction;
     }
 
@@ -76,7 +74,9 @@ const MapItem = (props: {
     if (data.comment.scorecnt !== 0) {
       const scoreCnt: number = data.comment.scorecnt;
       const scoreSum: number = data.comment.scoresum;
-      score = String(Math.floor((scoreSum / scoreCnt) * 10) / 10);
+      score = Math.floor((scoreSum / scoreCnt) * 10) / 10;
+    } else {
+      score = -1;
     }
 
     // 휴무일
@@ -85,15 +85,23 @@ const MapItem = (props: {
     }
 
     // 주소
-    if (data.basicInfo.hasOwnProperty('address')) {
-      const newaddrfullname: string = data.basicInfo.address.region.newaddrfullname; // 지역
+    if (data.basicInfo.hasOwnProperty("address")) {
+      const newaddrfullname: string =
+        data.basicInfo.address.region.newaddrfullname; // 지역
       const newaddrfull: string = data.basicInfo.address.newaddr.newaddrfull; // 도로명
       const bsizonno: string = data.basicInfo.address.newaddr.bsizonno; // 우편번호
-      let addrdetail: string = ''; // 상세 주소
-      if (data.basicInfo.address.hasOwnProperty('addrdetail')) {
+      let addrdetail: string = ""; // 상세 주소
+      if (data.basicInfo.address.hasOwnProperty("addrdetail")) {
         addrdetail = data.basicInfo.address.addrdetail;
       }
-      adress = newaddrfullname + ' ' + newaddrfull + ' ' + addrdetail + ' (우)' + bsizonno;
+      adress =
+        newaddrfullname +
+        " " +
+        newaddrfull +
+        " " +
+        addrdetail +
+        " (우)" +
+        bsizonno;
     }
 
     // 사진
@@ -106,7 +114,7 @@ const MapItem = (props: {
     }
 
     // 메뉴
-    if (data.hasOwnProperty('menuInfo')) {
+    if (data.hasOwnProperty("menuInfo")) {
       menu = data.menuInfo.bottomList;
     }
 
@@ -122,44 +130,62 @@ const MapItem = (props: {
   };
 
   return (
-    <div
-      onClick={() => {
-        selectMarker(id);
-        getPlaceInfo(place);
-        isOn ? setIsOn(false) : setIsOn(true);
-      }}
-    >
-    {/* {console.log(isOn)} */}
-      <div className={isOn ? "basic on" : "basic"}>
+    <div>
+      <div
+        className={isOn ? "basic on" : "basic"}
+        onClick={() => {
+          selectMarker(id);
+          getPlaceInfo(place);
+          isOn ? setIsOn(false) : setIsOn(true);
+        }}
+      >
         <div className="tag">
           <span>{tagArr[0]}</span>
           <span>{tagArr[1]}</span>
           {tagArr[2] !== undefined && <span>{tagArr[2]}</span>}
         </div>
         <div className="name">{place.place_name}</div>
-        <div className="address">{place.road_address_name}</div>
         <a href={"tel:" + phone} className="phone">
           {phone}
         </a>
         <a href={place.place_url} className="url" target="_balnk">
-          More
+          MORE
         </a>
       </div>
       <div className={isOn ? "detail on" : "detail"}>
         <div className="photo">
           <div className="inner" style={{ width: info.photoListWidth + "px" }}>
-            {info.photoUrl[0] !== "" && info.photoUrl.map((item: any, idx: number) => {
-              return <img key={idx} src={item} />;
-            })}
+            {info.photoUrl[0] !== "" &&
+              info.photoUrl.map((item: any, idx: number) => {
+                return <img key={idx} src={item} />;
+              })}
           </div>
         </div>
-        <div>{info.introduction}</div>
-        <div>{info.adress}</div>
-        <div>{info.score}</div>
-        <div>{info.holidayName}</div>
+        <div className="introduction">{info.introduction}</div>
+        <div className="adress">{info.adress}</div>
+        <div className={info.score !== -1 ? "score on" : "score"}>
+          평점 <span className="number">{info.score}</span>
+          <span className="frame">
+            <span className="line">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span
+              className="gauge"
+              style={{ width: info.score * 20 + "%" }}
+            ></span>
+          </span>
+        </div>
+        <div className="holidayName">{info.holidayName}</div>
         <div>
           {info.menu.map((item: any, idx: number) => {
-            return <div key={idx}>{item.menu}: <strong>{item.price}원</strong></div>
+            return (
+              <div key={idx}>
+                {item.menu}: <strong>{item.price}원</strong>
+              </div>
+            );
           })}
         </div>
       </div>
