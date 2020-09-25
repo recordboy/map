@@ -23,7 +23,6 @@ let infowindow: any;
 let ps: any;
 let geocoder: any;
 let markerList: any[] = [];
-let isChange: boolean = false;
 
 class App extends Component<Props, State> {
   
@@ -123,13 +122,6 @@ class App extends Component<Props, State> {
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정
       map.setBounds(bounds);
 
-      if (this.state.itemList.length > 0) {
-        isChange = false;
-        if (this.state.itemList[0].place.id !== itemList[0].place.id) {
-          isChange = true;
-        }
-      }
-
       // 검색된 장소 리스트 세팅
       this.setState({
         itemList: itemList,
@@ -172,7 +164,7 @@ class App extends Component<Props, State> {
     infowindow.open(map, markerList[id]);
 
     // 주소 얻기
-    console.log(this.state.itemList);
+    // console.log(this.state.itemList);
   };
 
   // 키워드 버튼으로 장소를 검색
@@ -216,7 +208,6 @@ class App extends Component<Props, State> {
           handleInputSearch={this.handleInputSearch}
         />
         <MapList
-          isChange={isChange}
           itemList={this.state.itemList}
           selectMarker={this.selectMarker}
         />
