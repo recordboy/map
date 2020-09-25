@@ -1,8 +1,5 @@
 import React, { useState , useEffect } from "react";
 
-// 정보 UI 컨트롤
-let isOn: boolean = false;
-
 const MapItem = (props: {
   id: number;
   isChange: boolean;
@@ -11,7 +8,7 @@ const MapItem = (props: {
 }) => {
   const { id, isChange, place, selectMarker } = props;
 
-  // 정보
+  // 정보 더보기
   const [info, setInfo] = useState({
     introduction: '',
     score: '',
@@ -22,23 +19,25 @@ const MapItem = (props: {
     menu: [''],
   });
 
-  // useEffect(() => {
-  //   if (isChange) {
-  //     isOn = false;
-  //   }
-  // });
+  // 정보 더보기 보여짐 유무
+  const [isOn, setIsOn] = useState(false);
 
-  // 관련 태그
+  // 각 정보 변경될 경우 정보 더보기 닫기
+  useEffect(() => {
+    setIsOn(false);
+  }, [place.id]);
+
+  // 장소 태그
   let tagArr: string[] = [];
   let tag: string = place.category_name;
   tag = tag.replace(/(\s*)/g, "");
   tagArr = tag.split(">");
 
-  // 전화번호
+  // 장소 전화번호
   let phone: string = "";
   place.phone !== "" && (phone += place.phone);
 
-  // 로컬 서버에 장소 정보 요청
+  // 로컬 서버에 장소 더보기 요청
   const getPlaceInfo = (place: any) => {
     fetch(`http://localhost:3001/api?id=${place.id}`)
       .then((res) => res.json())
@@ -49,15 +48,15 @@ const MapItem = (props: {
         // 이곳에 있는 정보로 데이터 세팅
         // console.log(placeData.basicInfo.placenamefull);
 
-        // 장소 정보 세팅
+        // 장소 더보기 세팅
         setPlaceInfo(dataJSON);
       });
   };
 
-  // 장소 정보 세팅
+  // 장소 더보기 세팅
   const setPlaceInfo = (data: any) => {
 
-    // 정보
+    // 더보기 항목
     let introduction: string = '';
     let score: string = '';
     let holidayName: string = '';
@@ -120,7 +119,6 @@ const MapItem = (props: {
       photoListWidth: photoListWidth,
       menu: menu,
     });
-
   };
 
   return (
@@ -128,10 +126,10 @@ const MapItem = (props: {
       onClick={() => {
         selectMarker(id);
         getPlaceInfo(place);
-        isOn ? isOn = false : isOn = true;
+        isOn ? setIsOn(false) : setIsOn(true);
       }}
     >
-    {console.log(isOn)}
+    {/* {console.log(isOn)} */}
       <div className={isOn ? "basic on" : "basic"}>
         <div className="tag">
           <span>{tagArr[0]}</span>
