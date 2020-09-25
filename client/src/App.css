@@ -1,6 +1,6 @@
 .App {
     position: relative;
-    padding-top: 300px;
+    padding-top: 100px;
 }
 
 .App .controller {
@@ -43,7 +43,6 @@
     height: 35px;
     font-size: 15px;
     font-weight: bold;
-
 }
 
 .App .controller .search button {
@@ -59,55 +58,134 @@
     color: #999;
 }
 
-.App .list > div {
+.App .list {
+    font-size: 12px;
+}
+
+.App .list .basic {
     position: relative;
     border-top: 1px dashed #e0e0e0;
     padding: 10px;
     cursor: pointer;
 }
 
-.App .list > div:hover {
-    background-color: #f7f7f7;
+.App .list .basic.on {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
 }
 
-.App .list .tag > span {
-    margin-right: 5px;
-    border-radius: 3px;
-    padding: 3px 5px;
-    font-size: 11px;
+.App .list .basic .tag > span {
+    margin-right: 3px;
+    border-radius: 2px;
+    padding: 2px 4px;
+    font-size: 10px;
     background-color: #E3E8ED;
     color: #999;
 }
 
-.App .list .name {
+.App .list .basic .name {
     margin-top: 8px;
-    font-size: 18px;
+    line-height: 22px;
+    font-size: 17px;
     font-weight: bold;
 }
 
-.App .list .address {
-    font-size: 12px;
-    color: #999;
-}
-
-.App .list .phone {
-    font-size: 12px;
+.App .list .basic .phone {
     text-decoration: none;
     color: #999;
 }
 
-.App .list .url {
+.App .list .basic .url {
     position: absolute;
     top: 10px;
     right: 10px;
-    padding: 3px 5px;
+    border-radius: 3px;
+    padding: 4px 2px;
     width: 50px;
     text-align: center;
-    font-size: 12px;
     text-decoration: none;
-    border-radius: 3px;
     background-color: #86D6D0;
     color: #fff;
+}
+
+.App .list .detail {
+    overflow: hidden;
+    display: none;
+    /* transition: max-height 0.5s ease-in; */
+}
+
+.App .list .detail.on {
+    display: block;
+    padding: 10px;
+}
+
+.App .list .detail .photo {
+    overflow-x: auto;
+}
+
+.App .list .detail .photo .inner {
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.App .list .detail .photo img {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding-left: 2px;
+    width: 130px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.App .list .detail .photo img:first-child {
+    padding-left: 0;
+}
+
+.App .list .detail .photo img:first-child {
+    padding-left: 0;
+}
+
+.App .list .detail .introduction {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.App .list .detail .adress {
+    color: #666;
+}
+
+.App .list .detail .score {
+    position: relative;
+    margin-top: 5px;
+    width: 40%;
+}
+
+.App .list .detail .score .number {
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    z-index: 10;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.App .list .detail .score .frame {
+    display: block;
+    width: 100%;
+    height: 25px;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+}
+
+.App .list .detail .score .gauge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    border-radius: 3px;
+    background-color: #86D6D0;
 }
 
 #map {
@@ -115,6 +193,6 @@
     top: 0;
     z-index: 10;
     width: 100%;
-    height: 300px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    height: 100px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 }
