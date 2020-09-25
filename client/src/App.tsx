@@ -171,8 +171,8 @@ class App extends Component<Props, State> {
     );
     infowindow.open(map, markerList[id]);
 
-    // 장소 상세 정보
-    // this.getItemInfo(this.state.itemList[id].place.place_url);
+    // 주소 얻기
+    console.log(this.state.itemList);
   };
 
   // 키워드 버튼으로 장소를 검색
