@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState , useEffect } from "react";
+
+// 정보 UI 컨트롤
+let isOn: boolean = false;
 
 const MapItem = (props: {
   id: number;
+  isChange: boolean;
   place: any;
   selectMarker: (id: number) => void;
 }) => {
-  const { id, place, selectMarker } = props;
+  const { id, isChange, place, selectMarker } = props;
 
   // 정보
   const [info, setInfo] = useState({
@@ -14,18 +18,15 @@ const MapItem = (props: {
     holidayName: '',
     adress: '',
     photoUrl: [''],
+    photoListWidth: 0,
     menu: [''],
   });
 
-  // UI 컨트롤
-  const [view, setView] = useState({
-    isOn: false,
-    photoListWidth: 0
-  });
-
-  useEffect(() => {
-    console.log(11)
-  });
+  // useEffect(() => {
+  //   if (isChange) {
+  //     isOn = false;
+  //   }
+  // });
 
   // 관련 태그
   let tagArr: string[] = [];
@@ -116,13 +117,10 @@ const MapItem = (props: {
       holidayName: holidayName,
       adress: adress,
       photoUrl: photoUrl,
+      photoListWidth: photoListWidth,
       menu: menu,
     });
 
-    setView({
-      isOn: true,
-      photoListWidth: photoListWidth,
-    });
   };
 
   return (
@@ -130,9 +128,11 @@ const MapItem = (props: {
       onClick={() => {
         selectMarker(id);
         getPlaceInfo(place);
+        isOn ? isOn = false : isOn = true;
       }}
     >
-      <div className={view.isOn ? "basic on" : "basic"}>
+    {console.log(isOn)}
+      <div className={isOn ? "basic on" : "basic"}>
         <div className="tag">
           <span>{tagArr[0]}</span>
           <span>{tagArr[1]}</span>
@@ -147,9 +147,9 @@ const MapItem = (props: {
           More
         </a>
       </div>
-      <div className={view.isOn ? "detail on" : "detail"}>
+      <div className={isOn ? "detail on" : "detail"}>
         <div className="photo">
-          <div className="inner" style={{ width: view.photoListWidth + "px" }}>
+          <div className="inner" style={{ width: info.photoListWidth + "px" }}>
             {info.photoUrl[0] !== "" && info.photoUrl.map((item: any, idx: number) => {
               return <img key={idx} src={item} />;
             })}
