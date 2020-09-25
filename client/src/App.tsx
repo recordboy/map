@@ -12,10 +12,7 @@ declare global {
 
 interface Props {}
 interface State {
-  latitude: number; // 위도
-  longitude: number; // 경도
-  address: string; // 주소 정보
-  itemList: any; // 검색된 각 장소
+  itemList: any;
 }
 
 let latitude: number;
@@ -26,14 +23,13 @@ let infowindow: any;
 let ps: any;
 let geocoder: any;
 let markerList: any[] = [];
+let isChange: boolean = false;
 
 class App extends Component<Props, State> {
+  
   constructor(props: Props) {
     super(props);
     this.state = {
-      latitude: 0,
-      longitude: 0,
-      address: "",
       itemList: [],
     };
   }
@@ -61,10 +57,10 @@ class App extends Component<Props, State> {
       geocoder = new window.kakao.maps.services.Geocoder();
 
       // 내 위치 마커
-      var markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
+      const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
 
       // 내 위치 마커 생성
-      var marker = new window.kakao.maps.Marker({
+      const marker = new window.kakao.maps.Marker({
         position: markerPosition,
       });
 
@@ -79,10 +75,6 @@ class App extends Component<Props, State> {
     navigator.geolocation.getCurrentPosition(function (pos) {
       latitude = pos.coords.latitude;
       longitude = pos.coords.longitude;
-      that.setState({
-        latitude: latitude,
-        longitude: longitude,
-      });
       callBack(latitude, longitude);
     });
   };
@@ -131,6 +123,13 @@ class App extends Component<Props, State> {
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정
       map.setBounds(bounds);
 
+      if (this.state.itemList.length > 0) {
+        isChange = false;
+        if (this.state.itemList[0].place.id !== itemList[0].place.id) {
+          isChange = true;
+        }
+      }
+
       // 검색된 장소 리스트 세팅
       this.setState({
         itemList: itemList,
@@ -143,7 +142,7 @@ class App extends Component<Props, State> {
     const that = this;
 
     // 마커를 생성하고 지도에 표시
-    let marker = new window.kakao.maps.Marker({
+    const marker = new window.kakao.maps.Marker({
       map: map,
       position: new window.kakao.maps.LatLng(place.y, place.x),
     });
@@ -208,6 +207,7 @@ class App extends Component<Props, State> {
   //////////////////////////////////////////////////////////////////////
 
   render() {
+
     return (
       <div className="App">
         <div id="map" className="map" />
@@ -216,6 +216,7 @@ class App extends Component<Props, State> {
           handleInputSearch={this.handleInputSearch}
         />
         <MapList
+          isChange={isChange}
           itemList={this.state.itemList}
           selectMarker={this.selectMarker}
         />
