@@ -40,9 +40,9 @@ const MapItem = (props: {
   const getPlaceInfo = (place: any) => {
     fetch(`http://localhost:3001/api?id=${place.id}`)
       .then((res) => res.json())
-      .then((data) => {
+      .then((dataJSON) => {
         // 데이터 저장
-        const dataJSON = JSON.parse(data);
+        // const dataJSON = JSON.parse(data);
 
         // 이곳에 있는 정보로 데이터 세팅
         // console.log(placeData.basicInfo.placenamefull);
