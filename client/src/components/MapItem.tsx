@@ -11,7 +11,6 @@ const MapItem = (props: {
   const [info, setInfo] = useState({
     introduction: "",
     score: 0,
-    holidayName: "",
     adress: "",
     photoUrl: [""],
     photoListWidth: 0,
@@ -57,7 +56,6 @@ const MapItem = (props: {
     // 더보기 항목
     let introduction: string = "";
     let score: number = 0;
-    let holidayName: string = "";
     let adress: string = "";
     let photoUrl: string[] = [];
     let menu: string[] = [];
@@ -77,11 +75,6 @@ const MapItem = (props: {
       score = Math.floor((scoreSum / scoreCnt) * 10) / 10;
     } else {
       score = -1;
-    }
-
-    // 휴무일
-    if (data.basicInfo.hasOwnProperty("openHour")) {
-      holidayName = data.basicInfo.openHour.offdayList[0].holidayName;
     }
 
     // 주소
@@ -121,7 +114,6 @@ const MapItem = (props: {
     setInfo({
       introduction: introduction,
       score: score,
-      holidayName: holidayName,
       adress: adress,
       photoUrl: photoUrl,
       photoListWidth: photoListWidth,
@@ -178,7 +170,6 @@ const MapItem = (props: {
             ></span>
           </span>
         </div>
-        <div className="holidayName">{info.holidayName}</div>
         <div>
           {info.menu.map((item: any, idx: number) => {
             return (
