@@ -71,7 +71,7 @@ const MapItem = (props: {
 
   // 장소 더보기 세팅
   const setPlaceInfo = (data: any) => {
-    
+
     // 더보기 항목
     let introduction: string = "";
     let score: number = 0;
@@ -225,6 +225,19 @@ const MapItem = (props: {
           </div>
         )}
 
+        {info.menu.length > 0 && (
+          <div className="menu">
+            {info.menu.map((item: any, idx: number) => {
+              return (
+                <div key={idx}>
+                  <span>{item.menu}</span>
+                  <strong>{item.price}원</strong>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
         {info.score !== -1 && (
           <div className="score">
             <span className="result">총 {info.score}점</span>
@@ -241,19 +254,6 @@ const MapItem = (props: {
                 style={{ width: info.score * 20 + "%" }}
               ></span>
             </span>
-          </div>
-        )}
-
-        {info.menu.length > 0 && (
-          <div className="menu">
-            {info.menu.map((item: any, idx: number) => {
-              return (
-                <div key={idx}>
-                  <span>{item.menu}</span>
-                  <strong>{item.price}원</strong>
-                </div>
-              );
-            })}
           </div>
         )}
 
