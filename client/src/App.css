@@ -69,10 +69,6 @@
     cursor: pointer;
 }
 
-.App .list .basic.on {
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-}
-
 .App .list .basic .tag > span {
     margin-right: 3px;
     border-radius: 2px;
