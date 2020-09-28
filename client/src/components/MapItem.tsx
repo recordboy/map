@@ -107,10 +107,10 @@ const MapItem = (props: {
     if (data.basicInfo.hasOwnProperty("openHour")) {
       if (data.basicInfo.openHour.hasOwnProperty("periodList")) {
         if (data.basicInfo.openHour.periodList[0].hasOwnProperty("timeList")) {
+          debugger
           timeName = data.basicInfo.openHour.periodList[0].timeList[0].timeName;
           timeSE = data.basicInfo.openHour.periodList[0].timeList[0].timeSE;
-          dayOfWeek =
-            data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
+          dayOfWeek = data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
         }
       }
     }
@@ -135,7 +135,7 @@ const MapItem = (props: {
       photoUrl = data.photo.photoList.map((item: any) => {
         return item.orgurl;
       });
-      photoListWidth = photoUrl.length * 200;
+      photoListWidth = photoUrl.length * 300;
     } else {
       photoUrl.push("N");
     }
@@ -194,7 +194,7 @@ const MapItem = (props: {
           {phone}
         </a>
         <a href={place.place_url} className="url" target="_balnk">
-          MORE
+          더보기
         </a>
       </div>
       <div className={isOn ? "detail on" : "detail"}>
@@ -221,15 +221,16 @@ const MapItem = (props: {
           <div className="time">
             <span>{info.timeName}</span>
             <span>{info.timeSE}</span>
-            <span>({info.dayOfWeek})</span>
+            <span>{info.dayOfWeek}</span>
           </div>
         )}
 
         {info.menu.length > 0 && (
           <div className="menu">
+            <div className="title">대표메뉴</div>
             {info.menu.map((item: any, idx: number) => {
               return (
-                <div key={idx}>
+                <div className="item" key={idx}>
                   <span>{item.menu}</span>
                   <strong>{item.price}원</strong>
                 </div>
