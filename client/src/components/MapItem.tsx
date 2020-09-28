@@ -19,6 +19,20 @@ const MapItem = (props: {
     photoUrl: [""],
     photoListWidth: 0,
     menu: [""],
+    commentList: [
+      {
+        contents: "",
+        point: 0,
+        username: "",
+        date: "",
+      },
+    ],
+  });
+
+  // 리뷰 더보기 보여질 항목 인덱스
+  const [reviewIdx, setReviewIdx] = useState({
+    idx: 0,
+    isOn: false,
   });
 
   // 정보 더보기 보여짐 유무
@@ -67,6 +81,7 @@ const MapItem = (props: {
     let adress: string = "";
     let photoUrl: string[] = [];
     let menu: string[] = [];
+    let commentList: any[] = [];
 
     // UI 컨트롤
     let photoListWidth: number = 0;
@@ -76,10 +91,11 @@ const MapItem = (props: {
       introduction = data.basicInfo.introduction;
     }
 
-    // 평점
+    // 리뷰
     if (data.comment.scorecnt !== 0) {
       const scoreCnt: number = data.comment.scorecnt;
       const scoreSum: number = data.comment.scoresum;
+      commentList = data.comment.list;
       score = Math.floor((scoreSum / scoreCnt) * 10) / 10;
       people = scoreCnt;
     } else {
@@ -90,10 +106,10 @@ const MapItem = (props: {
     if (data.basicInfo.hasOwnProperty("openHour")) {
       if (data.basicInfo.openHour.hasOwnProperty("periodList")) {
         if (data.basicInfo.openHour.periodList[0].hasOwnProperty("timeList")) {
-          
           timeName = data.basicInfo.openHour.periodList[0].timeList[0].timeName;
           timeSE = data.basicInfo.openHour.periodList[0].timeList[0].timeSE;
-          dayOfWeek = data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
+          dayOfWeek =
+            data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
         }
       }
     }
@@ -102,20 +118,15 @@ const MapItem = (props: {
     if (data.basicInfo.hasOwnProperty("address")) {
       const newaddrfullname: string =
         data.basicInfo.address.region.newaddrfullname; // 지역
-      const newaddrfull: string = data.basicInfo.address.newaddr.newaddrfull; // 도로명
-      const bsizonno: string = data.basicInfo.address.newaddr.bsizonno; // 우편번호
+      let newaddrfull: string = ""; // 도로명
       let addrdetail: string = ""; // 상세 주소
+      if (data.basicInfo.address.hasOwnProperty("newaddr")) {
+        newaddrfull = data.basicInfo.address.newaddr.newaddrfull;
+      }
       if (data.basicInfo.address.hasOwnProperty("addrdetail")) {
         addrdetail = data.basicInfo.address.addrdetail;
       }
-      adress =
-        newaddrfullname +
-        " " +
-        newaddrfull +
-        " " +
-        addrdetail +
-        " (우)" +
-        bsizonno;
+      adress = newaddrfullname + " " + newaddrfull + " " + addrdetail;
     }
 
     // 사진
@@ -143,8 +154,23 @@ const MapItem = (props: {
       photoUrl: photoUrl,
       photoListWidth: photoListWidth,
       menu: menu,
+      commentList: commentList,
     });
   };
+
+  const setReviewMore = (idx: number) => {
+    if (reviewIdx.idx === idx && reviewIdx.isOn) {
+      setReviewIdx({
+        idx: idx,
+        isOn: false,
+      });
+    } else {
+      setReviewIdx({
+        idx: idx,
+        isOn: true,
+      });
+    }
+  }
 
   return (
     <div>
@@ -180,8 +206,14 @@ const MapItem = (props: {
         </div>
         <div className="introduction">{info.introduction}</div>
         <div className="adress">{info.adress}</div>
+        <div className="time">
+          <span>{info.timeName}</span>
+          <span>{info.timeSE}</span>
+          <span>{info.dayOfWeek}</span>
+        </div>
         <div className={info.score !== -1 ? "score on" : "score"}>
-          평점 <span className="result">{info.score}점</span><span className="people">{info.people}명</span>
+          <span className="result">{info.score}점</span>
+          <span className="people">({info.people}명)</span>
           <span className="frame">
             <span className="line">
               <span></span>
@@ -195,20 +227,33 @@ const MapItem = (props: {
             ></span>
           </span>
         </div>
-        <div className="time">
-          <span>{info.timeName}</span>
-          <span>{info.timeSE}</span>
-          <span>{info.dayOfWeek}</span>
-        </div>
-        <div>
+        <div className="menu">
           {info.menu.map((item: any, idx: number) => {
             return (
               <div key={idx}>
-                {item.menu}: <strong>{item.price}원</strong>
+                <span>{item.menu}</span>
+                <strong>{item.price}원</strong>
               </div>
             );
           })}
         </div>
+        {info.commentList.map((item: any, idx: number) => {
+            return (
+              <div className="review" key={idx}>
+                <div className="info">
+                  <span className="point">{item.point}점</span>
+                  <span className="name">{item.username}</span>
+                  <span className="date">{item.date}</span>
+                  <button className="more" onClick={() => {
+                    setReviewMore(idx);
+                  }}>{reviewIdx.idx === idx && reviewIdx.isOn ? '닫기' : '더보기'}</button>
+                </div>
+                <div className={reviewIdx.idx === idx && reviewIdx.isOn ? 'text on' : 'text'}>
+                  {item.contents}
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
