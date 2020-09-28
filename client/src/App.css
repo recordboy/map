@@ -1,6 +1,6 @@
 .App {
     position: relative;
-    padding-top: 400px;
+    padding-top: 100px;
 }
 
 .App .controller {
@@ -70,7 +70,7 @@
 }
 
 .App .list .basic.on {
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
 }
 
 .App .list .basic .tag > span {
@@ -108,8 +108,8 @@
 }
 
 .App .list .detail {
-    overflow: hidden;
     display: none;
+    overflow: hidden;
     /* transition: max-height 0.5s ease-in; */
 }
 
@@ -154,81 +154,181 @@
 
 .App .list .detail .adress {
     margin-top: 5px;
+}
+
+.App .list .detail .time {
+    margin-top: 5px;
     color: #666;
 }
 
 .App .list .detail .score {
     display: none;
     position: relative;
-    margin-top: 5px;
-    width: 30%;
-    font-size: 10px;
-    color: #666;
+    margin-top: 10px;
+    width: 100px;
 }
 
 .App .list .detail .score.on {
     display: block;
 }
 
-.App .list .detail .score .number {
-    position: absolute;
-    bottom: 4px;
-    left: 4px;
-    z-index: 10;
-    font-size: 20px;
+.App .list .detail .score .result {
+    font-size: 16px;
     font-weight: bold;
-    color: #fff;
 }
 
-.App .list .detail .score .frame {
-    display: block;
+.App .list .detail .score .people {
+    font-size: 10px;
+    color: #999;
+}
+
+.App .list .detail .frame {
+    display: inline-block;
     position: relative;
     width: 100%;
-    height: 30px;
+    height: 10px;
     border-radius: 3px;
     background-color: #f0f0f0;
 }
 
-.App .list .detail .score .line span {
+.App .list .detail .frame .line span {
     position: absolute;
     top: 0;
     z-index: 20;
     width: 1px;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 1);
 }
 
-.App .list .detail .score .line span:nth-child(1) {
+.App .list .detail .frame .line span:nth-child(1) {
     left: 20%;
 }
 
-.App .list .detail .score .line span:nth-child(2) {
+.App .list .detail .frame .line span:nth-child(2) {
     left: 40%;
 }
 
-.App .list .detail .score .line span:nth-child(3) {
+.App .list .detail .frame .line span:nth-child(3) {
     left: 60%;
 }
 
-.App .list .detail .score .line span:nth-child(4) {
+.App .list .detail .frame .line span:nth-child(4) {
     left: 80%;
 }
 
-.App .list .detail .score .gauge {
+.App .list .detail .frame .gauge {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 30px;
+    height: 10px;
     border-radius: 3px 0 0 3px;
     background-color: #86D6D0;
+}
+
+.App .list .detail .menu {
+    margin-top: 10px;
+}
+
+.App .list .detail .menu > div {
+    position: relative;
+    padding-right: 70px;
+    box-sizing: border-box;
+}
+
+.App .list .detail .menu > div:after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 0;
+    z-index: -10;
+    border-top: 1px dashed #ccc;
+    width: 100%;
+}
+
+.App .list .detail .menu > div span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    padding-right: 5px;
+    background-color: #fff;
+}
+
+.App .list .detail .menu > div strong {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-left: 5px;
+    background-color: #fff;
+}
+
+.App .list .detail .review {
+    margin-top: 10px;
+}
+
+.App .list .detail .review .info {
+    position: relative;
+}
+
+.App .list .detail .review .info span {
+    position: relative;
+    margin-right: 10px;
+}
+
+.App .list .detail .review .info span:before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: -5px;
+    width: 1px;
+    height: 10px;
+    background-color: #ccc;
+}
+
+.App .list .detail .review .info span:first-child:before {
+    display: none;
+}
+
+.App .list .detail .review .point {
+    font-weight: bold;
+}
+
+.App .list .detail .review .date {
+    color: #999;
+}
+
+.App .list .detail .review .more {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    background: none;
+    color: #666;
+}
+
+.App .list .detail .review .text {
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap:break-word;
+    height: auto;
+}
+
+.App .list .detail .review .text.on {
+    -webkit-line-clamp: inherit;
 }
 
 #map {
     position: fixed;
     top: 0;
-    z-index: 10;
+    z-index: 30;
     width: 100%;
-    height: 400px;
+    height: 100px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 }
