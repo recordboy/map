@@ -80,7 +80,7 @@ const MapItem = (props: {
     let dayOfWeek: string = "";
     let adress: string = "";
     let photoUrl: string[] = [];
-    let menu: string[] = [];
+    let menu: any[] = [];
     let commentList: any[] = [];
 
     // UI 컨트롤
@@ -131,11 +131,12 @@ const MapItem = (props: {
 
     // 사진
     if (data.photo.photoCount !== 0) {
-      const photoUrlArr: string[] = [];
       photoUrl = data.photo.photoList.map((item: any) => {
         return item.orgurl;
       });
-      photoListWidth = photoUrl.length * 130;
+      photoListWidth = photoUrl.length * 200;
+    } else {
+      photoUrl.push("N");
     }
 
     // 메뉴
@@ -170,7 +171,7 @@ const MapItem = (props: {
         isOn: true,
       });
     }
-  }
+  };
 
   return (
     <div>
@@ -196,64 +197,100 @@ const MapItem = (props: {
         </a>
       </div>
       <div className={isOn ? "detail on" : "detail"}>
-        <div className="photo">
-          <div className="inner" style={{ width: info.photoListWidth + "px" }}>
-            {info.photoUrl[0] !== "" &&
-              info.photoUrl.map((item: any, idx: number) => {
+        {info.photoUrl[0] !== "N" && (
+          <div className="photo">
+            <div
+              className="inner"
+              style={{ width: info.photoListWidth + "px" }}
+            >
+              {info.photoUrl.map((item: any, idx: number) => {
                 return <img key={idx} src={item} />;
               })}
+            </div>
           </div>
-        </div>
-        <div className="introduction">{info.introduction}</div>
+        )}
+
+        {info.introduction !== "" && (
+          <div className="introduction">{info.introduction}</div>
+        )}
+
         <div className="adress">{info.adress}</div>
-        <div className="time">
-          <span>{info.timeName}</span>
-          <span>{info.timeSE}</span>
-          <span>{info.dayOfWeek}</span>
-        </div>
-        <div className={info.score !== -1 ? "score on" : "score"}>
-          <span className="result">{info.score}점</span>
-          <span className="people">({info.people}명)</span>
-          <span className="frame">
-            <span className="line">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+
+        {info.timeName !== "" && (
+          <div className="time">
+            <span>{info.timeName}</span>
+            <span>{info.timeSE}</span>
+            <span>({info.dayOfWeek})</span>
+          </div>
+        )}
+
+        {info.score !== -1 && (
+          <div className="score">
+            <span className="result">총 {info.score}점</span>
+            <span className="people">({info.people}명)</span>
+            <span className="frame">
+              <span className="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              <span
+                className="gauge"
+                style={{ width: info.score * 20 + "%" }}
+              ></span>
             </span>
-            <span
-              className="gauge"
-              style={{ width: info.score * 20 + "%" }}
-            ></span>
-          </span>
-        </div>
-        <div className="menu">
-          {info.menu.map((item: any, idx: number) => {
-            return (
-              <div key={idx}>
-                <span>{item.menu}</span>
-                <strong>{item.price}원</strong>
-              </div>
-            );
-          })}
-        </div>
-        {info.commentList.map((item: any, idx: number) => {
-            return (
-              <div className="review" key={idx}>
-                <div className="info">
-                  <span className="point">{item.point}점</span>
-                  <span className="name">{item.username}</span>
-                  <span className="date">{item.date}</span>
-                  <button className="more" onClick={() => {
-                    setReviewMore(idx);
-                  }}>{reviewIdx.idx === idx && reviewIdx.isOn ? '닫기' : '더보기'}</button>
+          </div>
+        )}
+
+        {info.menu.length > 0 && (
+          <div className="menu">
+            {info.menu.map((item: any, idx: number) => {
+              return (
+                <div key={idx}>
+                  <span>{item.menu}</span>
+                  <strong>{item.price}원</strong>
                 </div>
-                <div className={reviewIdx.idx === idx && reviewIdx.isOn ? 'text on' : 'text'}>
-                  {item.contents}
+              );
+            })}
+          </div>
+        )}
+
+        {info.score !== -1 && (
+          <div className="review">
+            <div className="title">방문자 리뷰</div>
+            {info.commentList.map((item: any, idx: number) => {
+              return (
+                <div className="item" key={idx}>
+                  <div className="info">
+                    <span className="point">{item.point}점</span>
+                    <span className="name">{item.username}</span>
+                    <span className="date">{item.date}</span>
+                    <button
+                      className="more"
+                      onClick={() => {
+                        setReviewMore(idx);
+                      }}
+                    >
+                      {reviewIdx.idx === idx && reviewIdx.isOn
+                        ? "닫기"
+                        : "더보기"}
+                    </button>
+                  </div>
+                  <div
+                    className={
+                      reviewIdx.idx === idx && reviewIdx.isOn
+                        ? "text on"
+                        : "text"
+                    }
+                  >
+                    {item.contents}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
