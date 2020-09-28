@@ -11,6 +11,10 @@ const MapItem = (props: {
   const [info, setInfo] = useState({
     introduction: "",
     score: 0,
+    people: 0,
+    timeName: "",
+    timeSE: "",
+    dayOfWeek: "",
     adress: "",
     photoUrl: [""],
     photoListWidth: 0,
@@ -39,9 +43,9 @@ const MapItem = (props: {
   const getPlaceInfo = (place: any) => {
     fetch(`http://localhost:3001/api?id=${place.id}`)
       .then((res) => res.json())
-      .then((dataJSON) => {
+      .then((data) => {
         // 데이터 저장
-        // const dataJSON = JSON.parse(data);
+        const dataJSON = JSON.parse(data);
 
         // 이곳에 있는 정보로 데이터 세팅
         // console.log(placeData.basicInfo.placenamefull);
@@ -56,6 +60,10 @@ const MapItem = (props: {
     // 더보기 항목
     let introduction: string = "";
     let score: number = 0;
+    let people: number = 0;
+    let timeName: string = "";
+    let timeSE: string = "";
+    let dayOfWeek: string = "";
     let adress: string = "";
     let photoUrl: string[] = [];
     let menu: string[] = [];
@@ -73,8 +81,21 @@ const MapItem = (props: {
       const scoreCnt: number = data.comment.scorecnt;
       const scoreSum: number = data.comment.scoresum;
       score = Math.floor((scoreSum / scoreCnt) * 10) / 10;
+      people = scoreCnt;
     } else {
       score = -1;
+    }
+
+    // 영업시간
+    if (data.basicInfo.hasOwnProperty("openHour")) {
+      if (data.basicInfo.openHour.hasOwnProperty("periodList")) {
+        if (data.basicInfo.openHour.periodList[0].hasOwnProperty("timeList")) {
+          
+          timeName = data.basicInfo.openHour.periodList[0].timeList[0].timeName;
+          timeSE = data.basicInfo.openHour.periodList[0].timeList[0].timeSE;
+          dayOfWeek = data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
+        }
+      }
     }
 
     // 주소
@@ -114,6 +135,10 @@ const MapItem = (props: {
     setInfo({
       introduction: introduction,
       score: score,
+      people: people,
+      timeName: timeName,
+      timeSE: timeSE,
+      dayOfWeek: dayOfWeek,
       adress: adress,
       photoUrl: photoUrl,
       photoListWidth: photoListWidth,
@@ -156,7 +181,7 @@ const MapItem = (props: {
         <div className="introduction">{info.introduction}</div>
         <div className="adress">{info.adress}</div>
         <div className={info.score !== -1 ? "score on" : "score"}>
-          평점 <span className="number">{info.score}</span>
+          평점 <span className="result">{info.score}점</span><span className="people">{info.people}명</span>
           <span className="frame">
             <span className="line">
               <span></span>
@@ -169,6 +194,11 @@ const MapItem = (props: {
               style={{ width: info.score * 20 + "%" }}
             ></span>
           </span>
+        </div>
+        <div className="time">
+          <span>{info.timeName}</span>
+          <span>{info.timeSE}</span>
+          <span>{info.dayOfWeek}</span>
         </div>
         <div>
           {info.menu.map((item: any, idx: number) => {
