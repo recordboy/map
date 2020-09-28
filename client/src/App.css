@@ -64,7 +64,7 @@
 
 .App .list .basic {
     position: relative;
-    border-top: 1px dashed #e0e0e0;
+    border-top: 7px solid #f2f2f2;
     padding: 10px;
     cursor: pointer;
 }
@@ -103,7 +103,7 @@
     width: 50px;
     text-align: center;
     text-decoration: none;
-    background-color: #86D6D0;
+    background-color: #FA8258;
     color: #fff;
 }
 
@@ -132,8 +132,8 @@
     vertical-align: top;
     box-sizing: border-box;
     padding-left: 2px;
-    width: 130px;
-    height: 100px;
+    width: 200px;
+    height: 130px;
     object-fit: cover;
 }
 
@@ -148,7 +148,7 @@
 .App .list .detail .introduction {
     margin-top: 10px;
     font-size: 14px;
-    line-height: 16px;
+    line-height: 18px;
     font-weight: bold;
 }
 
@@ -158,18 +158,23 @@
 
 .App .list .detail .time {
     margin-top: 5px;
-    color: #666;
+}
+
+.App .list .detail .time > span {
+    margin-right: 2px;
+}
+
+.App .list .detail .time > span:nth-child(3) {
+    color: #999;
+}
+.App .list .detail .time > span:nth-child(3) {
+    color: FA8258;
 }
 
 .App .list .detail .score {
-    display: none;
     position: relative;
     margin-top: 10px;
     width: 100px;
-}
-
-.App .list .detail .score.on {
-    display: block;
 }
 
 .App .list .detail .score .result {
@@ -223,7 +228,7 @@
     width: 100%;
     height: 10px;
     border-radius: 3px 0 0 3px;
-    background-color: #86D6D0;
+    background-color: #FA8258;
 }
 
 .App .list .detail .menu {
@@ -265,6 +270,16 @@
 
 .App .list .detail .review {
     margin-top: 10px;
+}
+
+.App .list .detail .review .title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.App .list .detail .review .item {
+    border-top: 1px solid #f0f0f0;
+    padding: 10px 0;
 }
 
 .App .list .detail .review .info {
@@ -314,7 +329,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     word-wrap:break-word;
     height: auto;
