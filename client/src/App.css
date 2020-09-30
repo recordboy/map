@@ -289,10 +289,10 @@
 .App .list .detail .review .info span:before {
     content: '';
     position: absolute;
-    top: 3px;
+    top: 5px;
     left: -5px;
     width: 1px;
-    height: 10px;
+    height: 14px;
     background-color: #ccc;
 }
 
