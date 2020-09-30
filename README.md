@@ -68,8 +68,6 @@ app.listen(port, ()=>{
 })
 ```
 
-서버에 크롤링이나 퍼펫티어 모듈 추가
-
 크롤링
 ```
 npm i axios cheerio --save
@@ -79,4 +77,3 @@ npm i axios cheerio --save
 ```
 npm i puppeteer cheerio --save
 ```
-
