@@ -111,7 +111,6 @@ const MapItem = (props: {
           timeName = data.basicInfo.openHour.periodList[0].timeList[0].timeName;
           timeSE = data.basicInfo.openHour.periodList[0].timeList[0].timeSE;
           dayOfWeek = data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
-
         }
       }
     }
@@ -143,7 +142,9 @@ const MapItem = (props: {
 
     // 메뉴
     if (data.hasOwnProperty("menuInfo")) {
-      menu = data.menuInfo.bottomList;
+      if (data.menuInfo.hasOwnProperty("bottomList")) {
+        menu = data.menuInfo.bottomList;
+      }
     }
 
     setInfo({
@@ -217,6 +218,8 @@ const MapItem = (props: {
         )}
 
         <div className="adress">{info.adress}</div>
+
+        {console.log(info)}
         {info.timeName !== "" && (
           <div className="time">
             <span>{info.timeName}</span>
