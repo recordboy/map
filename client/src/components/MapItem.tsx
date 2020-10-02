@@ -62,7 +62,7 @@ const MapItem = (props: {
         // const dataJSON = JSON.parse(data);
 
         // 이곳에 있는 정보로 데이터 세팅
-        console.log(`http://localhost:3001/api?id=${place.id}`);
+        console.log(`https://place.map.kakao.com/m/${place.id}`);
         console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
@@ -219,7 +219,6 @@ const MapItem = (props: {
 
         <div className="adress">{info.adress}</div>
 
-        {console.log(info)}
         {info.timeName !== "" && (
           <div className="time">
             <span>{info.timeName}</span>
