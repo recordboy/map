@@ -138,8 +138,6 @@
 
 .App .list .detail .introduction {
     margin-top: 10px;
-    font-size: 14px;
-    line-height: 18px;
     font-weight: bold;
 }
 
@@ -165,16 +163,16 @@
 .App .list .detail .score {
     position: relative;
     margin-top: 10px;
-    width: 100px;
+    width: 120px;
 }
 
 .App .list .detail .score .result {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .App .list .detail .score .people {
-    font-size: 10px;
+    font-size: 11px;
     color: #999;
 }
 
@@ -228,10 +226,12 @@
 
 .App .list .detail .menu .title {
     margin-top: 10px;
+    font-weight: bold;
 }
 
 .App .list .detail .menu .item {
     position: relative;
+    margin-top: 5px;
     padding-right: 70px;
     box-sizing: border-box;
 }

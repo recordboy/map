@@ -62,7 +62,8 @@ const MapItem = (props: {
         // const dataJSON = JSON.parse(data);
 
         // 이곳에 있는 정보로 데이터 세팅
-        // console.log(placeData.basicInfo.placenamefull);
+        console.log(`http://localhost:3001/api?id=${place.id}`);
+        console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
         setPlaceInfo(data);
@@ -107,10 +108,10 @@ const MapItem = (props: {
     if (data.basicInfo.hasOwnProperty("openHour")) {
       if (data.basicInfo.openHour.hasOwnProperty("periodList")) {
         if (data.basicInfo.openHour.periodList[0].hasOwnProperty("timeList")) {
-          debugger
           timeName = data.basicInfo.openHour.periodList[0].timeList[0].timeName;
           timeSE = data.basicInfo.openHour.periodList[0].timeList[0].timeSE;
           dayOfWeek = data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
+
         }
       }
     }
@@ -216,7 +217,6 @@ const MapItem = (props: {
         )}
 
         <div className="adress">{info.adress}</div>
-
         {info.timeName !== "" && (
           <div className="time">
             <span>{info.timeName}</span>
