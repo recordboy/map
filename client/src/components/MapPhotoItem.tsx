@@ -6,7 +6,6 @@ const MapPhotoItem = (props: {
 }) => {
   // const { id, url } = props;
 
-
   return (
     <div></div>
   );

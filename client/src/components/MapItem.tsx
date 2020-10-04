@@ -55,6 +55,7 @@ const MapItem = (props: {
 
   // 로컬 서버에 장소 더보기 요청
   const getPlaceInfo = (place: any) => {
+    // http://192.168.219.104/
     fetch(`http://localhost:3001/api?id=${place.id}`)
       .then((res) => res.json())
       .then((data) => {
