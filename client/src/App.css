@@ -8,8 +8,12 @@
     padding: 10px;
 }
 
-.App .controller .sort .inner {
+.App .controller .sort {
     overflow-x: auto;
+}
+
+.App .controller .sort .inner {
+    width: 500px;
 }
 
 .App .controller .sort button {
@@ -23,6 +27,10 @@
     font-size: 15px;
     font-weight: bold;
     background-color: #f7f7f7;
+}
+
+.App .controller .sort button:last-child {
+    margin-right: 0;
 }
 
 .App .controller .search {

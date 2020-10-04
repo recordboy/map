@@ -53,6 +53,14 @@ const MapSearch = (props: {
           >
             마트
           </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            화장실
+          </button>
         </div>
       </div>
 
