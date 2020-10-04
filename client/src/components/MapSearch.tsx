@@ -18,6 +18,12 @@ const MapSearch = (props: {
             onClick={(e) => {
               clickKeywordBtn(e);
             }}
+            onTouchStart={(e) => {
+              console.log(e.changedTouches[0].clientY);
+            }}
+            onTouchEnd={(e) => {
+              console.log(e.changedTouches[0].clientY);
+            }}
           >
             음식
           </button>
