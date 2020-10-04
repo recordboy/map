@@ -15,7 +15,7 @@ const MapSearch = (props: {
     handleKeywordSearch(e.target.innerText);
   };
 
-  const viewMorePlace = (e: any) => {
+  const moreY = (e: any) => {
     if (e.type === 'touchstart') {
       startY = e.changedTouches[0].clientY;
     }
@@ -23,10 +23,14 @@ const MapSearch = (props: {
       endY = e.changedTouches[0].clientY;
     }
     if (endY > startY && endY - startY > 30) {
-      
+      viewMorePlace();
     }
   };
-  
+
+  const viewMorePlace = () => {
+    console.log(1);
+  };
+
   return (
     <div className="controller">
       <div className="sort">
@@ -37,10 +41,10 @@ const MapSearch = (props: {
               clickKeywordBtn(e);
             }}
             onTouchStart={(e) => {
-              viewMorePlace(e);
+              moreY(e);
             }}
             onTouchEnd={(e) => {
-              viewMorePlace(e);
+              moreY(e);
             }}
           >
             음식
