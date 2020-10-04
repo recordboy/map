@@ -6,9 +6,27 @@ const MapSearch = (props: {
 }) => {
   const { handleKeywordSearch, handleInputSearch } = props;
   const [inputData, setInputData] = useState("");
+
+  // 검색 항목 더보기 좌표
+  let startY: number = 0;
+  let endY: number = 0;
+
   const clickKeywordBtn = (e: any) => {
     handleKeywordSearch(e.target.innerText);
   };
+
+  const viewMorePlace = (e: any) => {
+    if (e.type === 'touchstart') {
+      startY = e.changedTouches[0].clientY;
+    }
+    if (e.type === 'touchend') {
+      endY = e.changedTouches[0].clientY;
+    }
+    if (endY > startY && endY - startY > 30) {
+      
+    }
+  };
+  
   return (
     <div className="controller">
       <div className="sort">
@@ -19,10 +37,10 @@ const MapSearch = (props: {
               clickKeywordBtn(e);
             }}
             onTouchStart={(e) => {
-              console.log(e.changedTouches[0].clientY);
+              viewMorePlace(e);
             }}
             onTouchEnd={(e) => {
-              console.log(e.changedTouches[0].clientY);
+              viewMorePlace(e);
             }}
           >
             음식
