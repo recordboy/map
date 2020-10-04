@@ -12,15 +12,14 @@ const MapSearch = (props: {
   return (
     <div className="controller">
       <div className="sort">
-        <div className="box">
-          <div className="title">음식</div>
+        <div className="inner">
           <button
             type="button"
             onClick={(e) => {
               clickKeywordBtn(e);
             }}
           >
-            한식
+            음식
           </button>
           <button
             type="button"
@@ -28,7 +27,7 @@ const MapSearch = (props: {
               clickKeywordBtn(e);
             }}
           >
-            일식
+            편의점
           </button>
           <button
             type="button"
@@ -36,7 +35,7 @@ const MapSearch = (props: {
               clickKeywordBtn(e);
             }}
           >
-            중식
+            약국
           </button>
           <button
             type="button"
@@ -44,11 +43,19 @@ const MapSearch = (props: {
               clickKeywordBtn(e);
             }}
           >
-            분식
+            마트
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              clickKeywordBtn(e);
+            }}
+          >
+            마트
           </button>
         </div>
       </div>
-      
+
       <div className="search">
         <input
           type="text"
