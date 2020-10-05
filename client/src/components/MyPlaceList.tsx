@@ -1,15 +1,15 @@
 import React from "react";
-import MapItem from "./MapItem";
+import MyPlaceItem from "./MyPlaceItem";
 
-const MapList = (props: {
+const MyPlaceList = (props: {
   itemList: any;
   selectMarker: (id: number) => void;
 }) => {
   const { itemList, selectMarker } = props;
   const list = itemList.map((item: any) => {
-    return <MapItem key={item.id} id={item.id} place={item.place} selectMarker={selectMarker} />;
+    return <MyPlaceItem key={item.id} id={item.id} place={item.place} selectMarker={selectMarker} />;
   });
   return <div className="list">{list}</div>;
 };
 
-export default MapList;
+export default MyPlaceList;

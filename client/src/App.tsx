@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import MapSearch from "./components/MapSearch";
-import MapList from "./components/MapList";
-import MapSort from "./components/MapSort";
+import MyPlaceSearch from "./components/MyPlaceSearch";
+import MyPlaceList from "./components/MyPlaceList";
+import MyPlaceSort from "./components/MyPlaceSort";
 import "./App.css";
 
 declare global {
@@ -203,15 +203,15 @@ class App extends Component<Props, State> {
     return (
       <div className="App">
         <div id="map" className="map" />
-        <MapSearch
+        <MyPlaceSearch
           handleKeywordSearch={this.handleKeywordSearch}
           handleInputSearch={this.handleInputSearch}
         />
-        <MapList
+        <MyPlaceList
           itemList={this.state.itemList}
           selectMarker={this.selectMarker}
         />
-        <MapSort
+        <MyPlaceSort
           itemList={this.state.itemList}
           setShuffleList={this.setShuffleList}
           setAlphabeticalSort={this.setAlphabeticalSort}

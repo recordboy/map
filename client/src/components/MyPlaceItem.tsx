@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const MapItem = (props: {
+const MyPlaceItem = (props: {
   id: number;
   place: any;
   selectMarker: (id: number) => void;
@@ -304,4 +304,4 @@ const MapItem = (props: {
   );
 };
 
-export default MapItem;
+export default MyPlaceItem;

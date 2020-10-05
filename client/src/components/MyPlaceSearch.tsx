@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // 검색 항목 가져오기
 import searchList from "../search-list.json";
 
-const MapSearch = (props: {
+const MyPlaceSearch = (props: {
   handleKeywordSearch: (item: string) => void;
   handleInputSearch: (item: string) => void;
 }) => {
@@ -229,4 +229,4 @@ const MapSearch = (props: {
   );
 };
 
-export default MapSearch;
+export default MyPlaceSearch;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const MapSort = (props: {
+const MyPlaceSort = (props: {
   itemList: any[];
   setShuffleList: (listArr: number[]) => void;
   setAlphabeticalSort: (listArr: number[]) => void;
@@ -89,4 +89,4 @@ const MapSort = (props: {
   );
 };
 
-export default MapSort;
+export default MyPlaceSort;
