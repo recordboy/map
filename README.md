@@ -67,3 +67,13 @@ app.listen(port, ()=>{
     console.log(`express is running on ${port}`);
 })
 ```
+
+크롤링
+```
+npm i axios cheerio --save
+```
+
+퍼펫티어
+```
+npm i puppeteer cheerio --save
+```
