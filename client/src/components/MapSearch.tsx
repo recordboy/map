@@ -23,17 +23,18 @@ const MapSearch = (props: {
     window.addEventListener('scroll', onScroll);
   }, [])
 
-  let isOn = false;
+  /**
+   * 스크롤 이벤트
+   * @param {object} e 이벤트 객체
+   */
   const onScroll = (e: any) => {
-    // if (e.srcElement.scrollingElement.scrollTop * -1 > 100) {
-    //   isOn = true;
-    // } else {
-    //   isOn = false;
-    // }
+    let fixedY: number = document.getElementsByClassName('sort')[0].clientHeight + 30;
+    if (e.srcElement.scrollingElement.scrollTop > fixedY) {
 
-    // if (isOn) {
-      console.log(e.srcElement.scrollingElement.scrollTop);
-    // }
+      setSearchFixed(true);
+    } else {
+      setSearchFixed(false);
+    }
   };
 
   // 검색 항목 더보기 좌표
@@ -56,7 +57,6 @@ const MapSearch = (props: {
   const swipeY = (listLength: number, e: any) => {
 
     if (e.type === "touchstart") {
-
       startY = e.changedTouches[0].clientY;
     }
     if (e.type === "touchend") {
@@ -69,8 +69,8 @@ const MapSearch = (props: {
         } else if (depth === 2) {
           listLength > 0 && viewDepth03(e.target.innerText);
         }
-      
-      // 위로 스와이프
+
+        // 위로 스와이프
       } else if (endY < startY && startY - endY > 10) {
         if (depth === 2) {
           setDepth(1);
@@ -208,7 +208,7 @@ const MapSearch = (props: {
         </div>
       </div>
 
-      <div className="search">
+      <div className={searchFixed ? "search fixed" : "search"}>
         <input
           type="text"
           placeholder="직접 입력"
