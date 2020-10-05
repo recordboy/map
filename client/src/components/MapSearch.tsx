@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // 검색 항목 가져오기
 import searchList from "../search-list.json";
@@ -16,29 +16,50 @@ const MapSearch = (props: {
     selectdepth03: "",
     selectListdepth03: [],
   });
+  const [searchFixed, setSearchFixed] = useState(false);
+
+  // 스크를 이벤트 적용
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll);
+  }, [])
+
+  let isOn = false;
+  const onScroll = (e: any) => {
+    // if (e.srcElement.scrollingElement.scrollTop * -1 > 100) {
+    //   isOn = true;
+    // } else {
+    //   isOn = false;
+    // }
+
+    // if (isOn) {
+      console.log(e.srcElement.scrollingElement.scrollTop);
+    // }
+  };
 
   // 검색 항목 더보기 좌표
   let startY: number = 0;
   let endY: number = 0;
 
+  /**
+   * 직접 입력
+   * @param {object} e 이벤트 객체
+   */
   const clickKeywordBtn = (e: any) => {
     handleKeywordSearch(e.target.innerText);
   };
 
   /**
-   * 세로 스와이프 감지 함수 
+   * 세로 스와이프 감지
    * @param {number} listLength 아래로 스와이프할 경우 보여질 리스트 길이
    * @param {object} e 이벤트 객체
    */
   const swipeY = (listLength: number, e: any) => {
 
     if (e.type === "touchstart") {
-      
-      console.log(document);
+
       startY = e.changedTouches[0].clientY;
     }
     if (e.type === "touchend") {
-      console.log(2);
       endY = e.changedTouches[0].clientY;
 
       // 아래로 스와이프
@@ -119,10 +140,10 @@ const MapSearch = (props: {
                     clickKeywordBtn(e);
                   }}
                   onTouchStart={(e) => {
-                    swipeY(item.depth02.length, e);
+                    depth === 1 && swipeY(item.depth02.length, e);
                   }}
                   onTouchEnd={(e) => {
-                    swipeY(item.depth02.length, e);
+                    depth === 1 && swipeY(item.depth02.length, e);
                   }}
                 >
                   {item.name}
