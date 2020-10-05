@@ -193,9 +193,12 @@ const MapItem = (props: {
           {tagArr[2] !== undefined && <span>{tagArr[2]}</span>}
         </div>
         <div className="name">{place.place_name}</div>
-        <a href={"tel:" + phone} className="phone">
-          {phone}
-        </a>
+        {phone && (
+          <a href={"tel:" + phone} className="phone">
+            <i className="fa fa-phone"></i>
+            {phone}
+          </a>
+        )}
         <a href={place.place_url} className="url" target="_balnk">
           더보기
         </a>
