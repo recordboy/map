@@ -33,9 +33,12 @@ const MapSearch = (props: {
   const swipeY = (listLength: number, e: any) => {
 
     if (e.type === "touchstart") {
+      
+      console.log(document);
       startY = e.changedTouches[0].clientY;
     }
     if (e.type === "touchend") {
+      console.log(2);
       endY = e.changedTouches[0].clientY;
 
       // 아래로 스와이프
