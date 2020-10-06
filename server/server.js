@@ -11,19 +11,27 @@ app.listen(port, () => {
   console.log(`express is running on ${port}`);
 });
 
+// 테스트용, 더미 가져오기
+const fs = require("fs");
+const dataBuffer = fs.readFileSync('./data2.json');
+const dataJSON = dataBuffer.toString();
+
 app.use("/api", (req, res) => {
 
-  // 장소 id
-  const id = req.param('id');
+  // 테스트용, 더미 가져오기
+  res.json(dataJSON);
 
-  fetch(`https://place.map.kakao.com/m/main/v/${id}`)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (myJson) {
-      const data = JSON.parse(JSON.stringify(myJson));
-      res.json(data);
-    });
+  // 장소 id
+  // const id = req.param('id');
+
+  // fetch(`https://place.map.kakao.com/m/main/v/${id}`)
+  //   .then(function (response) {
+  //     return response.json();
+  //   })
+  //   .then(function (myJson) {
+  //     const data = JSON.parse(JSON.stringify(myJson));
+  //     res.json(data);
+  //   });
 });
 
 // const puppeteer = require("puppeteer");
