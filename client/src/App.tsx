@@ -13,6 +13,7 @@ declare global {
 interface Props {}
 interface State {
   itemList: any;
+  option: any;
 }
 
 let latitude: number;
@@ -30,10 +31,14 @@ class App extends Component<Props, State> {
     super(props);
     this.state = {
       itemList: [],
+      option: {
+        mapHeight: 0
+      }
     };
   }
 
   componentDidMount(): void {
+
     this.setLocation((latitude: number, longitude: number) => {
       const options = {
         center: new window.kakao.maps.LatLng(latitude, longitude),
@@ -65,8 +70,23 @@ class App extends Component<Props, State> {
 
       // 내 위치 마커 세팅
       marker.setMap(map);
+
+      // 지도 스타일 초기화
+      // this.initMapStyle();
+      
     });
   }
+
+  // initMapStyle = (): void => {
+  //   const controllerHeight: number = document.getElementsByClassName('controller')[0].clientHeight;
+  //   const windowHeight = window.innerHeight;
+  //   this.setState({
+  //     option: {
+  //       mapHeight: windowHeight - controllerHeight
+  //     }
+  //   });
+  //   map.relayout();
+  // }
 
   // 현재 위치 좌표 세팅
   setLocation = (callBack: any): void => {
@@ -190,11 +210,26 @@ class App extends Component<Props, State> {
 
   //////////////////////////////////////////////////////////////////////
 
-  // 셔플
-  setShuffleList = (shuffleArr: number[]) => {};
-
   // 가나다순
-  setAlphabeticalSort = (alphabeArr: number[]) => {};
+  setAlphabeticalSort = (alphabeArr: number[]) => {
+    console.log(alphabeArr);
+  };
+
+  // 별점순
+  setScoreSort = (scoreArr: {}[]) => {
+    let itemList: any = [];
+    scoreArr.forEach((scoreItem: any) => {
+      this.state.itemList.forEach((item: any) => {
+        if (scoreItem.id === item.id) {
+          itemList.push(item);
+        }
+      });
+    });
+    this.setState({
+      itemList: itemList
+    });
+    console.log(this.state.itemList);
+  };
 
   //////////////////////////////////////////////////////////////////////
 
@@ -202,7 +237,11 @@ class App extends Component<Props, State> {
 
     return (
       <div className="App">
-        <div id="map" className="map" />
+        {/* <div id="map" className="map" style={{height: this.state.option.mapHeight}} /> */}
+        <div className="map-wrap">
+          <div id="map" className="map" />
+          <button type="button" className="btn-resize"></button>
+        </div>
         <MyPlaceSearch
           handleKeywordSearch={this.handleKeywordSearch}
           handleInputSearch={this.handleInputSearch}
@@ -211,11 +250,11 @@ class App extends Component<Props, State> {
           itemList={this.state.itemList}
           selectMarker={this.selectMarker}
         />
-        <MyPlaceSort
+        {/* <MyPlaceSort
           itemList={this.state.itemList}
-          setShuffleList={this.setShuffleList}
           setAlphabeticalSort={this.setAlphabeticalSort}
-        />
+          setScoreSort={this.setScoreSort}
+        /> */}
       </div>
     );
   }
