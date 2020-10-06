@@ -40,6 +40,7 @@ const MyPlaceSort = (props: {
   };
 
   const scoreSort = () => {
+
     // async, await 방식
     let scoreList: {}[] = [];
     itemList.forEach((item: any, idx: number) => {
@@ -66,12 +67,25 @@ const MyPlaceSort = (props: {
         score: score,
       });
       if (idx >= itemList.length - 1) {
+
         const dummy: any = [
           { id: 0, score: 1.2 },
           { id: 1, score: 3.4 },
           { id: 2, score: 1.3 },
           { id: 3, score: 2.4 },
+          { id: 4, score: 0.2 },
+          { id: 5, score: 3.7 },
+          { id: 6, score: 2.3 },
+          { id: 7, score: 2.4 },
+          { id: 8, score: 1.7 },
+          { id: 9, score: 3.1 },
+          { id: 10, score: 4.3 },
+          { id: 11, score: 5.0 },
+          { id: 12, score: 4.9 },
+          { id: 13, score: 1.0 },
+          { id: 14, score: 0.3 },
         ];
+
         setScoreSort(setScoreData(dummy));
       }
     }
