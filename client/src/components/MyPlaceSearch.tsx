@@ -20,17 +20,17 @@ const MyPlaceSearch = (props: {
 
   // 스크를 이벤트 적용
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-  }, [])
+    window.addEventListener("scroll", onScroll);
+  }, []);
 
   /**
    * 스크롤 이벤트
    * @param {object} e 이벤트 객체
    */
   const onScroll = (e: any) => {
-    let fixedY: number = document.getElementsByClassName('sort')[0].clientHeight + 30;
+    let fixedY: number =
+      document.getElementsByClassName("sort")[0].clientHeight;
     if (e.srcElement.scrollingElement.scrollTop > fixedY) {
-
       setSearchFixed(true);
     } else {
       setSearchFixed(false);
@@ -55,7 +55,6 @@ const MyPlaceSearch = (props: {
    * @param {object} e 이벤트 객체
    */
   const swipeY = (listLength: number, e: any) => {
-
     if (e.type === "touchstart") {
       startY = e.changedTouches[0].clientY;
     }
@@ -122,7 +121,10 @@ const MyPlaceSearch = (props: {
   };
 
   return (
-    <div className="controller">
+    <div
+      className="controller"
+    >
+      
       <div className="sort">
         <div className="depth01">
           <div
@@ -135,7 +137,11 @@ const MyPlaceSearch = (props: {
                   key={idx}
                   type="button"
                   className={nextPlace.selectdepth02 === item.name ? "on" : ""}
-                  disabled={depth !== 1 && nextPlace.selectdepth02 !== item.name ? true : false}
+                  disabled={
+                    depth !== 1 && nextPlace.selectdepth02 !== item.name
+                      ? true
+                      : false
+                  }
                   onClick={(e) => {
                     clickKeywordBtn(e);
                   }}
@@ -163,7 +169,11 @@ const MyPlaceSearch = (props: {
                   key={idx}
                   type="button"
                   className={nextPlace.selectdepth03 === item.name ? "on" : ""}
-                  disabled={depth !== 2 && nextPlace.selectdepth03 !== item.name ? true : false}
+                  disabled={
+                    depth !== 2 && nextPlace.selectdepth03 !== item.name
+                      ? true
+                      : false
+                  }
                   onClick={(e) => {
                     clickKeywordBtn(e);
                   }}
