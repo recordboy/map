@@ -1,11 +1,17 @@
 .App {
     position: relative;
-    padding-top: 300px;
+    padding-top: 100px;
     font-size: 16px;
 }
 
 .App .controller {
-    padding: 10px;
+    position: relative;
+    padding: 0 0 52px;
+    transition: height 0.4s;
+}
+
+.App .controller .sort {
+    padding: 10px 10px 0;
 }
 
 .App .controller .sort .depth01,
@@ -22,13 +28,13 @@
 .App .controller .sort .depth03 {
     overflow-y: hidden;
     height: 0;
-    transition: 0.2s;
+    transition: height 0.2s;
 }
 
 .App .controller .sort .depth02.on,
 .App .controller .sort .depth03.on {
     margin: 2px -1px 0;
-    height: 45px;
+    height: 40px;
 }
 
 .App .controller .sort .inner::after {
@@ -45,7 +51,7 @@
     border-radius: 2px;
     padding: 0;
     width: 88px;
-    height: 45px;
+    height: 40px;
     font-size: 13px;
     font-weight: bold;
     touch-action: none;
@@ -58,21 +64,25 @@
 }
 
 .App .controller .search {
-    position: relative;
-    margin-top: 10px;
-    padding-right: 45px;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    box-sizing: border-box;
+    padding: 0 50px 0 10px;
+    width: 100%;
+    height: 40px;
+    transition: 0.2s;
 }
 
 .App .controller .search.fixed {
     position: fixed;
-    top: 290px;
+    top: 100px;
     left: 0;
-    z-index: 20;
-    margin-top: 10px;
-    box-sizing: border-box;
-    padding-right: 45px;
+    z-index: 30;
+    padding: 0 50px 0 0;
     width: 100%;
-    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+    height: 50px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .App .controller .search input[type="text"] {
@@ -81,22 +91,33 @@
     box-sizing: border-box;
     padding: 0 5px;
     width: 100%;
-    height: 45px;
+    height: 40px;
     font-size: 15px;
     font-weight: bold;
+    transition: 0.2s;
+}
+.App .controller .search.fixed input[type="text"] {
+    height: 50px;
 }
 
 .App .controller .search button {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 10px;
     border: 2px solid #e0e0e0;
     border-left: none;
     border-radius: 0 3px 3px 0;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     font-size: 18px;
+    transition: 0.2s;
     color: #999;
+}
+
+.App .controller .search.fixed button {
+    right: 0;
+    width: 50px;
+    height: 50px;
 }
 
 .App .list .basic {
@@ -378,10 +399,30 @@
     -webkit-line-clamp: inherit;
 }
 
-#map {
+.map-wrap {
     position: fixed;
     top: 0;
     z-index: 30;
     width: 100%;
-    height: 300px;
+    height: 100px;
+}
+
+.map-wrap .map {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100px;
+}
+
+.map-wrap .btn-resize {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 10;
+    margin-left: -25px;
+    border: none;
+    border-bottom: 0;
+    border-radius: 20px 20px 0 0;
+    width: 40px;
+    height: 20px;
+    background-color: #FA8258;
 }
