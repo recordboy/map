@@ -24,7 +24,6 @@ app.use("/api", (req, res) => {
 
   // 장소 id
   const id = req.param('id');
-  debugger
 
   fetch(`https://place.map.kakao.com/m/main/v/${id}`)
     .then(function (response) {
