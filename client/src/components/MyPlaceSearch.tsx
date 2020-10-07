@@ -4,10 +4,11 @@ import React, { useState, useEffect } from "react";
 import searchList from "../search-list.json";
 
 const MyPlaceSearch = (props: {
+  mapSize: number;
   handleKeywordSearch: (item: string) => void;
   handleInputSearch: (item: string) => void;
 }) => {
-  const { handleKeywordSearch, handleInputSearch } = props;
+  const { mapSize, handleKeywordSearch, handleInputSearch } = props;
   const [inputData, setInputData] = useState("");
   const [depth, setDepth] = useState(1);
   const [nextPlace, setNextPlace] = useState({
@@ -28,8 +29,8 @@ const MyPlaceSearch = (props: {
    * @param {object} e 이벤트 객체
    */
   const onScroll = (e: any) => {
-    let fixedY: number =
-      document.getElementsByClassName("sort")[0].clientHeight;
+    let fixedY: number = document.getElementsByClassName("sort")[0]
+      .clientHeight;
     if (e.srcElement.scrollingElement.scrollTop > fixedY) {
       setSearchFixed(true);
     } else {
@@ -121,10 +122,7 @@ const MyPlaceSearch = (props: {
   };
 
   return (
-    <div
-      className="controller"
-    >
-      
+    <div className="controller">
       <div className="sort">
         <div className="depth01">
           <div
@@ -218,7 +216,10 @@ const MyPlaceSearch = (props: {
         </div>
       </div>
 
-      <div className={searchFixed ? "search fixed" : "search"}>
+      <div
+        className={searchFixed ? "search fixed" : "search"}
+        style={searchFixed ? { top: mapSize } : { top: "auto" }}
+      >
         <input
           type="text"
           placeholder="직접 입력"
