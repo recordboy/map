@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MyPlaceSearch from "./components/MyPlaceSearch";
 import MyPlaceList from "./components/MyPlaceList";
+import MyPlaceResize from "./components/MyPlaceResize";
+import MyPlaceManual from "./components/MyPlaceManual";
 import MyPlaceSort from "./components/MyPlaceSort";
 import "./App.css";
 
@@ -13,7 +15,9 @@ declare global {
 interface Props {}
 interface State {
   itemList: any;
-  option: any;
+  mapSize: number;
+  isOnMapSize: boolean;
+  isOnintro: string;
 }
 
 let latitude: number;
@@ -26,19 +30,17 @@ let geocoder: any;
 let markerList: any[] = [];
 
 class App extends Component<Props, State> {
-  
   constructor(props: Props) {
     super(props);
     this.state = {
       itemList: [],
-      option: {
-        mapHeight: 0
-      }
+      mapSize: 100,
+      isOnMapSize: false,
+      isOnintro: "show",
     };
   }
 
   componentDidMount(): void {
-
     this.setLocation((latitude: number, longitude: number) => {
       const options = {
         center: new window.kakao.maps.LatLng(latitude, longitude),
@@ -71,22 +73,23 @@ class App extends Component<Props, State> {
       // 내 위치 마커 세팅
       marker.setMap(map);
 
-      // 지도 스타일 초기화
-      // this.initMapStyle();
-      
+      // 인트로 페이지
+      this.hideIntro();
     });
   }
 
-  // initMapStyle = (): void => {
-  //   const controllerHeight: number = document.getElementsByClassName('controller')[0].clientHeight;
-  //   const windowHeight = window.innerHeight;
-  //   this.setState({
-  //     option: {
-  //       mapHeight: windowHeight - controllerHeight
-  //     }
-  //   });
-  //   map.relayout();
-  // }
+  hideIntro = (): void => {
+    setTimeout(() => {
+      this.setState({
+        isOnintro: "opacity",
+      });
+    }, 2000);
+    setTimeout(() => {
+      this.setState({
+        isOnintro: "none",
+      });
+    }, 2500);
+  };
 
   // 현재 위치 좌표 세팅
   setLocation = (callBack: any): void => {
@@ -112,7 +115,6 @@ class App extends Component<Props, State> {
     marker.setMap(null);
 
     if (status === window.kakao.maps.services.Status.OK) {
-
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가
       let bounds = new window.kakao.maps.LatLngBounds();
 
@@ -122,7 +124,7 @@ class App extends Component<Props, State> {
           markerList[i].setMap(null);
         }
       }
-      
+
       // 기존 마커 리스트 삭제
       markerList = [];
 
@@ -168,7 +170,6 @@ class App extends Component<Props, State> {
 
     // 마커에 클릭이벤트를 등록
     window.kakao.maps.event.addListener(marker, "click", function () {
-
       // 마커를 클릭하면 장소명이 인포윈도우에 표출
       that.selectMarker(marker.id);
     });
@@ -182,9 +183,6 @@ class App extends Component<Props, State> {
         "</div>"
     );
     infowindow.open(map, markerList[id]);
-
-    // 주소 얻기
-    // console.log(this.state.itemList);
   };
 
   // 키워드 버튼으로 장소를 검색
@@ -208,6 +206,22 @@ class App extends Component<Props, State> {
     }
   };
 
+  // 맵 높이 변경
+  setMapResize = (size: number) => {
+    this.setState({
+      mapSize: size,
+      isOnMapSize: true,
+    });
+    map.relayout();
+  };
+
+  // 맵 리사이징 상태
+  isOnResize = (isOn: boolean) => {
+    this.setState({
+      isOnMapSize: isOn,
+    });
+  };
+
   //////////////////////////////////////////////////////////////////////
 
   // 가나다순
@@ -226,23 +240,45 @@ class App extends Component<Props, State> {
       });
     });
     this.setState({
-      itemList: itemList
+      itemList: itemList,
     });
+
     console.log(this.state.itemList);
   };
 
   //////////////////////////////////////////////////////////////////////
 
   render() {
-
     return (
-      <div className="App">
-        {/* <div id="map" className="map" style={{height: this.state.option.mapHeight}} /> */}
-        <div className="map-wrap">
-          <div id="map" className="map" />
-          <button type="button" className="btn-resize"></button>
+      <div
+        className="App"
+        style={{
+          paddingTop: this.state.mapSize,
+          position: this.state.isOnMapSize ? "fixed" : "relative",
+          width: this.state.isOnMapSize ? window.innerWidth : "auto",
+        }}
+      >
+        {/* <div
+          className="intro"
+          style={{
+            opacity: this.state.isOnintro === "opacity" ? 0 : 1,
+            display: this.state.isOnintro === "none" ? "none" : "block",
+          }}
+        ></div> */}
+        <MyPlaceManual />
+        <div className="map-wrap" style={{ height: this.state.mapSize }}>
+          <div
+            id="map"
+            className="map"
+            style={{ height: this.state.mapSize }}
+          />
+          <MyPlaceResize
+            isOnResize={this.isOnResize}
+            setMapResize={this.setMapResize}
+          />
         </div>
         <MyPlaceSearch
+          mapSize={this.state.mapSize}
           handleKeywordSearch={this.handleKeywordSearch}
           handleInputSearch={this.handleInputSearch}
         />
