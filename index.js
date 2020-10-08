@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3001; // 로컬 전용
-// const port = process.env.PORT || 5000; // heroku 전용
 const fetch = require("node-fetch");
 
 app.use(cors());
