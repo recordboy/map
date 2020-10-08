@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const port = process.env.PORT || 3001; // 로컬 전용
+// const port = process.env.PORT || 3001; // 로컬 전용
+const port = process.env.PORT || 5000; // 배포 전용
 const fetch = require("node-fetch");
 
 app.use(cors());
@@ -11,18 +12,26 @@ app.listen(port, () => {
   console.log(`express is running on ${port}`);
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+
 // 테스트용, 더미 가져오기
 // const fs = require("fs");
 // const dataBuffer = fs.readFileSync('./data2.json');
 // const dataJSON = dataBuffer.toString();
 
-app.use("/api", (req, res) => {
+app.use("/api/data", (req, res) => {
 
   // 테스트용, 더미 가져오기
   // res.json(dataJSON);
 
   // 장소 id
-  const id = req.param('id');
+  const id = req.param("id");
 
   fetch(`https://place.map.kakao.com/m/main/v/${id}`)
     .then(function (response) {

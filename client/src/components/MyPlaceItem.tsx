@@ -57,7 +57,7 @@ const MyPlaceItem = (props: {
   const getPlaceInfo = (place: any) => {
     
     // http://192.168.219.104/
-    fetch(`http://localhost:3001/api?id=${place.id}`)
+    fetch(`http://localhost:5000/api/data?id=${place.id}`)
       .then((res) => res.json())
       .then((data) => {
         

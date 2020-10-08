@@ -1,7 +1,7 @@
 {
   "name": "my-place",
   "version": "1.0.0",
-  "description": "클라이언트 영역 리액트 프로젝트로 생성\r ```\r create-react-app client --use-npm --template typescript\r ```",
+  "description": "Get nearby place information",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
