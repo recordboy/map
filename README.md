@@ -1,79 +1,44 @@
-## 프로젝트 폴더 생성
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-클라이언트 영역 리액트 프로젝트로 생성
-```
-create-react-app client --use-npm --template typescript
-```
+## Available Scripts
 
-server 폴더 생성하고 npm 초기화 뒤 익스프레스 설치
+In the project directory, you can run:
 
-```
-npm init
-npm add express --save
-```
+### `npm start`
 
-server 폴더에 server.js 파일 생성하고 아래처럼 입력
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-```javascript
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const port =process.env.PORT || 3001;
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-app.use(bodyParser.json());
-app.use('/api', (req, res)=> res.json({username:'bryan'}));
+### `npm test`
 
-app.listen(port, ()=>{
-    console.log(`express is running on ${port}`);
-})
-```
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-server 디렉토리에 `.gitignore` 추가한 뒤 아래 코드 추가
-```
-/node_modules
-```
+### `npm run build`
 
-서버 실행
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-http://localhost:3001/api 에 {"username":"bryan"} 나오면 됨
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-리액트 부근에 아래처럼 데이터 받아옴
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```javascript
-fetch("http://localhost:3001/api")
-  .then((res) => res.json())
-  .then((data) => console.log(data));
-```
+### `npm run eject`
 
-서버에 크로스 모듈 추가
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-npm install cors --save
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-서버 수정
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-```
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const port =process.env.PORT || 3001;
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-app.use(cors());
+## Learn More
 
-app.use(bodyParser.json());
-app.use('/api', (req, res)=> res.json({username:'bryan'}));
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-app.listen(port, ()=>{
-    console.log(`express is running on ${port}`);
-})
-```
-
-크롤링
-```
-npm i axios cheerio --save
-```
-
-퍼펫티어
-```
-npm i puppeteer cheerio --save
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
