@@ -1,5 +1,3 @@
-## 프로젝트 폴더 생성
-
 클라이언트 폴더로 리액트 프로젝트로 생성
 ```
 create-react-app client --use-npm --template typescript
