@@ -1,3 +1,52 @@
+프로젝트 초기화
+```
+$ npm init
+```
+
+익스프레스, 노드몬 설치
+```
+$ npm install express
+$ npm install nodemon
+```
+
+`index.js` 파일 추가, 아래처럼 입력
+```javascript
+const express = require('express');
+const path = require('path');
+const app = express()
+
+app.get("/api/greeting", (req,res) => {
+  res.send("Hello World!");
+})
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT);
+```
+
+익스프레스 서버 가동
+```
+npm run server
+```
+
+[http://localhost:5000/api/greeting](http://localhost:5000/api/greeting) 로 들어가 익스프레스 서버 확인
+
+리액트 설치
+```
+$ create-react-app client --use-npm --template typescript
+```
+
+프록시 설정(react-scripts의 버전이 2 이상인 경우)
+```
+$ npm install http-proxy-middleware
+```
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 클라이언트 폴더로 리액트 프로젝트로 생성
 ```
 create-react-app client --use-npm --template typescript
