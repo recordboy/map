@@ -1,4 +1,12 @@
-프로젝트 초기화
+초기 세팅(React, Express)
+
+프로젝트 생성 후 해당 디렉토리로 이동
+```
+$ mkdir my-app
+$ cd my-app
+```
+
+프로젝트 초기화, 질문 나오면 계속 엔터
 ```
 $ npm init
 ```
@@ -31,7 +39,7 @@ npm run server
 
 [http://localhost:5000/api/greeting](http://localhost:5000/api/greeting) 로 들어가 익스프레스 서버 확인
 
-리액트 설치
+리액트 설치(TypeScript)
 ```
 $ create-react-app client --use-npm --template typescript
 ```
@@ -40,6 +48,18 @@ $ create-react-app client --use-npm --template typescript
 ```
 $ npm install http-proxy-middleware
 ```
+
+`client/src` 경로에 `setupProxy.js`파일 생성 후 아래 입력
+
+```javascript
+const proxy = require("http-proxy-middleware");
+
+module.exports = function(app) {
+  app.use(proxy("/api/greeting", { target: "http://localhost:5000" }));
+};
+```
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
