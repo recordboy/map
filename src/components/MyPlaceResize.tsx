@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const MyPlaceResize = (props: {
-  isOnResize: (height: boolean) => void;
   setMapResize: (height: number) => void;
 }) => {
-  const { isOnResize, setMapResize } = props;
-  const [resize, setResize] = useState(70);
+  const { setMapResize } = props;
+  const [resize, setResize] = useState(130);
   const touchMove = (screenY: number) => {
     screenY = Math.floor(screenY);
     setMapResize(screenY);
-    setResize(screenY - 30);
+    setResize(screenY - 20);
   };
+  let btnResize: any;
+
+  useEffect(() => {
+    btnResize = document.getElementsByClassName("btn-resize")[0];
+  });
 
   return (
     <button
@@ -20,13 +24,15 @@ const MyPlaceResize = (props: {
         touchMove(e.touches[0].clientY);
       }}
       onTouchStart={() => {
-        isOnResize(true);
+        btnResize.addEventListener("touchmove", (e: any) => {
+          console.log(1);
+          e.preventDefault();
+          return;
+        });
       }}
-      onTouchEnd={() => {
-        isOnResize(false);
-      }}
+      onTouchEnd={() => {}}
       style={{ top: resize }}
-    ></button>
+    />
   );
 };
 
