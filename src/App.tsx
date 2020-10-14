@@ -16,7 +16,6 @@ interface Props {}
 interface State {
   itemList: any;
   mapSize: number;
-  isOnMapSize: boolean;
   isOnintro: string;
 }
 
@@ -29,13 +28,14 @@ let ps: any;
 let geocoder: any;
 let markerList: any[] = [];
 
+let mapRsizeTimer:any;
+
 class App extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
       itemList: [],
-      mapSize: 100,
-      isOnMapSize: false,
+      mapSize: 150,
       isOnintro: "show",
     };
   }
@@ -93,7 +93,6 @@ class App extends Component<Props, State> {
 
   // 현재 위치 좌표 세팅
   setLocation = (callBack: any): void => {
-    const that = this;
     navigator.geolocation.getCurrentPosition(function (pos) {
       latitude = pos.coords.latitude;
       longitude = pos.coords.longitude;
@@ -210,16 +209,13 @@ class App extends Component<Props, State> {
   setMapResize = (size: number) => {
     this.setState({
       mapSize: size,
-      isOnMapSize: true,
     });
-    map.relayout();
-  };
 
-  // 맵 리사이징 상태
-  isOnResize = (isOn: boolean) => {
-    this.setState({
-      isOnMapSize: isOn,
-    });
+    clearTimeout(mapRsizeTimer);
+    mapRsizeTimer = setTimeout(() => {
+      map.relayout();
+    }, 150);
+
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -254,8 +250,6 @@ class App extends Component<Props, State> {
         className="App"
         style={{
           paddingTop: this.state.mapSize,
-          position: this.state.isOnMapSize ? "fixed" : "relative",
-          width: this.state.isOnMapSize ? window.innerWidth : "auto",
         }}
       >
         {/* <div
@@ -273,7 +267,6 @@ class App extends Component<Props, State> {
             style={{ height: this.state.mapSize }}
           />
           <MyPlaceResize
-            isOnResize={this.isOnResize}
             setMapResize={this.setMapResize}
           />
         </div>
