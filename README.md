@@ -122,10 +122,60 @@ $ npm run dev
 
 [http://localhost:3000/](http://localhost:3000/)가 정상으로 나오면 test 링크를 클릭해 `Hello World!`가 정상으로 나오는지 확인한다.
 
+## 추가 모듈
+
+크로스 도메인 방지 모듈 및 노드 환경에서 `fetch`를 사용하기 위해 아래 모듈을 설치
+```
+$ npm install cors
+$ npm install node-fetch
+```
+
+`index.js`는 아래처럼 수정
+```javascript
+const express = require('express');
+const fetch = require("node-fetch");
+const app = express()
+
+// app.get("/api/greeting", (req,res) => {
+//   res.send("Hello World!");
+// })
+
+// 크로스
+const cors = require("cors");
+app.use(cors());
+
+// 포트 설정
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`express is running on ${PORT}`);
+});
+
+// 테스트용, 더미 가져오기
+const fs = require("fs");
+const dataBuffer = fs.readFileSync('./data.json');
+const dataJSON = dataBuffer.toString();
+
+app.use("/api/greeting", (req, res) => {
+
+  // 테스트용, 더미 가져오기
+  res.json(dataJSON);
+
+  // 장소 id
+  // const id = req.param('id');
+
+  // fetch(`https://place.map.kakao.com/m/main/v/${id}`)
+  //   .then(function (response) {
+  //     return response.json();
+  //   })
+  //   .then(function (myJson) {
+  //     const data = JSON.parse(JSON.stringify(myJson));
+  //     res.json(data);
+  //   });
+});
+```
+
 ## Reference
 [Express 서버와 React: Proxy 활용과 빌드 및 헤로쿠(Heroku) 배포](https://chaewonkong.github.io/posts/express-with-react.html)
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 # 이전 버전 초기화
 
