@@ -1,5 +1,6 @@
-초기 세팅(React, Express)
+# 초기 세팅(React, Express)
 
+## 초기화
 프로젝트 생성 후 해당 디렉토리로 이동
 ```
 $ mkdir my-app
@@ -11,6 +12,7 @@ $ cd my-app
 $ npm init
 ```
 
+## 서버 설치
 익스프레스, 노드몬 설치
 ```
 $ npm install express
@@ -39,12 +41,52 @@ npm run server
 
 [http://localhost:5000/api/greeting](http://localhost:5000/api/greeting) 로 들어가 익스프레스 서버 확인
 
+## 클라이언트 설치
 리액트 설치(TypeScript)
 ```
 $ create-react-app client --use-npm --template typescript
 ```
 
-프록시 설정(react-scripts의 버전이 2 이상인 경우)
+이따가 프록시 설정이 잘 되있는지 확인하기 위해 `src/App.tsx`에 아래처럼 링크 하나 추가
+```tsx
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+
+        {/* 이부분 추가 */}
+        <a className="App-link" href="/api/greeting">
+          test
+        </a>
+        {/* // 이부분 추가 */}
+
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
+
+## 프록시 설정(react-scripts 버전 2 이상)
+
+루트에 `http-proxy-middleware` 설치
 ```
 $ npm install http-proxy-middleware
 ```
@@ -59,13 +101,33 @@ module.exports = function(app) {
 };
 ```
 
+서버 두개를 돌리기 위해 루트경로에 `concurrently` 설치
+```
+$ npm install concurrently
+```
 
+루트 `package.json`에 `script`부분 아래 내용 추가
+```json
+"scripts": {
+  "server": "nodemon index.js",
+  "client": "npm run start --prefix client",
+  "dev": "concurrently \"npm run server\" \"npm run client\""
+},
+```
 
-////////////////////////////////////////////////////////////////////////////////////////////////
+앱 구동
+```
+$ npm run dev
+```
 
+[http://localhost:3000/](http://localhost:3000/)가 정상으로 나오면 test 링크를 클릭해 `Hello World!`가 정상으로 나오는지 확인한다.
 
+## Reference
+[Express 서버와 React: Proxy 활용과 빌드 및 헤로쿠(Heroku) 배포](https://chaewonkong.github.io/posts/express-with-react.html)
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+# 이전 버전 초기화
 
 클라이언트 폴더로 리액트 프로젝트로 생성
 ```
