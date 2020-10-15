@@ -2,36 +2,23 @@ import React, { useState, useEffect } from "react";
 
 const MyPlaceManual = () => {
   const [isOnManual, setIsOnManual] = useState(true);
-  const [isOnManualAgain, setIsOnManualAgain] = useState(false);
-  const myPlaceData: any = JSON.parse(
-    localStorage.getItem("MyPlaceData") as string
-  );
+  const [isOnAgainCheck, setIsOnAgainCheck] = useState(false);
 
-  // 다시 보지 않기 확인
   useEffect(() => {
-    if (myPlaceData !== null) {
-      if (
-        myPlaceData.hasOwnProperty("isOnManualAgain") &&
-        myPlaceData.isOnManualAgain === "Y"
-      ) {
-        setIsOnManual(false);
-      }
+    if (localStorage.getItem("MyPlaceManualAgain") === null) {
+      localStorage.setItem("MyPlaceManualAgain", 'Y');
+    } else if (localStorage.getItem("MyPlaceManualAgain") === "N") {
+      setIsOnManual(false);
     }
   }, []);
 
   const hideManual = (): void => {
-    if (isOnManualAgain) {
-      saveLocalData("Y");
+    if (isOnAgainCheck) {
+      localStorage.setItem("MyPlaceManualAgain", 'N');
+    } else {
+      localStorage.setItem("MyPlaceManualAgain", 'Y');
     }
     setIsOnManual(false);
-  };
-
-  const saveLocalData = (value: string): void => {
-    let MyPlaceData: any = {
-      isOnManualAgain: value,
-    };
-    MyPlaceData = JSON.stringify(MyPlaceData);
-    localStorage.setItem("MyPlaceData", MyPlaceData);
   };
 
   return (
@@ -39,8 +26,8 @@ const MyPlaceManual = () => {
       <div
         className="info"
         style={!isOnManual ? { display: "none" } : { display: "block" }}
-        >
-          <div className="test"></div>
+      >
+        <div className="test"></div>
         <div className="balloon type01">
           위, 아래로 지도 크기를 변경할 수 있어요!
         </div>
@@ -57,10 +44,10 @@ const MyPlaceManual = () => {
             type="checkbox"
             id="check01-01"
             onChange={() => {
-              if (isOnManualAgain) {
-                setIsOnManualAgain(false);
+              if (isOnAgainCheck) {
+                setIsOnAgainCheck(false);
               } else {
-                setIsOnManualAgain(true);
+                setIsOnAgainCheck(true);
               }
             }}
           />
@@ -82,7 +69,7 @@ const MyPlaceManual = () => {
           setIsOnManual(true);
         }}
       >
-        {/* <i className="fa fa-question" aria-hidden="true"></i> */}
+        <div></div>
       </div>
     </div>
   );
