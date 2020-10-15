@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import MyPlaceSearch from "./components/MyPlaceSearch";
 import MyPlaceList from "./components/MyPlaceList";
 import MyPlaceResize from "./components/MyPlaceResize";
+import MyPlaceIntro from "./components/MyPlaceIntro";
 import MyPlaceManual from "./components/MyPlaceManual";
+import MyPlaceLocalData from "./components/MyPlaceLocalData";
 import MyPlaceSort from "./components/MyPlaceSort";
 import "./App.css";
 
@@ -16,9 +18,10 @@ interface Props {}
 interface State {
   itemList: any;
   mapSize: number;
-  isOnintro: string;
+  localPlaceData: any;
 }
 
+// 지도 관련
 let latitude: number;
 let longitude: number;
 let address: string = "";
@@ -27,8 +30,10 @@ let infowindow: any;
 let ps: any;
 let geocoder: any;
 let markerList: any[] = [];
+let mapRsizeTimer: any;
 
-let mapRsizeTimer:any;
+// 로컬 장소 데이터 관련
+const localPlaceData: any = [];
 
 class App extends Component<Props, State> {
   constructor(props: Props) {
@@ -36,7 +41,7 @@ class App extends Component<Props, State> {
     this.state = {
       itemList: [],
       mapSize: 150,
-      isOnintro: "show",
+      localPlaceData: []
     };
   }
 
@@ -64,32 +69,23 @@ class App extends Component<Props, State> {
 
       // 내 위치 마커
       const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
+      const imageSrc: string = "ico-address.png",
+        imageSize: any = new window.kakao.maps.Size(20, 30);
+      const markerImage = new window.kakao.maps.MarkerImage(
+        imageSrc,
+        imageSize
+      );
 
       // 내 위치 마커 생성
       const marker = new window.kakao.maps.Marker({
         position: markerPosition,
+        image: markerImage,
       });
 
       // 내 위치 마커 세팅
       marker.setMap(map);
-
-      // 인트로 페이지
-      this.hideIntro();
     });
   }
-
-  hideIntro = (): void => {
-    setTimeout(() => {
-      this.setState({
-        isOnintro: "opacity",
-      });
-    }, 2000);
-    setTimeout(() => {
-      this.setState({
-        isOnintro: "none",
-      });
-    }, 2500);
-  };
 
   // 현재 위치 좌표 세팅
   setLocation = (callBack: any): void => {
@@ -154,10 +150,16 @@ class App extends Component<Props, State> {
   displayMarker = (place: any, id: number) => {
     const that = this;
 
+    // 마커 이미지 설정
+    const imageSrc: string = "ico-address.png",
+      imageSize: any = new window.kakao.maps.Size(20, 30);
+    const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
+
     // 마커를 생성하고 지도에 표시
     const marker = new window.kakao.maps.Marker({
       map: map,
       position: new window.kakao.maps.LatLng(place.y, place.x),
+      image: markerImage,
     });
 
     // 마커에 id, 장소명 추가
@@ -215,18 +217,42 @@ class App extends Component<Props, State> {
     mapRsizeTimer = setTimeout(() => {
       map.relayout();
     }, 150);
-
   };
+
+  setLocalData = (place: any) => {
+
+
+
+    console.log(place);
+    
+    
+    
+  };
+
+
+
+
 
   //////////////////////////////////////////////////////////////////////
 
   // 가나다순
   setAlphabeticalSort = (alphabeArr: number[]) => {
-    console.log(alphabeArr);
+    let itemList: any = [];
+    alphabeArr.forEach((alphabeItem: any) => {
+      this.state.itemList.forEach((item: any) => {
+        if (alphabeItem === item.id) {
+          itemList.push(item);
+        }
+      });
+    });
+    this.setState({
+      itemList: itemList,
+    });
   };
 
   // 별점순
   setScoreSort = (scoreArr: {}[]) => {
+    console.log(scoreArr);
     let itemList: any = [];
     scoreArr.forEach((scoreItem: any) => {
       this.state.itemList.forEach((item: any) => {
@@ -238,7 +264,6 @@ class App extends Component<Props, State> {
     this.setState({
       itemList: itemList,
     });
-
     console.log(this.state.itemList);
   };
 
@@ -252,13 +277,12 @@ class App extends Component<Props, State> {
           paddingTop: this.state.mapSize,
         }}
       >
-        {/* <div
-          className="intro"
-          style={{
-            opacity: this.state.isOnintro === "opacity" ? 0 : 1,
-            display: this.state.isOnintro === "none" ? "none" : "block",
-          }}
-        ></div> */}
+        {/* <MyPlaceIntro /> */}
+        {/* <MyPlaceSort
+          itemList={this.state.itemList}
+          setAlphabeticalSort={this.setAlphabeticalSort}
+          setScoreSort={this.setScoreSort}
+        /> */}
         <MyPlaceManual />
         <div className="map-wrap" style={{ height: this.state.mapSize }}>
           <div
@@ -266,9 +290,7 @@ class App extends Component<Props, State> {
             className="map"
             style={{ height: this.state.mapSize }}
           />
-          <MyPlaceResize
-            setMapResize={this.setMapResize}
-          />
+          <MyPlaceResize setMapResize={this.setMapResize} />
         </div>
         <MyPlaceSearch
           mapSize={this.state.mapSize}
@@ -278,12 +300,9 @@ class App extends Component<Props, State> {
         <MyPlaceList
           itemList={this.state.itemList}
           selectMarker={this.selectMarker}
+          setLocalData={this.setLocalData}
         />
-        {/* <MyPlaceSort
-          itemList={this.state.itemList}
-          setAlphabeticalSort={this.setAlphabeticalSort}
-          setScoreSort={this.setScoreSort}
-        /> */}
+        <MyPlaceLocalData />
       </div>
     );
   }
