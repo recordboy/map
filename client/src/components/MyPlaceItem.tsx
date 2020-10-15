@@ -4,8 +4,9 @@ const MyPlaceItem = (props: {
   id: number;
   place: any;
   selectMarker: (id: number) => void;
+  setLocalData: (place: any) => void;
 }) => {
-  const { id, place, selectMarker } = props;
+  const { id, place, selectMarker, setLocalData } = props;
 
   // 정보 더보기
   const [info, setInfo] = useState({
@@ -62,14 +63,15 @@ const MyPlaceItem = (props: {
       .then((data) => {
         
         // 테스트용, 데이터 저장
-        // const dataJSON: any = JSON.parse(data);
+        const dataJSON: any = JSON.parse(data);
+        console.log(dataJSON);
 
         // 이곳에 있는 정보로 데이터 세팅
         // console.log(`https://place.map.kakao.com/m/${place.id}`);
         // console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
-        setPlaceInfo(data);
+        setPlaceInfo(dataJSON);
       });
   };
 
@@ -191,20 +193,22 @@ const MyPlaceItem = (props: {
       >
         <div className="tag">
           <span>{tagArr[0]}</span>
-          <span>{tagArr[1]}</span>
+          {tagArr[1] !== undefined && <span>{tagArr[1]}</span>}
           {tagArr[2] !== undefined && <span>{tagArr[2]}</span>}
         </div>
         <div className="name">{place.place_name}</div>
         {phone && (
           <a href={"tel:" + phone} className="phone">
             <i className="fa fa-phone"></i>
-            {phone}
           </a>
         )}
         <a href={place.place_url} className="url" target="_balnk">
           더보기
         </a>
       </div>
+      <button type="button" onClick={() => {
+        setLocalData(place);
+      }}>찜</button>
       <div className={isOn ? "detail on" : "detail"}>
         {info.photoUrl[0] !== "N" && (
           <div className="photo">
