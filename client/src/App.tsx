@@ -33,7 +33,14 @@ let markerList: any[] = [];
 let mapRsizeTimer: any;
 
 // 로컬 장소 데이터 관련
-const localPlaceData: any = [];
+let localPlaceData: any;
+if (localStorage.getItem("localPlaceData") === null) {
+  localStorage.setItem("localPlaceData", JSON.stringify(localPlaceData));
+} else {
+  // 작업 예정
+  localPlaceData = localStorage.getItem("localPlaceData");
+  console.log(localPlaceData);
+}
 
 class App extends Component<Props, State> {
   constructor(props: Props) {
