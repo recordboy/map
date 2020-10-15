@@ -56,7 +56,7 @@
   font-weight: bold;
   touch-action: none;
   touch-action: pan-x;
-  background-color: #FA8258;
+  background-color: rgba(247, 148, 132, 1);
   transition: background-color 0.4s;
   color: #fff;
 }
@@ -104,7 +104,7 @@
 }
 
 .App .controller .search.fixed input[type="text"] {
-  border: 2px solid #FA8258;
+  border: 2px solid rgba(247, 148, 132, 1);
   border-radius: 0 0 0 3px;
   height: 50px;
 }
@@ -126,12 +126,12 @@
 
 .App .controller .search.fixed button {
   right: 0;
-  border: 2px solid #FA8258;
+  border: 2px solid rgba(247, 148, 132, 1);
   border-left: none;
   border-radius: 0 0 3px 0;
   width: 50px;
   height: 50px;
-  background-color: #FA8258;
+  background-color: rgba(247, 148, 132, 1);
   color: #fff;
 }
 
@@ -153,15 +153,17 @@
 }
 
 .App .list .basic .name {
+  display: inline-block;
   margin-top: 10px;
   font-size: 20px;
   font-weight: bold;
 }
 
 .App .list .basic .phone {
+  margin-left: 5px;
   text-decoration: none;
-  font-size: 12px;
-  color: #999;
+  font-size: 18px;
+  color: rgba(127, 221, 216, 1);
 }
 .App .list .basic .phone i {
   margin-right: 2px;
@@ -176,7 +178,7 @@
   font-size: 11px;
   text-align: center;
   text-decoration: none;
-  background-color: #FA8258;
+  background-color: rgba(247, 148, 132, 1);
   color: #fff;
 }
 
@@ -298,7 +300,7 @@
   width: 100%;
   height: 10px;
   border-radius: 3px 0 0 3px;
-  background-color: #FA8258;
+  background-color: rgba(247, 148, 132, 1);
 }
 
 .App .list .detail .menu {
@@ -439,7 +441,7 @@
   width: 40px;
   height: 20px;
   outline: none;
-  background-color: #FA8258;
+  background-color: rgba(247, 148, 132, 1);
 }
 
 .App .intro {
@@ -470,7 +472,7 @@
   font-size: 13px;
   color: #fff;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-  background-color: #FA8258;
+  background-color: rgba(247, 148, 132, 1);
 }
 
 .App .manual .balloon:before {
@@ -479,7 +481,7 @@
   width: 0px;
   height: 0px;
   border-top: 6px solid transparent;
-  border-left: 8px solid #FA8258;
+  border-left: 8px solid rgba(247, 148, 132, 1);
   border-bottom: 6px solid transparent;
 }
 .App .manual .balloon.type01 {
@@ -501,7 +503,7 @@
   left: 50%;
   z-index: 10;
   margin-left: 15px;
-  border: 5px solid #FA8258;
+  border: 5px solid rgba(247, 148, 132, 1);
   box-sizing: border-box;
   border-radius: 20px 20px 0 0;
   width: 40px;
@@ -527,7 +529,7 @@
   bottom: 65px;
   left: 0;
   z-index: 10;
-  border: 5px dashed #FA8258;
+  border: 5px dashed rgba(247, 148, 132, 1);
   border-radius: 5px;
   box-sizing: border-box;
   padding: 0;
@@ -557,7 +559,7 @@
   left: 0;
   z-index: 10;
   margin: 2.5%;
-  border: 5px dashed #FA8258;
+  border: 5px dashed rgba(247, 148, 132, 1);
   border-radius: 5px;
   box-sizing: border-box;
   width: 95%; 
@@ -603,3 +605,7 @@
 
   clip-path: circle(40px at center);
 }
+
+
+/* fill: rgb(127, 221, 216);
+fill: rgb(247, 148, 132); */
