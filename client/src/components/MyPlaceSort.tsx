@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { callbackify } from "util";
 
 const MyPlaceSort = (props: {
   itemList: any[];
@@ -40,7 +39,6 @@ const MyPlaceSort = (props: {
   };
 
   const scoreSort = () => {
-
     // async, await 방식
     let scoreList: {}[] = [];
     itemList.forEach((item: any, idx: number) => {
@@ -49,7 +47,7 @@ const MyPlaceSort = (props: {
 
     async function getData(item: any, idx: number) {
       const data: any = await fetch(
-        `http://localhost:3001/api?id=${item.place.id}`
+        `http://localhost:3000/api/greeting?id=${item.place.id}`
       );
       const dataStr = await data.json();
       const dataJSON = JSON.parse(dataStr);
@@ -67,7 +65,6 @@ const MyPlaceSort = (props: {
         score: score,
       });
       if (idx >= itemList.length - 1) {
-
         const dummy: any = [
           { id: 0, score: 1.2 },
           { id: 1, score: 3.4 },
@@ -141,6 +138,16 @@ const MyPlaceSort = (props: {
       >
         별점
       </button>
+      {/* <button
+        type="button"
+        onClick={() => {
+          if (itemList.length > 0) {
+            alphabeticalSort();
+          }
+        }}
+      >
+        가나다
+      </button> */}
     </div>
   );
 };
