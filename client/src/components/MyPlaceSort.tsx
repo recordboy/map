@@ -47,7 +47,7 @@ const MyPlaceSort = (props: {
 
     async function getData(item: any, idx: number) {
       const data: any = await fetch(
-        `https://recordboy-my-place.herokuapp.com/api/greeting?id=${item.place.id}`
+        `http://localhost:3000/api/greeting?id=${item.place.id}`
       );
       const dataStr = await data.json();
       const dataJSON = JSON.parse(dataStr);
