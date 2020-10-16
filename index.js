@@ -2,45 +2,41 @@ const express = require('express');
 const app = express()
 
 // 서버 확인용
-app.get("/api/greeting", (req,res) => {
-  res.send("Hello World!");
-})
+// app.get("/api/greeting", (req,res) => {
+//   res.send("Hello World!");
+// })
 
-module.exports = function(app) {
-  app.use(proxy("/api/greeting", { target: "http://localhost:5000" }));
-};
+// 크로스 설정
+const cors = require("cors");
+app.use(cors());
 
-// // 크로스 설정
-// const cors = require("cors");
-// app.use(cors());
+// 포트 설정
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`express is running on ${PORT}`);
+});
 
-// // 포트 설정
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => {
-//   console.log(`express is running on ${PORT}`);
-// });
+// 테스트용 더미 가져오기
+// const fs = require("fs");
+// const dataBuffer = fs.readFileSync('./data.json');
+// const dataJSON = dataBuffer.toString();
 
-// // 테스트용 더미 가져오기
-// // const fs = require("fs");
-// // const dataBuffer = fs.readFileSync('./data.json');
-// // const dataJSON = dataBuffer.toString();
+// 데이터 가져오기
+const fetch = require("node-fetch");
+app.use("/api/greeting", (req, res) => {
 
-// // 데이터 가져오기
-// const fetch = require("node-fetch");
-// app.use("/api/greeting", (req, res) => {
+  // 테스트용, 더미 가져오기
+  // res.json(dataJSON);
 
-//   // 테스트용, 더미 가져오기
-//   // res.json(dataJSON);
+  // 장소 id
+  const id = req.param('id');
 
-//   // 장소 id
-//   const id = req.param('id');
-
-//   fetch(`https://place.map.kakao.com/m/main/v/${id}`)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (myJson) {
-//       const data = JSON.parse(JSON.stringify(myJson));
-//       res.json(data);
-//     });
-// });
+  fetch(`https://place.map.kakao.com/m/main/v/${id}`)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (myJson) {
+      const data = JSON.parse(JSON.stringify(myJson));
+      res.json(data);
+    });
+});
