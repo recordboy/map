@@ -2,9 +2,9 @@ const express = require('express');
 const app = express()
 
 // 서버 확인용
-// app.get("/api/greeting", (req,res) => {
-//   res.send("Hello World!");
-// })
+app.get("/api/greeting", (req,res) => {
+  res.send("Hello World!");
+})
 
 // 크로스 설정
 const cors = require("cors");
