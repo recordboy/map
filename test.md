@@ -1,20 +1,24 @@
 
 npm init -y
-mkdir server
-mkdir client
 
 리액트 생성
-cd client
 npx create-react-app client --typescript
 
 서버 생성
-cd ..
-cd server
-npm init -y
-npm install express
-npm install nodemon
-npm install cros
-npm install node-fetch
+npm install express nodemon cors node-fetch
 
-루트 이동해서 프록시 설정
-cd ..
+루트에서 프록시 설정
+npm install http-proxy-middleware
+
+`setupProxy.js`
+
+```javascript
+const proxy = require("http-proxy-middleware");
+
+module.exports = function(app) {
+  app.use(proxy("/api/greeting", { target: "http://localhost:5000" }));
+};
+```
+
+서버 두개 돌리기 위해 루트에 아래 설치
+npm install concurrently

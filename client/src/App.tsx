@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 const getData = () => {
-  fetch(`/api/greeting`)
+  fetch(`http://localhost:5000/api/greeting`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -14,10 +14,7 @@ function App() {
     <div className="App">
       <button type="button" onClick={() => {
         getData();
-      }}>click</button>
-      <a className="App-link" href="/api/greeting">
-        test
-      </a>
+      }}>test</button>
     </div>
   );
 }

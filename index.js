@@ -1,23 +1,15 @@
-const express = require("express");
-const app = express();
-
-// 서버 확인용
-// app.get("/api/greeting", (req, res) => {
-//   res.json({
-//     name: "nana",
-//   });
-// });
+const express = require('express');
+const app = express()
 
 // 크로스 설정
-// const cors = require("cors");
-// app.use(cors());
+const cors = require("cors");
+app.use(cors());
 
 // 포트 설정
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`express is running on ${PORT}`);
 });
-
 
 const fetch = require("node-fetch");
 app.use("/api/greeting", (req, res) => {
@@ -31,13 +23,12 @@ app.use("/api/greeting", (req, res) => {
     });
 });
 
+// 테스트용 더미 가져오기
+// const fs = require("fs");
+// const dataBuffer = fs.readFileSync('./data.json');
+// const dataJSON = dataBuffer.toString();
 
-// // 테스트용 더미 가져오기
-// // const fs = require("fs");
-// // const dataBuffer = fs.readFileSync('./data.json');
-// // const dataJSON = dataBuffer.toString();
-
-// // 데이터 가져오기
+// 데이터 가져오기
 // const fetch = require("node-fetch");
 // app.use("/api/greeting", (req, res) => {
 
