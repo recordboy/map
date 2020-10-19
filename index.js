@@ -1,17 +1,30 @@
 const express = require('express');
 const path = require('path');
 const fetch = require("node-fetch");
-
 const app = express();
+
+// 크로스 설정
+const cors = require("cors");
+app.use(cors());
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Put all API endpoints under '/api'
-// app.use('/api/data', (req, res) => {
-app.get('/api/data', (req, res) => {
+// 테스트 더미
+// const fs = require("fs");
+// const dataBuffer = fs.readFileSync('./data.json');
+// const dataJSON = dataBuffer.toString();
 
-  fetch(`https://place.map.kakao.com/m/main/v/27103887`)
+// Put all API endpoints under '/api'
+app.get('/api/data', (req, res) => {
+  
+  // 테스트 더미
+  // res.json(dataJSON);
+
+  // 장소 id
+  const id = req.param('id');
+
+  fetch(`https://place.map.kakao.com/m/main/v/${id}`)
     .then(function (response) {
       return response.json();
     })
@@ -19,18 +32,7 @@ app.get('/api/data', (req, res) => {
       const data = JSON.parse(JSON.stringify(myJson));
       res.json(data);
     });
-
-  // const count = 5;
-
-  // // Generate some passwords
-  // const passwords = Array.from(Array(count).keys()).map(i =>
-  //   generatePassword(12, false)
-  // )
-
-  // // Return them as json
-  // res.json(passwords);
-
-  // console.log(`Sent ${count} passwords`);
+  
 });
 
 // The "catchall" handler: for any request that doesn't
