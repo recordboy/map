@@ -8,8 +8,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Put all API endpoints under '/api'
-app.use('/api/passwords', (req, res) => {
-
+// app.use('/api/data', (req, res) => {
+app.get('/api/data', (req, res) => {
 
   fetch(`https://place.map.kakao.com/m/main/v/27103887`)
     .then(function (response) {
@@ -42,4 +42,4 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Password generator listening on ${port}`);
+console.log(`Getting place data ${port}`);
