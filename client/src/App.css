@@ -1,5 +1,8 @@
+@import url("https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css");
+
 .App {
   position: relative;
+  font-family: "NanumSquareRound", "Helvetica Neue", sans-serif;
   font-size: 16px;
 }
 
@@ -22,7 +25,7 @@
 }
 
 .App .controller .sort .depth01 {
-  margin: 0 -1px;
+  margin: 0 -2px;
 }
 
 .App .controller .sort .depth02,
@@ -34,7 +37,7 @@
 
 .App .controller .sort .depth02.on,
 .App .controller .sort .depth03.on {
-  margin: 2px -1px 0;
+  margin: 2px -2px 0;
   height: 40px;
 }
 
@@ -46,17 +49,18 @@
 
 .App .controller .sort button {
   float: left;
-  margin: 0 1px;
+  margin: 0 3px;
   border: none;
-  border-radius: 2px;
+  border-radius: 3px;
+  box-sizing: border-box;
   padding: 0;
-  width: 88px;
-  height: 40px;
-  font-size: 13px;
-  font-weight: bold;
+  width: 100px;
+  height: 50px;
+  font-size: 14px;
+  font-weight: 300;
   touch-action: none;
   touch-action: pan-x;
-  background-color: rgba(247, 148, 132, 1);
+  background-color: #ea4c89;
   transition: background-color 0.4s;
   color: #fff;
 }
@@ -434,14 +438,25 @@
   position: absolute;
   left: 50%;
   z-index: 10;
-  margin-left: -20px;
-  border: 5px solid #fff;
-  border-bottom: 0;
-  border-radius: 20px 20px 0 0;
-  width: 40px;
-  height: 20px;
+  margin-left: -40px;box-sizing: content-box;
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
   outline: none;
-  background-color: rgba(247, 148, 132, 1);
+  background-color: #ea4c89;
+}
+
+.App .map-wrap .btn-resize:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .App .intro {
@@ -524,7 +539,7 @@
 }
 
 .App .manual .balloon.type02:after {
-  content: '음식';
+  content: '식사';
   position: absolute;
   bottom: 65px;
   left: 0;

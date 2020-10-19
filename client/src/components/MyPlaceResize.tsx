@@ -4,11 +4,11 @@ const MyPlaceResize = (props: {
   setMapResize: (height: number) => void;
 }) => {
   const { setMapResize } = props;
-  const [resize, setResize] = useState(130);
+  const [resize, setResize] = useState(110);
   const touchMove = (screenY: number) => {
     screenY = Math.floor(screenY);
     setMapResize(screenY);
-    setResize(screenY - 20);
+    setResize(screenY - 40);
   };
   let btnResize: any;
 
@@ -25,7 +25,6 @@ const MyPlaceResize = (props: {
       }}
       onTouchStart={() => {
         btnResize.addEventListener("touchmove", (e: any) => {
-          console.log(1);
           e.preventDefault();
           return;
         });
