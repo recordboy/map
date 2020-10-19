@@ -10,11 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/recordboy/map.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/recordboy/map/issues"
   },
-  "homepage": "https://github.com/recordboy/map#readme"
+  "homepage": "https://github.com/recordboy/map#readme",
+  "dependencies": {
+    "http-proxy-middleware": "^1.0.6",
+    "node-fetch": "^2.6.1"
+  }
 }
