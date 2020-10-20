@@ -82,6 +82,11 @@ $ npm start
 $ npx create-react-app client --typescript
 ```
 
+서버, 클라이언트 동시 실행 모듈은 아래 설치
+```
+$ npm install concurrently
+```
+
 <!-- 
 루트에서 프록시 설정
 npm install http-proxy-middleware
