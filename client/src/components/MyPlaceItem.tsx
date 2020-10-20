@@ -57,13 +57,11 @@ const MyPlaceItem = (props: {
   // 로컬 서버에 장소 더보기 요청
   const getPlaceInfo = (place: any) => {
     // http://192.168.219.104/
-    // fetch(`http://localhost:5000/api/data?id=${place.id}`)
-    fetch(`/api/data?id=${place.id}`)
+    fetch(`http://localhost:5000/api/data?id=${place.id}`)
       .then((res) => res.json())
       .then((data) => {
-
         // 테스트용, 데이터 저장
-        // const dataJSON: any = JSON.parse(data);
+        const dataJSON: any = JSON.parse(data);
         // console.log(dataJSON);
 
         // 이곳에 있는 정보로 데이터 세팅
@@ -71,7 +69,7 @@ const MyPlaceItem = (props: {
         // console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
-        setPlaceInfo(data);
+        setPlaceInfo(dataJSON);
       });
   };
 
@@ -256,12 +254,7 @@ const MyPlaceItem = (props: {
             <span className="result">총 {info.score}점</span>
             <span className="people">({info.people}명)</span>
             <span className="frame">
-              <span className="line">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
+              <span className="line"></span>
               <span
                 className="gauge"
                 style={{ width: info.score * 20 + "%" }}
