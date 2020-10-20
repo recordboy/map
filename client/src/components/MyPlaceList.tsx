@@ -10,7 +10,7 @@ const MyPlaceList = (props: {
   const list = itemList.map((item: any) => {
     return <MyPlaceItem key={item.id} id={item.id} place={item.place} selectMarker={selectMarker} setLocalData={setLocalData} />;
   });
-  return <div className="list">{list}</div>;
+  return <div className="place-list">{list}</div>;
 };
 
 export default MyPlaceList;
