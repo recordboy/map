@@ -57,11 +57,13 @@ const MyPlaceItem = (props: {
   // 로컬 서버에 장소 더보기 요청
   const getPlaceInfo = (place: any) => {
     // http://192.168.219.104/
-    fetch(`http://localhost:5000/api/data?id=${place.id}`)
+    // fetch(`http://localhost:5000/api/data?id=${place.id}`)
+    fetch(`https://recordboy-my-place.herokuapp.com/api/data?id=${place.id}`)
       .then((res) => res.json())
       .then((data) => {
+
         // 테스트용, 데이터 저장
-        const dataJSON: any = JSON.parse(data);
+        // const dataJSON: any = JSON.parse(data);
         // console.log(dataJSON);
 
         // 이곳에 있는 정보로 데이터 세팅
@@ -69,7 +71,7 @@ const MyPlaceItem = (props: {
         // console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
-        setPlaceInfo(dataJSON);
+        setPlaceInfo(data);
       });
   };
 
