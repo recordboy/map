@@ -1,5 +1,31 @@
 @import url("https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css");
 
+body {
+  background-color: #e8edf0;
+}
+
+/* common */
+
+.convex {
+  position: relative;
+  border-radius: 10px;
+  background-color: #f1f5f7;
+  box-shadow: 3px 3px 5px rgba(10, 39, 57, 0.1);
+}
+
+.convex:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  box-shadow: -3px -3px 6px rgba(255, 255, 255, 1);
+}
+
+/* layout */
+
 .App {
   position: relative;
   font-family: "NanumSquareRound", "Helvetica Neue", sans-serif;
@@ -8,7 +34,7 @@
 
 .App .controller {
   position: relative;
-  padding: 0 0 52px;
+  padding: 0 0 70px;
   transition: height 0.4s;
 }
 
@@ -21,11 +47,7 @@
 }
 
 .App .controller .sort > div .inner {
-  padding: 0 10px;
-}
-
-.App .controller .sort .depth01 {
-  margin: 0 -2px;
+  padding: 0 5px;
 }
 
 .App .controller .sort .depth02,
@@ -37,8 +59,7 @@
 
 .App .controller .sort .depth02.on,
 .App .controller .sort .depth03.on {
-  margin: 2px -2px 0;
-  height: 40px;
+  height: 60px;
 }
 
 .App .controller .sort .inner::after {
@@ -48,25 +69,24 @@
 }
 
 .App .controller .sort button {
+  position: relative;
   float: left;
-  margin: 0 3px;
+  margin: 5px;
   border: none;
-  border-radius: 3px;
+  border-radius: 10px;
   box-sizing: border-box;
   padding: 0;
   width: 100px;
   height: 50px;
   font-size: 14px;
-  font-weight: 300;
   touch-action: none;
   touch-action: pan-x;
-  background-color: #ea4c89;
   transition: background-color 0.4s;
-  color: #fff;
+  outline: none;
 }
 
 .App .controller .sort button:disabled {
-  background-color: #ffdacd;
+  color: #ccc;
 }
 
 .App .controller .sort button:last-child {
@@ -78,134 +98,152 @@
   bottom: 10px;
   left: 0;
   box-sizing: border-box;
-  padding: 0 50px 0 10px;
+  padding: 0 10px;
   width: 100%;
-  height: 40px;
-  transition: padding 0.2s, height 0.2s;
+  height: 50px;
+}
+
+.App .controller .search .inner {
+  position: relative;
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding-right: 50px;
+  width: 100%;
+  height: 50px;
+}
+
+.App .controller .search input[type="text"] {
+  position: relative;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 0 10px;
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #f1f5f7;
+  outline: none;
 }
 
 .App .controller .search.fixed {
   position: fixed;
   left: 0;
   z-index: 30;
-  padding: 0 50px 0 0;
-  width: 100%;
-  height: 50px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 0;
 }
 
-.App .controller .search input[type="text"] {
-  border: 2px solid #e0e0e0;
-  border-radius: 3px 0 0 3px;
-  box-sizing: border-box;
-  padding: 0 5px;
-  width: 100%;
-  height: 40px;
-  font-size: 15px;
-  font-weight: bold;
-  transition: 0.2s;
-  outline: none;
+.App .controller .search.fixed .inner:before {
+  box-shadow: none;
 }
 
 .App .controller .search.fixed input[type="text"] {
-  border: 2px solid rgba(247, 148, 132, 1);
-  border-radius: 0 0 0 3px;
-  height: 50px;
+  border-radius: 0;
 }
 
 .App .controller .search button {
   position: absolute;
   top: 0;
-  right: 10px;
-  border: 2px solid #e0e0e0;
-  border-left: none;
-  border-radius: 0 3px 3px 0;
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
-  transition: 0.2s;
-  outline: none;
-  color: #999;
-}
-
-.App .controller .search.fixed button {
   right: 0;
-  border: 2px solid rgba(247, 148, 132, 1);
+  border: none;
   border-left: none;
-  border-radius: 0 0 3px 0;
+  border-radius: 0 10px 10px 0;
   width: 50px;
   height: 50px;
-  background-color: rgba(247, 148, 132, 1);
+  font-size: 18px;
+  outline: none;
+  background-color: #6088f7;
   color: #fff;
 }
 
+.App .controller .search.fixed button {
+  border-radius: 0;
+}
 
-.App .list .basic {
+.App .place-list {
+  padding: 0 10px;
+}
+
+.App .place-list > div {
   position: relative;
-  border-top: 7px solid #f2f2f2;
-  padding: 15px 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.App .place-list .basic {
+  position: relative;
+  padding: 15px 10px 25px;
   cursor: pointer;
 }
 
-.App .list .basic .tag > span {
+
+.App .place-list .basic .tag > span {
   margin-right: 4px;
   border-radius: 2px;
   padding: 3px 5px;
   font-size: 11px;
-  background-color: #E3E8ED;
-  color: #999;
+  background-color: #6088f7;
+  color: #fff;
 }
 
-.App .list .basic .name {
+.App .place-list .basic .name {
   display: inline-block;
   margin-top: 10px;
   font-size: 20px;
   font-weight: bold;
 }
 
-.App .list .basic .phone {
-  margin-left: 5px;
-  text-decoration: none;
-  font-size: 18px;
-  color: rgba(127, 221, 216, 1);
-}
-.App .list .basic .phone i {
-  margin-right: 2px;
-}
-
-.App .list .basic .url {
+.App .place-list .basic .url {
   position: absolute;
   top: 15px;
   right: 10px;
+  z-index: 10;
   border-radius: 2px;
-  padding: 3px 5px;
-  font-size: 11px;
+  width: 25px;
+  height: 25px;
+  line-height: 28px;
+  font-size: 17px;
   text-align: center;
   text-decoration: none;
-  background-color: rgba(247, 148, 132, 1);
+  background-color: #999;
   color: #fff;
 }
 
-.App .list .detail {
+.App .place-list .basic .phone {
+  position: absolute;
+  top: 15px;
+  right: 40px;
+  border-radius: 2px;
+  width: 25px;
+  height: 25px;
+  line-height: 28px;
+  font-size: 17px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #8ce2bd;
+  color: #fff;
+}
+
+.App .place-list .detail {
   display: none;
   overflow: hidden;
 }
 
-.App .list .detail.on {
+.App .place-list .detail.on {
   display: block;
   padding: 10px;
 }
 
-.App .list .detail .photo {
+.App .place-list .detail .photo {
   overflow-x: auto;
 }
 
-.App .list .detail .photo .inner {
+.App .place-list .detail .photo .inner {
   overflow: hidden;
   border-radius: 3px;
 }
 
-.App .list .detail .photo img {
+.App .place-list .detail .photo img {
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
@@ -215,55 +253,55 @@
   object-fit: cover;
 }
 
-.App .list .detail .photo img:first-child {
+.App .place-list .detail .photo img:first-child {
   padding-left: 0;
 }
 
-.App .list .detail .photo img:first-child {
+.App .place-list .detail .photo img:first-child {
   padding-left: 0;
 }
 
-.App .list .detail .introduction {
+.App .place-list .detail .introduction {
   margin-top: 10px;
   font-weight: bold;
 }
 
-.App .list .detail .adress {
+.App .place-list .detail .adress {
   margin-top: 5px;
 }
 
-.App .list .detail .time {
+.App .place-list .detail .time {
   margin-top: 5px;
 }
 
-.App .list .detail .time > span {
+.App .place-list .detail .time > span {
   margin-right: 2px;
 }
 
-.App .list .detail .time > span:nth-child(3) {
+.App .place-list .detail .time > span:nth-child(3) {
   color: #999;
 }
-.App .list .detail .time > span:nth-child(3) {
+.App .place-list .detail .time > span:nth-child(3) {
   color: FA8258;
 }
 
-.App .list .detail .score {
+.App .place-list .detail .score {
   position: relative;
   margin-top: 10px;
   width: 120px;
 }
 
-.App .list .detail .score .result {
+.App .place-list .detail .score .result {
   font-size: 20px;
   font-weight: bold;
 }
 
-.App .list .detail .score .people {
+.App .place-list .detail .score .people {
   font-size: 11px;
   color: #999;
 }
 
-.App .list .detail .frame {
+.App .place-list .detail .frame {
   display: inline-block;
   position: relative;
   width: 100%;
@@ -272,7 +310,7 @@
   background-color: #f0f0f0;
 }
 
-.App .list .detail .frame .line span {
+.App .place-list .detail .frame .line span {
   position: absolute;
   top: 0;
   z-index: 20;
@@ -281,23 +319,23 @@
   background-color: rgba(255, 255, 255, 1);
 }
 
-.App .list .detail .frame .line span:nth-child(1) {
+.App .place-list .detail .frame .line span:nth-child(1) {
   left: 20%;
 }
 
-.App .list .detail .frame .line span:nth-child(2) {
+.App .place-list .detail .frame .line span:nth-child(2) {
   left: 40%;
 }
 
-.App .list .detail .frame .line span:nth-child(3) {
+.App .place-list .detail .frame .line span:nth-child(3) {
   left: 60%;
 }
 
-.App .list .detail .frame .line span:nth-child(4) {
+.App .place-list .detail .frame .line span:nth-child(4) {
   left: 80%;
 }
 
-.App .list .detail .frame .gauge {
+.App .place-list .detail .frame .gauge {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -307,23 +345,23 @@
   background-color: rgba(247, 148, 132, 1);
 }
 
-.App .list .detail .menu {
+.App .place-list .detail .menu {
   margin-top: 10px;
 }
 
-.App .list .detail .menu .title {
+.App .place-list .detail .menu .title {
   margin-top: 10px;
   font-weight: bold;
 }
 
-.App .list .detail .menu .item {
+.App .place-list .detail .menu .item {
   position: relative;
   margin-top: 5px;
   padding-right: 70px;
   box-sizing: border-box;
 }
 
-.App .list .detail .menu .item:after {
+.App .place-list .detail .menu .item:after {
   content: '';
   position: absolute;
   top: 11px;
@@ -333,7 +371,7 @@
   width: 100%;
 }
 
-.App .list .detail .menu .item span {
+.App .place-list .detail .menu .item span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -342,7 +380,7 @@
   background-color: #fff;
 }
 
-.App .list .detail .menu .item strong {
+.App .place-list .detail .menu .item strong {
   position: absolute;
   top: 0;
   right: 0;
@@ -350,30 +388,30 @@
   background-color: #fff;
 }
 
-.App .list .detail .review {
+.App .place-list .detail .review {
   margin-top: 10px;
 }
 
-.App .list .detail .review .title {
+.App .place-list .detail .review .title {
   font-size: 15px;
   font-weight: bold;
 }
 
-.App .list .detail .review .item {
+.App .place-list .detail .review .item {
   border-top: 1px solid #f0f0f0;
   padding: 10px 0;
 }
 
-.App .list .detail .review .info {
+.App .place-list .detail .review .info {
   position: relative;
 }
 
-.App .list .detail .review .info span {
+.App .place-list .detail .review .info span {
   position: relative;
   margin-right: 15px;
 }
 
-.App .list .detail .review .info span:before {
+.App .place-list .detail .review .info span:before {
   content: '';
   position: absolute;
   top: 5px;
@@ -383,19 +421,19 @@
   background-color: #ccc;
 }
 
-.App .list .detail .review .info span:first-child:before {
+.App .place-list .detail .review .info span:first-child:before {
   display: none;
 }
 
-.App .list .detail .review .point {
+.App .place-list .detail .review .point {
   font-weight: bold;
 }
 
-.App .list .detail .review .date {
+.App .place-list .detail .review .date {
   color: #999;
 }
 
-.App .list .detail .review .more {
+.App .place-list .detail .review .more {
   position: absolute;
   top: 0;
   right: 0;
@@ -406,7 +444,7 @@
   color: #666;
 }
 
-.App .list .detail .review .text {
+.App .place-list .detail .review .text {
   margin-top: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -417,7 +455,7 @@
   height: auto;
 }
 
-.App .list .detail .review .text.on {
+.App .place-list .detail .review .text.on {
   -webkit-line-clamp: inherit;
 }
 
@@ -433,30 +471,27 @@
   width: 100%;
   background-color: #fff;
 }
-
 .App .map-wrap .btn-resize {
   position: absolute;
-  left: 50%;
+  bottom: -7px;
+  left: 0;
   z-index: 10;
-  margin-left: -40px;box-sizing: content-box;
   border: none;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: 14px;
+  background: none;
   outline: none;
-  background-color: #ea4c89;
 }
 
-.App .map-wrap .btn-resize:before {
+.App .map-wrap .btn-resize:after {
   content: '';
   position: absolute;
-  top: 0;
+  bottom: 7px;
   left: 0;
-  z-index: -1;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 10;
+  width: 100%;
+  height: 2px;
+  background: #82a1b4;
 }
 
 .App .intro {
