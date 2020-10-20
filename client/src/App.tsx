@@ -47,7 +47,7 @@ class App extends Component<Props, State> {
     super(props);
     this.state = {
       itemList: [],
-      mapSize: 150,
+      mapSize: 200,
       localPlaceData: []
     };
   }
@@ -227,18 +227,8 @@ class App extends Component<Props, State> {
   };
 
   setLocalData = (place: any) => {
-
-
-
     console.log(place);
-    
-    
-    
   };
-
-
-
-
 
   //////////////////////////////////////////////////////////////////////
 
@@ -309,7 +299,7 @@ class App extends Component<Props, State> {
           selectMarker={this.selectMarker}
           setLocalData={this.setLocalData}
         />
-        <MyPlaceLocalData />
+        {/* <MyPlaceLocalData /> */}
       </div>
     );
   }
