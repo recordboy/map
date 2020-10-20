@@ -127,14 +127,14 @@ const MyPlaceSearch = (props: {
         <div className="depth01">
           <div
             className="inner"
-            style={{ width: searchList.length * 100 + "px" }}
+            style={{ width: searchList.length * 110 + "px" }}
           >
             {searchList.map((item: any, idx: number) => {
               return (
                 <button
                   key={idx}
                   type="button"
-                  className={nextPlace.selectdepth02 === item.name ? "on" : ""}
+                  className={nextPlace.selectdepth02 === item.name ? "convex on" : "convex"}
                   disabled={
                     depth !== 1 && nextPlace.selectdepth02 !== item.name
                       ? true
@@ -159,14 +159,14 @@ const MyPlaceSearch = (props: {
         <div className={depth === 2 || depth === 3 ? "depth02 on" : "depth02"}>
           <div
             className="inner"
-            style={{ width: nextPlace.selectListdepth02.length * 90 + "px" }}
+            style={{ width: nextPlace.selectListdepth02.length * 110 + "px" }}
           >
             {nextPlace.selectListdepth02.map((item: any, idx: number) => {
               return (
                 <button
                   key={idx}
                   type="button"
-                  className={nextPlace.selectdepth03 === item.name ? "on" : ""}
+                  className={nextPlace.selectdepth03 === item.name ? "convex on" : "convex"}
                   disabled={
                     depth !== 2 && nextPlace.selectdepth03 !== item.name
                       ? true
@@ -191,13 +191,14 @@ const MyPlaceSearch = (props: {
         <div className={depth === 3 ? "depth03 on" : "depth03"}>
           <div
             className="inner"
-            style={{ width: nextPlace.selectListdepth03.length * 90 + "px" }}
+            style={{ width: nextPlace.selectListdepth03.length * 110 + "px" }}
           >
             {nextPlace.selectListdepth03.map((item: any, idx: number) => {
               return (
                 <button
                   key={idx}
                   type="button"
+                  className="convex"
                   onClick={(e) => {
                     clickKeywordBtn(e);
                   }}
@@ -215,26 +216,27 @@ const MyPlaceSearch = (props: {
           </div>
         </div>
       </div>
-
       <div
         className={searchFixed ? "search fixed" : "search"}
         style={searchFixed ? { top: mapSize } : { top: "auto" }}
       >
-        <input
-          type="text"
-          placeholder="직접 입력"
-          onChange={(e) => {
-            setInputData(e.target.value);
-          }}
-        />
-        <button
-          type="button"
-          onClick={(e) => {
-            handleInputSearch(inputData);
-          }}
-        >
-          <i className="fa fa-search"></i>
-        </button>
+        <div className="inner convex">
+          <input
+            type="text"
+            placeholder="직접 입력"
+            onChange={(e) => {
+              setInputData(e.target.value);
+            }}
+          />
+          <button
+            type="button"
+            onClick={(e) => {
+              handleInputSearch(inputData);
+            }}
+          >
+            <i className="fa fa-search"></i>
+          </button>
+        </div>
       </div>
     </div>
   );
