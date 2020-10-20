@@ -58,7 +58,7 @@ const MyPlaceItem = (props: {
   const getPlaceInfo = (place: any) => {
     // http://192.168.219.104/
     // fetch(`http://localhost:5000/api/data?id=${place.id}`)
-    fetch(`https://recordboy-my-place.herokuapp.com/api/data?id=${place.id}`)
+    fetch(`/api/data?id=${place.id}`)
       .then((res) => res.json())
       .then((data) => {
 
