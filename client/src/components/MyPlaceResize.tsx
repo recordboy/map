@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 
 const MyPlaceResize = (props: { setMapResize: (height: number) => void }) => {
   const { setMapResize } = props;
-  const [resize, setResize] = useState(121);
+  const [resize, setResize] = useState(75);
   const touchMove = (screenY: number) => {
     screenY = Math.floor(screenY);
-    setMapResize(screenY);
-    setResize(screenY - 59);
+    setMapResize(screenY * 2);
+    setResize(screenY - 25);
+    console.log(screenY);
   };
   let btnResize: any;
 
@@ -18,8 +19,10 @@ const MyPlaceResize = (props: { setMapResize: (height: number) => void }) => {
     <button
       type="button"
       className="btn-resize"
+      style={{ top: resize }}
       onTouchMove={(e: any) => {
         touchMove(e.touches[0].clientY);
+        console.log(e.touches[0].clientY);
       }}
       onTouchStart={() => {
         btnResize.addEventListener("touchmove", (e: any) => {
@@ -28,7 +31,9 @@ const MyPlaceResize = (props: { setMapResize: (height: number) => void }) => {
         });
       }}
       onTouchEnd={() => {}}
-    />
+    >
+      <i className="fa fa-arrows-v" aria-hidden="true"></i>
+    </button>
   );
 };
 
