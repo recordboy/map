@@ -77,7 +77,7 @@ class App extends Component<Props, State> {
       // 내 위치 마커
       const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
       const imageSrc: string = "ico-address.png",
-        imageSize: any = new window.kakao.maps.Size(20, 30);
+        imageSize: any = new window.kakao.maps.Size(24, 30);
       const markerImage = new window.kakao.maps.MarkerImage(
         imageSrc,
         imageSize
@@ -159,7 +159,7 @@ class App extends Component<Props, State> {
 
     // 마커 이미지 설정
     const imageSrc: string = "ico-address.png",
-      imageSize: any = new window.kakao.maps.Size(20, 30);
+      imageSize: any = new window.kakao.maps.Size(24, 30);
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
 
     // 마커를 생성하고 지도에 표시
