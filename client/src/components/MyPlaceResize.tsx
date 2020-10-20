@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-const MyPlaceResize = (props: {
-  setMapResize: (height: number) => void;
-}) => {
+const MyPlaceResize = (props: { setMapResize: (height: number) => void }) => {
   const { setMapResize } = props;
-  const [resize, setResize] = useState(110);
+  const [resize, setResize] = useState(121);
   const touchMove = (screenY: number) => {
     screenY = Math.floor(screenY);
     setMapResize(screenY);
-    setResize(screenY - 40);
+    setResize(screenY - 59);
   };
   let btnResize: any;
 
@@ -30,7 +28,6 @@ const MyPlaceResize = (props: {
         });
       }}
       onTouchEnd={() => {}}
-      style={{ top: resize }}
     />
   );
 };
