@@ -7,7 +7,6 @@ const MyPlaceResize = (props: { setMapResize: (height: number) => void }) => {
     screenY = Math.floor(screenY);
     setMapResize(screenY * 2);
     setResize(screenY - 25);
-    console.log(screenY);
   };
   let btnResize: any;
 
