@@ -56,14 +56,12 @@ const MyPlaceItem = (props: {
 
   // 로컬 서버에 장소 더보기 요청
   const getPlaceInfo = (place: any) => {
-    
     // http://192.168.219.104/
     fetch(`http://localhost:5000/api/data?id=${place.id}`)
       .then((res) => res.json())
       .then((data) => {
-        
         // 테스트용, 데이터 저장
-        // const dataJSON: any = JSON.parse(data);
+        const dataJSON: any = JSON.parse(data);
         // console.log(dataJSON);
 
         // 이곳에 있는 정보로 데이터 세팅
@@ -71,13 +69,12 @@ const MyPlaceItem = (props: {
         // console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
-        setPlaceInfo(data);
+        setPlaceInfo(dataJSON);
       });
   };
 
   // 장소 더보기 세팅
   const setPlaceInfo = (data: any) => {
-
     // 더보기 항목
     let introduction: string = "";
     let score: number = 0;
@@ -115,7 +112,8 @@ const MyPlaceItem = (props: {
         if (data.basicInfo.openHour.periodList[0].hasOwnProperty("timeList")) {
           timeName = data.basicInfo.openHour.periodList[0].timeList[0].timeName;
           timeSE = data.basicInfo.openHour.periodList[0].timeList[0].timeSE;
-          dayOfWeek = data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
+          dayOfWeek =
+            data.basicInfo.openHour.periodList[0].timeList[0].dayOfWeek;
         }
       }
     }
@@ -182,7 +180,7 @@ const MyPlaceItem = (props: {
   };
 
   return (
-    <div>
+    <div className="convex">
       <div
         className={isOn ? "basic on" : "basic"}
         onClick={() => {
@@ -197,18 +195,18 @@ const MyPlaceItem = (props: {
           {tagArr[2] !== undefined && <span>{tagArr[2]}</span>}
         </div>
         <div className="name">{place.place_name}</div>
+        <a href={place.place_url} className="url" target="_balnk">
+          <i className="fa fa-link"></i>
+        </a>
         {phone && (
           <a href={"tel:" + phone} className="phone">
             <i className="fa fa-phone"></i>
           </a>
         )}
-        <a href={place.place_url} className="url" target="_balnk">
-          더보기
-        </a>
       </div>
-      <button type="button" onClick={() => {
+      {/* <button type="button" onClick={() => {
         setLocalData(place);
-      }}>찜</button>
+      }}>찜</button> */}
       <div className={isOn ? "detail on" : "detail"}>
         {info.photoUrl[0] !== "N" && (
           <div className="photo">
