@@ -21,7 +21,6 @@ const MyPlaceResize = (props: { setMapResize: (height: number) => void }) => {
       style={{ top: resize }}
       onTouchMove={(e: any) => {
         touchMove(e.touches[0].clientY);
-        console.log(e.touches[0].clientY);
       }}
       onTouchStart={() => {
         btnResize.addEventListener("touchmove", (e: any) => {
