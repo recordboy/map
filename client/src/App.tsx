@@ -4,7 +4,7 @@ import MyPlaceList from "./components/MyPlaceList";
 import MyPlaceResize from "./components/MyPlaceResize";
 import MyPlaceIntro from "./components/MyPlaceIntro";
 import MyPlaceManual from "./components/MyPlaceManual";
-import MyPlaceLocalData from "./components/MyPlaceLocalData";
+import MyPlaceSave from "./components/MyPlaceSave";
 import MyPlaceSort from "./components/MyPlaceSort";
 import "./App.css";
 
@@ -18,7 +18,7 @@ interface Props {}
 interface State {
   itemList: any;
   mapSize: number;
-  localPlaceData: any;
+  savePlaceData: any;
 }
 
 // 지도 관련
@@ -32,23 +32,21 @@ let geocoder: any;
 let markerList: any[] = [];
 let mapRsizeTimer: any;
 
-// 로컬 장소 데이터 관련
-let localPlaceData: any;
-if (localStorage.getItem("localPlaceData") === null) {
-  localStorage.setItem("localPlaceData", JSON.stringify(localPlaceData));
+// 로컬 장소 데이터 초기화
+let savePlaceData: any;
+if (localStorage.getItem("savePlaceData") === null) {
+  savePlaceData = [];
 } else {
-  // 작업 예정
-  localPlaceData = localStorage.getItem("localPlaceData");
-  console.log(localPlaceData);
+  savePlaceData = localStorage.getItem("savePlaceData");
+  savePlaceData = JSON.parse(savePlaceData);
 }
-
 class App extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
       itemList: [],
       mapSize: 200,
-      localPlaceData: []
+      savePlaceData: savePlaceData,
     };
   }
 
@@ -219,15 +217,71 @@ class App extends Component<Props, State> {
     this.setState({
       mapSize: size,
     });
-
     clearTimeout(mapRsizeTimer);
     mapRsizeTimer = setTimeout(() => {
       map.relayout();
     }, 150);
   };
 
-  setLocalData = (place: any) => {
-    console.log(place);
+  // 찜한 장소, 날짜 로컬 스토리지에 저장
+  setSavePlace = (place: any) => {
+    savePlaceData.push({
+      data: place,
+      date: this.getToday(new Date()),
+    });
+    this.saveLocalData(savePlaceData);
+  };
+
+  // 찜한 장소 삭제
+  removeSavePlace = (id: number) => {
+    savePlaceData.splice(id, 1);
+    this.saveLocalData(savePlaceData);
+  };
+
+  // 찜한 장소 전체 삭제
+  removeAllSavePlace = () => {
+    savePlaceData = [];
+    this.saveLocalData(savePlaceData);
+  };
+
+  // 로컬 스토리지에 찜한 장소 저장
+  saveLocalData = (savePlaceData: any) => {
+    localStorage.setItem("savePlaceData", JSON.stringify(savePlaceData));
+    this.setState({
+      savePlaceData: savePlaceData,
+    });
+  }
+
+  // 현재 날짜 구하기
+  getToday = (data: any) => {
+    const year: number = data.getFullYear(); // 년도
+    const month: number = data.getMonth() + 1; // 월
+    const date: number = data.getDate(); // 날짜
+    let day: number | string = data.getDay(); // 요일
+    if (day === 0) {
+      day = "일";
+    } else if (day === 1) {
+      day = "월";
+    } else if (day === 2) {
+      day = "화";
+    } else if (day === 3) {
+      day = "수";
+    } else if (day === 4) {
+      day = "목";
+    } else if (day === 5) {
+      day = "금";
+    } else if (day === 6) {
+      day = "토";
+    }
+    return year + "/" + month + "/" + date + "/" + day;
+  };
+
+  // 현재 시간 구하기
+  getTime = (data: any) => {
+    const hours: number = data.getHours(); // 시간
+    const minutes: number = data.getMinutes(); // 분
+    const seconds: number = data.getSeconds(); // 초
+    return hours + "." + minutes + "." + seconds;
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -294,12 +348,16 @@ class App extends Component<Props, State> {
           handleKeywordSearch={this.handleKeywordSearch}
           handleInputSearch={this.handleInputSearch}
         />
+        <MyPlaceSave
+          savePlaceData={this.state.savePlaceData}
+          removeSavePlace={this.removeSavePlace}
+          removeAllSavePlace={this.removeAllSavePlace}
+        />
         <MyPlaceList
           itemList={this.state.itemList}
           selectMarker={this.selectMarker}
-          setLocalData={this.setLocalData}
+          setSavePlace={this.setSavePlace}
         />
-        {/* <MyPlaceLocalData /> */}
       </div>
     );
   }

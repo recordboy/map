@@ -4,9 +4,9 @@ const MyPlaceItem = (props: {
   id: number;
   place: any;
   selectMarker: (id: number) => void;
-  setLocalData: (place: any) => void;
+  setSavePlace: (place: any) => void;
 }) => {
-  const { id, place, selectMarker, setLocalData } = props;
+  const { id, place, selectMarker, setSavePlace } = props;
 
   // 정보 더보기
   const [info, setInfo] = useState({
@@ -36,8 +36,11 @@ const MyPlaceItem = (props: {
     isOn: false,
   });
 
-  // 정보 더보기 보여짐 유무
+  // 정보 더보기 보여짐
   const [isOn, setIsOn] = useState(false);
+
+  // 로딩바 보여짐
+  const [loading, setLoading] = useState(false);
 
   // 각 정보 변경될 경우 정보 더보기 닫기
   useEffect(() => {
@@ -56,13 +59,16 @@ const MyPlaceItem = (props: {
 
   // 로컬 서버에 장소 더보기 요청
   const getPlaceInfo = (place: any) => {
-    // http://192.168.219.104/
-    fetch(`http://localhost:5000/api/data?id=${place.id}`)
-      .then((res) => res.json())
+    setLoading(true);
+    fetch(`/api/data?id=${place.id}`)
+      .then((res) => {
+        return res.json();
+      })
       .then((data) => {
+        setLoading(false);
 
         // 테스트용, 데이터 저장
-        // const dataJSON: any = JSON.parse(data);
+        const dataJSON: any = JSON.parse(data);
         // console.log(dataJSON);
 
         // 이곳에 있는 정보로 데이터 세팅
@@ -70,7 +76,7 @@ const MyPlaceItem = (props: {
         // console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
-        setPlaceInfo(data);
+        setPlaceInfo(dataJSON);
       });
   };
 
@@ -205,10 +211,16 @@ const MyPlaceItem = (props: {
           </a>
         )}
       </div>
-      {/* <button type="button" onClick={() => {
-        setLocalData(place);
-      }}>찜</button> */}
+      <button type="button" onClick={() => {
+        setSavePlace(place);
+      }}>찜</button>
       <div className={isOn ? "detail on" : "detail"}>
+        <div className={loading ? "loading on" : "loading"}>
+          <div className="inner">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
         {info.photoUrl[0] !== "N" && (
           <div className="photo">
             <div

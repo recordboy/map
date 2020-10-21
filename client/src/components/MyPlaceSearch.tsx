@@ -30,7 +30,7 @@ const MyPlaceSearch = (props: {
    */
   const onScroll = (e: any) => {
     let fixedY: number = document.getElementsByClassName("sort")[0]
-      .clientHeight;
+      .clientHeight + 10;
     if (e.srcElement.scrollingElement.scrollTop > fixedY) {
       setSearchFixed(true);
     } else {
