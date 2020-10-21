@@ -19,10 +19,16 @@ body {
   top: 0;
   left: 0;
   z-index: -10;
-  border-radius: 15px;
+  border-radius: 10px;
   width: 100%;
   height: 100%;
   box-shadow: -2px -2px 4px rgba(255, 255, 255, 1);
+}
+
+.main-title {
+  padding: 10px;
+  font-size: 25px;
+  font-weight: 800;
 }
 
 /* layout */
@@ -46,11 +52,11 @@ body {
   left: 0;
   width: 100%;
   height: 5px;
-  background: linear-gradient( 45deg, #7fcde3, #6585f1 );
+  background: linear-gradient( to top, #e8edf0, #fff );
 } */
 
 .App .controller .sort {
-  padding: 15px 0 0;
+  padding-top: 20px;
 }
 
 .App .controller .sort > div {
@@ -112,6 +118,7 @@ body {
   padding: 0 10px;
   width: 100%;
   height: 50px;
+  transition: padding 0.2s;
 }
 
 .App .controller .search .inner {
@@ -134,6 +141,7 @@ body {
   font-size: 15px;
   font-weight: bold;
   background-color: #f1f5f7;
+  transition: border-radius 0.2s;
   outline: none;
 }
 
@@ -186,7 +194,6 @@ body {
   padding: 15px 10px 25px;
   cursor: pointer;
 }
-
 
 .App .place-list .basic .tag > span {
   margin-right: 4px;
@@ -242,6 +249,7 @@ body {
 
 .App .place-list .detail.on {
   display: block;
+  position: relative;
   padding: 10px;
 }
 
@@ -315,6 +323,7 @@ body {
 .App .place-list .detail .frame {
   display: inline-block;
   position: relative;
+  margin-top: 5px;
   width: 100%;
   height: 20px;
   border-radius: 20px;
@@ -393,6 +402,7 @@ body {
 
 .App .place-list .detail .review .info {
   position: relative;
+  font-weight: 600;
 }
 
 .App .place-list .detail .review .info span {
@@ -427,14 +437,16 @@ body {
   top: 0;
   right: 0;
   border: none;
+  border-radius: 2px;
   font-size: 12px;
   cursor: pointer;
-  background: none;
-  color: #666;
+  background: #999;
+  outline: none;
+  color: #fff;
 }
 
 .App .place-list .detail .review .text {
-  margin-top: 5px;
+  margin-top: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -442,6 +454,8 @@ body {
   -webkit-box-orient: vertical;
   word-wrap:break-word;
   height: auto;
+  line-height: 20px;
+  font-size: 14px;
 }
 
 .App .place-list .detail .review .text.on {
@@ -634,11 +648,88 @@ body {
   height: 18px;
 }
 
-.test {
-
-  clip-path: circle(40px at center);
+.App .save-place .inner {
+  overflow-x: auto;
+  margin-top: 20px;
+  padding: 0 5px;
 }
 
+.App .save-place .list {
+  content: '';
+  display: block;
+  clear: both;
+}
 
-/* fill: rgb(127, 221, 216);
-fill: rgb(247, 148, 132); */
+.App .save-place .list > div {
+  float: left;
+  margin: 5px;
+  padding: 10px;
+  width: 130px;
+  height: 130px;
+  /* background: linear-gradient( 45deg, #7fcde3, #6585f1 ); */
+  /* color: #fff; */
+}
+
+/* loding */
+
+.loading {
+  display: none;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: #f1f5f7;
+}
+
+.loading.on {
+  display: block;
+}
+
+.loading .inner {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  margin-left: -50px;
+  transform: translate(-50%, -50%) scale(0.5);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.loading .inner div {
+  position: absolute;
+  border-width: 4px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  animation: loading 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.loading .inner div:nth-child(1) {
+  border-color: #6585f1
+}
+
+.loading .inner div:nth-child(2) {
+  border-color: #7fcde3;
+  animation-delay: -0.5s;
+}
+
+@keyframes loading {
+  0% {
+    top: 96px;
+    left: 96px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 18px;
+    left: 18px;
+    width: 156px;
+    height: 156px;
+    opacity: 0;
+  }
+}
