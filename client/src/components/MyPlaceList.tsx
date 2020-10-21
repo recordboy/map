@@ -4,11 +4,11 @@ import MyPlaceItem from "./MyPlaceItem";
 const MyPlaceList = (props: {
   itemList: any;
   selectMarker: (id: number) => void;
-  setLocalData: (place: any) => void;
+  setSavePlace: (place: any) => void;
 }) => {
-  const { itemList, selectMarker, setLocalData } = props;
+  const { itemList, selectMarker, setSavePlace } = props;
   const list = itemList.map((item: any) => {
-    return <MyPlaceItem key={item.id} id={item.id} place={item.place} selectMarker={selectMarker} setLocalData={setLocalData} />;
+    return <MyPlaceItem key={item.id} id={item.id} place={item.place} selectMarker={selectMarker} setSavePlace={setSavePlace} />;
   });
   return <div className="place-list">{list}</div>;
 };
