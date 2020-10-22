@@ -1,6 +1,11 @@
 @import url("https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css");
 
+html {
+  height: 100%;
+  background-color: #262626;
+}
 body {
+  height: 100%;
   background-color: #e8edf0;
 }
 /* common */
@@ -31,10 +36,13 @@ body {
 /* layout */
 
 .App {
+  font-family: "NanumSquareRound", "Helvetica Neue", sans-serif;
   position: relative;
   padding-bottom: 80px;
-  font-family: "NanumSquareRound", "Helvetica Neue", sans-serif;
+  margin: 0 auto;
+  max-width: 600px;
   font-size: 16px;
+  background-color: #e8edf0;
 }
 
 .App .controller {
@@ -155,9 +163,11 @@ body {
 
 .App .controller .search.fixed {
   position: fixed;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 30;
   padding: 0;
+  max-width: 600px;
 }
 
 .App .controller .search.fixed .inner:before {
@@ -215,7 +225,6 @@ body {
 }
 
 .App .place-list .basic .name {
-  display: inline-block;
   margin-top: 10px;
   font-size: 20px;
   font-weight: bold;
@@ -252,9 +261,27 @@ body {
   color: #fff;
 }
 
+.App .place-list .basic .btn-save {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border: none;
+  border-radius: 2px;
+  width: 55px;
+  height: 25px;
+  background: #6585f1;
+  outline: none;
+  color: #fff;
+}
+
 .App .place-list .detail {
   display: none;
   overflow: hidden;
+}
+
+.App .place-list .detail.loading {
+  display: block;
+  height: 300px;
 }
 
 .App .place-list .detail.on {
@@ -477,6 +504,7 @@ body {
   top: 0;
   z-index: 30;
   width: 100%;
+  max-width: 600px;
 }
 
 .App .map-wrap .map {
@@ -788,12 +816,10 @@ body {
   display: none;
   position: absolute;
   top: 0;
-  left: 50%;
-  margin-left: -100px;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: #f1f5f7;
-  transform: scale(0.5);
 }
 
 .loading.on {
@@ -801,12 +827,11 @@ body {
 }
 
 .loading .inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform: translateZ(0) scale(1);
-  backface-visibility: hidden;
-  transform-origin: 0 0;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.5);
+  width: 120px;
 }
 
 .loading .inner div { 
@@ -816,21 +841,21 @@ body {
 }
 
 .loading .inner div:nth-child(1) {
-  left: 35px;
+  left: 0;
   background: #6585f1;
   animation: loading-inner-1 1s cubic-bezier(0,0.5,0.5,1) infinite;
   animation-delay: -0.2s
 }
 
 .loading .inner div:nth-child(2) {
-  left: 85px;
+  left: 45px;
   background: #999;
   animation: loading-inner-2 1s cubic-bezier(0,0.5,0.5,1) infinite;
   animation-delay: -0.1s
 }
 
 .loading .inner div:nth-child(3) {
-  left: 135px;
+  left: 90px;
   background: #7fcde3;
   animation: loading-inner-3 1s cubic-bezier(0,0.5,0.5,1) infinite;
   animation-delay: undefineds
