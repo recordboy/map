@@ -68,7 +68,7 @@ const MyPlaceItem = (props: {
         setLoading('E');
 
         // 테스트용, 데이터 저장
-        const dataJSON: any = JSON.parse(data);
+        // const dataJSON: any = JSON.parse(data);
         // console.log(dataJSON);
 
         // 이곳에 있는 정보로 데이터 세팅
@@ -76,7 +76,7 @@ const MyPlaceItem = (props: {
         // console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
-        setPlaceInfo(dataJSON);
+        setPlaceInfo(data);
       });
   };
 
