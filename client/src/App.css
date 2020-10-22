@@ -2,9 +2,11 @@
 
 html {
   height: 100%;
-  background-color: #262626;
+  background-color: #fff;
 }
 body {
+  margin: 0 auto;
+  max-width: 600px;
   height: 100%;
   background-color: #e8edf0;
 }
@@ -39,8 +41,6 @@ body {
   font-family: "NanumSquareRound", "Helvetica Neue", sans-serif;
   position: relative;
   padding-bottom: 80px;
-  margin: 0 auto;
-  max-width: 600px;
   font-size: 16px;
   background-color: #e8edf0;
 }
