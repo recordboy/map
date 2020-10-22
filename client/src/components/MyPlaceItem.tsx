@@ -40,7 +40,7 @@ const MyPlaceItem = (props: {
   const [isOn, setIsOn] = useState(false);
 
   // 로딩바 보여짐
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState('N');
 
   // 각 정보 변경될 경우 정보 더보기 닫기
   useEffect(() => {
@@ -59,16 +59,16 @@ const MyPlaceItem = (props: {
 
   // 로컬 서버에 장소 더보기 요청
   const getPlaceInfo = (place: any) => {
-    setLoading(true);
+    setLoading('Y');
     fetch(`/api/data?id=${place.id}`)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        setLoading(false);
+        setLoading('E');
 
         // 테스트용, 데이터 저장
-        // const dataJSON: any = JSON.parse(data);
+        const dataJSON: any = JSON.parse(data);
         // console.log(dataJSON);
 
         // 이곳에 있는 정보로 데이터 세팅
@@ -76,7 +76,7 @@ const MyPlaceItem = (props: {
         // console.log(`https://place.map.kakao.com/m/main/v/${place.id}`);
 
         // 장소 더보기 세팅
-        setPlaceInfo(data);
+        setPlaceInfo(dataJSON);
       });
   };
 
@@ -210,17 +210,20 @@ const MyPlaceItem = (props: {
             <i className="fa fa-phone"></i>
           </a>
         )}
+        <button
+          type="button"
+          className="btn-save"
+          onClick={() => {
+            setSavePlace(place);
+          }}
+        >
+          <i className="fa fa-thumb-tack" aria-hidden="true"></i> 저장
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          setSavePlace(place);
-        }}
-      >
-        찜
-      </button>
-      <div className={isOn ? "detail on" : "detail"}>
-        <div className={loading ? "loading on" : "loading"}>
+      <div className={isOn ? "detail on" : "detail"} style={{
+        height: loading === 'Y' ? '100px' : 'auto'
+      }}>
+        <div className={loading === "Y" ? "loading on" : "loading"}>
           <div className="inner">
             <div></div>
             <div></div>
