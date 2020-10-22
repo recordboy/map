@@ -19,6 +19,7 @@ interface State {
   itemList: any;
   mapSize: number;
   savePlaceData: any;
+  result: any;
 }
 
 // 지도 관련
@@ -47,6 +48,7 @@ class App extends Component<Props, State> {
       itemList: [],
       mapSize: 200,
       savePlaceData: savePlaceData,
+      result: '',
     };
   }
 
@@ -108,6 +110,7 @@ class App extends Component<Props, State> {
 
   // 키워드 검색 완료 시 호출되는 콜백함수
   placesSearchCB = (data: any, status: any, pagination: any) => {
+
     let itemList: any = [];
 
     // 마커를 생성하고 지도에 표시
@@ -202,6 +205,11 @@ class App extends Component<Props, State> {
         y: longitude,
       });
     });
+
+    // 검색 값 세팅
+    this.setState({
+      result: keyword
+    })
   };
 
   // 직접 입력으로 장소를 검색
@@ -210,6 +218,11 @@ class App extends Component<Props, State> {
       ps.keywordSearch(data, this.placesSearchCB);
       console.log(data);
     }
+
+    // 검색 값 세팅
+    this.setState({
+      result: data
+    })
   };
 
   // 맵 높이 변경
@@ -227,7 +240,7 @@ class App extends Component<Props, State> {
   setSavePlace = (place: any) => {
     savePlaceData.push({
       data: place,
-      date: this.getToday(new Date()),
+      date: this.getToday(new Date()) + " " + this.getTime(new Date()),
     });
     this.saveLocalData(savePlaceData);
   };
@@ -281,7 +294,8 @@ class App extends Component<Props, State> {
     const hours: number = data.getHours(); // 시간
     const minutes: number = data.getMinutes(); // 분
     const seconds: number = data.getSeconds(); // 초
-    return hours + "." + minutes + "." + seconds;
+    return hours + ":" + minutes;
+    // return hours + "." + minutes + "." + seconds;
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -354,10 +368,12 @@ class App extends Component<Props, State> {
           removeAllSavePlace={this.removeAllSavePlace}
         />
         <MyPlaceList
+          result={this.state.result}
           itemList={this.state.itemList}
           selectMarker={this.selectMarker}
           setSavePlace={this.setSavePlace}
         />
+        <div className="copy"></div>
       </div>
     );
   }
