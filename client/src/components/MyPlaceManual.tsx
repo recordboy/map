@@ -30,19 +30,29 @@ const MyPlaceManual = () => {
         <div className="test"></div>
         <div className="balloon type01">
           드래그하여 지도 크기를<br />변경할 수 있어요!
+          <div className="border">
+            <i className="fa fa-arrows-v" aria-hidden="true"></i>
+          </div>
         </div>
         <div className="balloon type02">
           원하는 항목을 클릭하면
           <br />
           장소 리스트가 나와요!
           <br />
-          <br />
           아래로 드래그하면
           <br />
           세분화된 항목이 나와요!
+          <div className="border">음식점</div>
         </div>
         <div className="balloon type03">
-          장소를 클릭하면 자세한 정보를 얻을 수 있어요!
+          검색어를 직접 입력할 수 있어요!
+          <div className="border"></div>
+        </div>
+        <div className="balloon type04">
+          장소를 클릭하면
+          <br />
+          자세한 정보를 얻을 수 있어요!
+          <div className="border"></div>
         </div>
         <label className="check-again" htmlFor="check01-01">
           <input
