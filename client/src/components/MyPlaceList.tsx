@@ -9,12 +9,26 @@ const MyPlaceList = (props: {
 }) => {
   const { result, itemList, selectMarker, setSavePlace } = props;
   const list = itemList.map((item: any) => {
-    return <MyPlaceItem key={item.id} id={item.id} place={item.place} selectMarker={selectMarker} setSavePlace={setSavePlace} />;
+    return (
+      <MyPlaceItem
+        key={item.id}
+        id={item.id}
+        place={item.place}
+        selectMarker={selectMarker}
+        setSavePlace={setSavePlace}
+      />
+    );
   });
-  return <div className="place-list">
-    <div className="main-title">{result}</div>
-    {list}
-  </div>;
+  return (
+    <div className="place-list">
+      <div className="main-title">{result} 검색결과 +</div>
+      {list.length > 0 ? (
+        list
+      ) : (
+        <div className="absence">플레이스가 없습니다</div>
+      )}
+    </div>
+  );
 };
 
 export default MyPlaceList;
