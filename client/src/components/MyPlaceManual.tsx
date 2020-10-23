@@ -29,12 +29,17 @@ const MyPlaceManual = () => {
       >
         <div className="test"></div>
         <div className="balloon type01">
-          위, 아래로 지도 크기를 변경할 수 있어요!
+          드래그하여 지도 크기를<br />변경할 수 있어요!
         </div>
         <div className="balloon type02">
-          원하는 항목을 클릭하면 장소가 나와요!
+          원하는 항목을 클릭하면
           <br />
-          아래로 밀면 자세한 항목이 나와요!
+          장소 리스트가 나와요!
+          <br />
+          <br />
+          아래로 드래그하면
+          <br />
+          세분화된 항목이 나와요!
         </div>
         <div className="balloon type03">
           장소를 클릭하면 자세한 정보를 얻을 수 있어요!
