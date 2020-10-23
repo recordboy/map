@@ -238,7 +238,7 @@ class App extends Component<Props, State> {
 
   // 찜한 장소, 날짜 로컬 스토리지에 저장
   setSavePlace = (place: any) => {
-    savePlaceData.push({
+    savePlaceData.unshift({
       data: place,
       date: this.getToday(new Date()) + " " + this.getTime(new Date()),
     });
