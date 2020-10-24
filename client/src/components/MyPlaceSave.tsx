@@ -27,47 +27,55 @@ const MyPlaceSave = (props: {
       >
         <i className="fa fa-trash-o" aria-hidden="true"></i>
       </button>
-      <div className="inner">
-        <div
-          className="list"
-          style={{ width: savePlaceData.length * 180 + 5 + "px" }}
-        >
-          {savePlaceData.map((item: any, idx: number) => {
-            return (
-              <div className="convex" key={idx}>
-                <div className="category">{item.data.category_name}</div>
-                <div className="name">{item.data.place_name}</div>
-                <div className="address">{item.data.address_name}</div>
-                <div className="btn-area">
-                  <a href={"tel:" + item.data.phone} className="phone">
-                    <i className="fa fa-phone"></i>
-                  </a>
-                  <a href={item.data.place_url} className="url" target="_blank">
-                    <i className="fa fa-link"></i>
-                  </a>
-                  <a
-                    href={"https://map.kakao.com/link/to/" + item.data.id}
-                    className="way"
-                    target="_blank"
+      {savePlaceData.length > 0 ? (
+        <div className="inner">
+          <div
+            className="list"
+            style={{ width: savePlaceData.length * 180 + 5 + "px" }}
+          >
+            {savePlaceData.map((item: any, idx: number) => {
+              return (
+                <div className="convex" key={idx}>
+                  <div className="category">{item.data.category_name}</div>
+                  <div className="name">{item.data.place_name}</div>
+                  <div className="address">{item.data.address_name}</div>
+                  <div className="btn-area">
+                    <a href={"tel:" + item.data.phone} className="phone">
+                      <i className="fa fa-phone"></i>
+                    </a>
+                    <a
+                      href={item.data.place_url}
+                      className="url"
+                      target="_blank"
+                    >
+                      <i className="fa fa-link"></i>
+                    </a>
+                    <a
+                      href={"https://map.kakao.com/link/to/" + item.data.id}
+                      className="way"
+                      target="_blank"
+                    >
+                      <i className="fa fa-map-marker"></i>
+                    </a>
+                  </div>
+                  <div className="date">{item.date}</div>
+                  <button
+                    type="button"
+                    className="btn-delete"
+                    onClick={() => {
+                      removeSavePlace(idx);
+                    }}
                   >
-                    <i className="fa fa-map-marker"></i>
-                  </a>
+                    <i className="fa fa-trash-o" aria-hidden="true"></i>
+                  </button>
                 </div>
-                <div className="date">{item.date}</div>
-                <button
-                  type="button"
-                  className="btn-delete"
-                  onClick={() => {
-                    removeSavePlace(idx);
-                  }}
-                >
-                  <i className="fa fa-trash-o" aria-hidden="true"></i>
-                </button>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="absence">플레이스가 없습니다</div>
+      )}
     </div>
   );
 };
