@@ -313,14 +313,14 @@ body {
 
 .App .place-list .detail .photo .inner {
   overflow: hidden;
-  border-radius: 3px;
 }
 
 .App .place-list .detail .photo img {
   display: inline-block;
-  vertical-align: top;
+  vertical-align:top;
   box-sizing: border-box;
-  padding-left: 2px;
+  border-radius: 10px;
+  margin-left: 2px;
   width: 300px;
   height: 200px;
   object-fit: cover;
@@ -360,7 +360,7 @@ body {
 
 .App .place-list .detail .score {
   position: relative;
-  margin-top: 10px;
+  margin-top: 20px;
   width: 120px;
 }
 
@@ -400,8 +400,9 @@ body {
 }
 
 .App .place-list .detail .menu .title {
-  margin-top: 10px;
-  font-weight: bold;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 800;
 }
 
 .App .place-list .detail .menu .item {
@@ -441,16 +442,17 @@ body {
 }
 
 .App .place-list .detail .review {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .App .place-list .detail .review .title {
-  font-size: 15px;
-  font-weight: bold;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: 800;
 }
 
 .App .place-list .detail .review .item {
-  border-top: 1px solid #f0f0f0;
+  border-top: 2px solid #e8edf0;
   padding: 10px 0;
 }
 
@@ -560,9 +562,11 @@ body {
 .App .manual .info {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   z-index: 40;
   width: 100%;
+  margin-left: -300px;
+  max-width: 600px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
 }
@@ -656,11 +660,13 @@ body {
 .App .manual .balloon.type03 .border {
   position: fixed;
   top: 290px;
-  left: 0;
+  left: 50%;
   z-index: 10;
+  margin-left: -300px;
   box-sizing: border-box;
   padding: 0 10px;
   width: 100%;
+  max-width: 600px;
   height: 50px;
 }
 
@@ -693,11 +699,13 @@ body {
 .App .manual .balloon.type04 .border {
   position: fixed;
   top: 440px;
-  left: 0;
+  left: 50%;
   z-index: 10;
+  margin-left: -300px;
   box-sizing: border-box;
   padding: 0 10px;
   width: 100%;
+  max-width: 600px;
   height: 86px;
 }
 
