@@ -57,7 +57,7 @@ const MyPlaceItem = (props: {
   // 로컬 서버에 장소 더보기 요청
   const getPlaceInfo = (place: any) => {
     setDetailState('step01');
-    fetch(`/api/data?id=${place.id}`)
+    fetch(`https://recordboy-my-place.herokuapp.com:5000/api/data?id=${place.id}`)
       .then((res) => {
         return res.json();
       })
