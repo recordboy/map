@@ -96,18 +96,14 @@ class App extends Component<Props, State> {
 
   // 현재 위치 좌표 세팅
   setLocation = (callBack: any): void => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (pos) {
-        latitude = pos.coords.latitude;
-        longitude = pos.coords.longitude;
-        callBack(latitude, longitude);
-      });
-    } else {
-      alert('해당 브라우저는 현재 위치를 지원하지 않습니다');
-      latitude = 33.450701;
-      longitude = 126.570667;
-      callBack(33.450701, 126.570667);
-    }
+    // navigator.geolocation.getCurrentPosition(function (pos) {
+    //   latitude = pos.coords.latitude;
+    //   longitude = pos.coords.longitude;
+    //   callBack(latitude, longitude);
+    // });
+    latitude = 33.450701;
+    longitude = 126.570667;
+    callBack(33.450701, 126.570667);
   };
 
   // 좌표로 주소 정보 요청
