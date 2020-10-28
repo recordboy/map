@@ -96,14 +96,22 @@ class App extends Component<Props, State> {
 
   // 현재 위치 좌표 세팅
   setLocation = (callBack: any): void => {
-    // navigator.geolocation.getCurrentPosition(function (pos) {
-    //   latitude = pos.coords.latitude;
-    //   longitude = pos.coords.longitude;
-    //   callBack(latitude, longitude);
-    // });
-    latitude = 33.450701;
-    longitude = 126.570667;
-    callBack(33.450701, 126.570667);
+
+    const varUA: any = navigator.userAgent.toLowerCase();
+
+    // IOS
+    if (varUA.indexOf("iphone") > -1||varUA.indexOf("ipad") > -1||varUA.indexOf("ipod") > -1) {
+      latitude = 37.554071;
+      longitude = 126.969610;
+      callBack(37.554071, 126.969610);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      latitude = pos.coords.latitude;
+      longitude = pos.coords.longitude;
+      callBack(latitude, longitude);
+    });
   };
 
   // 좌표로 주소 정보 요청
