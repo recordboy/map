@@ -96,11 +96,14 @@ class App extends Component<Props, State> {
 
   // 현재 위치 좌표 세팅
   setLocation = (callBack: any): void => {
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      latitude = pos.coords.latitude;
-      longitude = pos.coords.longitude;
-      callBack(latitude, longitude);
-    });
+    // navigator.geolocation.getCurrentPosition(function (pos) {
+    //   latitude = pos.coords.latitude;
+    //   longitude = pos.coords.longitude;
+    //   callBack(latitude, longitude);
+    // });
+    latitude = 33.450701;
+    longitude = 126.570667;
+    callBack(33.450701, 126.570667);
   };
 
   // 좌표로 주소 정보 요청
