@@ -144,7 +144,7 @@ const MyPlaceItem = (props: {
       photoUrl = data.photo.photoList.map((item: any) => {
         return item.orgurl;
       });
-      photoListWidth = (photoUrl.length * 300) + (photoUrl.length * 2);
+      photoListWidth = (photoUrl.length * 400) + (photoUrl.length * 5);
     } else {
       photoUrl.push("N");
     }
