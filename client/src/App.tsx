@@ -104,18 +104,6 @@ class App extends Component<Props, State> {
   setLocation = (callBack: any): void => {
     const varUA: any = navigator.userAgent.toLowerCase();
 
-    // IOS
-    // if (
-    //   varUA.indexOf("iphone") > -1 ||
-    //   varUA.indexOf("ipad") > -1 ||
-    //   varUA.indexOf("ipod") > -1
-    // ) {
-    //   latitude = 37.554071;
-    //   longitude = 126.96961;
-    //   callBack(37.554071, 126.96961);
-    //   return;
-    // }
-
     navigator.geolocation.getCurrentPosition(function (pos) {
       latitude = pos.coords.latitude;
       longitude = pos.coords.longitude;
