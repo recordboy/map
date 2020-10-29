@@ -63,7 +63,7 @@ const MyPlaceSearch = (props: {
       endY = e.changedTouches[0].clientY;
 
       // 아래로 스와이프
-      if (endY > startY && endY - startY > 10) {
+      if (endY > startY && endY - startY > 20) {
         if (depth === 1) {
           listLength > 0 && viewDepth02(e.target.innerText);
         } else if (depth === 2) {
@@ -71,7 +71,7 @@ const MyPlaceSearch = (props: {
         }
 
         // 위로 스와이프
-      } else if (endY < startY && startY - endY > 10) {
+      } else if (endY < startY && startY - endY > 20) {
         if (depth === 2) {
           setDepth(1);
         } else if (depth === 3) {
