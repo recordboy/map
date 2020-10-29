@@ -20,6 +20,7 @@ interface State {
   mapSize: number;
   savePlaceData: any;
   result: any;
+  isManualFixed: any;
 }
 
 // 지도 관련
@@ -41,6 +42,7 @@ if (localStorage.getItem("savePlaceData") === null) {
   savePlaceData = localStorage.getItem("savePlaceData");
   savePlaceData = JSON.parse(savePlaceData);
 }
+
 class App extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -49,6 +51,10 @@ class App extends Component<Props, State> {
       mapSize: 200,
       savePlaceData: savePlaceData,
       result: "",
+      isManualFixed:
+        localStorage.getItem("MyPlaceManualAgain") !== null
+          ? localStorage.getItem("MyPlaceManualAgain")
+          : "",
     };
   }
 
@@ -96,14 +102,17 @@ class App extends Component<Props, State> {
 
   // 현재 위치 좌표 세팅
   setLocation = (callBack: any): void => {
-
     const varUA: any = navigator.userAgent.toLowerCase();
 
     // IOS
-    if (varUA.indexOf("iphone") > -1||varUA.indexOf("ipad") > -1||varUA.indexOf("ipod") > -1) {
+    if (
+      varUA.indexOf("iphone") > -1 ||
+      varUA.indexOf("ipad") > -1 ||
+      varUA.indexOf("ipod") > -1
+    ) {
       latitude = 37.554071;
-      longitude = 126.969610;
-      callBack(37.554071, 126.969610);
+      longitude = 126.96961;
+      callBack(37.554071, 126.96961);
       return;
     }
 
@@ -308,6 +317,12 @@ class App extends Component<Props, State> {
     // return hours + "." + minutes + "." + seconds;
   };
 
+  setManualFixed = (res: string) => {
+    this.setState({
+      isManualFixed: res
+    });
+  };
+
   //////////////////////////////////////////////////////////////////////
 
   // 가나다순
@@ -349,11 +364,13 @@ class App extends Component<Props, State> {
       <div
         className="App"
         style={{
+          position: this.state.isManualFixed !== "N" ? "fixed" : "relative",
           paddingTop: this.state.mapSize,
+          width: this.state.isManualFixed !== "N" ? window.innerWidth : "auto",
         }}
       >
         <MyPlaceIntro />
-        <MyPlaceManual />
+        <MyPlaceManual setManualFixed={this.setManualFixed} />
         <div className="map-wrap" style={{ height: this.state.mapSize }}>
           <div
             id="map"
