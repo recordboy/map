@@ -142,7 +142,7 @@ const MyPlaceItem = (props: {
     // 사진
     if (data.photo.photoCount !== 0) {
       photoUrl = data.photo.photoList.map((item: any) => {
-        return item.orgurl;
+        return item.orgurl.replace('http', 'https');
       });
       photoListWidth = (photoUrl.length * 400) + (photoUrl.length * 5);
     } else {
