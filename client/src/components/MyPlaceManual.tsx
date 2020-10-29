@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-const MyPlaceManual = () => {
+const MyPlaceManual = (props: {
+  setManualFixed: (res: string) => void;
+}) => {
+
+  const {setManualFixed} = props;
   const [isOnManual, setIsOnManual] = useState(true);
   const [isOnAgainCheck, setIsOnAgainCheck] = useState(false);
 
@@ -19,6 +23,7 @@ const MyPlaceManual = () => {
       localStorage.setItem("MyPlaceManualAgain", 'Y');
     }
     setIsOnManual(false);
+    setManualFixed("N");
   };
 
   return (
