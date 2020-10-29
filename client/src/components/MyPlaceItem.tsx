@@ -207,7 +207,6 @@ const MyPlaceItem = (props: {
           {tagArr[2] !== undefined && <span>{tagArr[2]}</span>}
         </div>
         <div className="name">{place.place_name}</div>
-        <button type="button" className="btn-detail"></button>
         <a href={place.place_url} className="url" target="_balnk" onClick={(e: any) => {
 	          e.stopPropagation();
           }}>
