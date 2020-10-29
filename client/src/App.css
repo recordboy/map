@@ -34,7 +34,7 @@ body {
 
 .main-title {
   padding: 25px 0 10px;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 800;
 }
 
@@ -44,28 +44,18 @@ body {
   font-family: "NanumSquareRound", "Helvetica Neue", sans-serif;
   position: relative;
   padding-bottom: 50px;
-  font-size: 16px;
+  font-size: 20px;
   background-color: #e8edf0;
 }
 
 .App .controller {
   position: relative;
-  padding: 0 0 80px;
+  padding: 0 0 115px;
   transition: height 0.4s;
 }
 
-/* .App .controller:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient( to top, #e8edf0, #fff );
-} */
-
 .App .controller .sort {
-  padding-top: 20px;
+  padding-top: 30px;
 }
 
 .App .controller .sort > div {
@@ -73,7 +63,7 @@ body {
 }
 
 .App .controller .sort > div .inner {
-  padding: 0 5px;
+  padding: 0 15px;
 }
 
 .App .controller .sort .depth02,
@@ -85,7 +75,7 @@ body {
 
 .App .controller .sort .depth02.on,
 .App .controller .sort .depth03.on {
-  height: 60px;
+  height: 90px;
 }
 
 .App .controller .sort .inner::after {
@@ -99,13 +89,13 @@ body {
   float: left;
   margin: 5px;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   box-sizing: border-box;
   padding: 0;
-  width: 100px;
-  height: 50px;
+  width: 130px;
+  height: 80px;
   line-height: 52px;
-  font-weight: 600;
+  font-size: 20px;
   touch-action: none;
   touch-action: pan-x;
   transition: background-color 0.4s;
@@ -121,45 +111,44 @@ body {
 }
 
 .App .controller .sort button:before {
-  border-radius: 25px;
+  border-radius: 10px;
 
 }
 
 .App .controller .search {
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   left: 0;
   box-sizing: border-box;
   border-radius: 25px;
-  padding: 0 10px;
+  padding: 0 20px;
   width: 100%;
-  height: 50px;
+  height: 80px;
   transition: padding 0.2s;
 }
 
 .App .controller .search .inner {
   position: relative;
   box-sizing: border-box;
-  border-radius: 25px;
+  border-radius: 10px;
   padding-right: 50px;
   width: 100%;
-  height: 50px;
+  height: 80px;
 }
 
 .App .controller .search .inner:before {
-  border-radius: 25px;
+  border-radius: 10px;
 }
 
 .App .controller .search input[type="text"] {
   position: relative;
   border: none;
   box-sizing: border-box;
-  border-radius: 25px;
+  border-radius: 10px;
   padding: 0 10px 0 20px;
   width: 100%;
-  height: 50px;
-  font-size: 15px;
-  font-weight: bold;
+  height: 80px;
+  font-size: 20px;
   background-color: #f1f5f7;
   transition: border-radius 0.2s;
   outline: none;
@@ -188,10 +177,10 @@ body {
   right: 0;
   border: none;
   border-left: none;
-  border-radius: 25px;
-  width: 50px;
-  height: 50px;
-  font-size: 18px;
+  border-radius: 0 10px 10px 0;
+  width: 80px;
+  height: 80px;
+  font-size: 30px;
   outline: none;
   transition: border-radius 0.2s;
   background: linear-gradient( 45deg, #7fcde3, #6585f1 );
@@ -215,35 +204,35 @@ body {
 
 .App .place-list .basic {
   position: relative;
-  padding: 15px 75px 25px 10px;
+  padding: 30px 100px 30px 10px;
   cursor: pointer;
 }
 
 .App .place-list .basic .tag > span {
   margin-right: 4px;
-  border-radius: 2px;
-  padding: 3px 5px;
-  font-size: 11px;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 13px;
   background-color: #7fcde3;
   color: #fff;
 }
 
 .App .place-list .basic .name {
   margin-top: 10px;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: 800;
 }
 
 .App .place-list .basic .url {
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: 10px;
   z-index: 10;
-  border-radius: 2px;
-  width: 25px;
-  height: 25px;
-  line-height: 28px;
-  font-size: 17px;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  line-height: 45px;
+  font-size: 25px;
   text-align: center;
   text-decoration: none;
   background-color: #999;
@@ -252,13 +241,13 @@ body {
 
 .App .place-list .basic .phone {
   position: absolute;
-  top: 15px;
-  right: 40px;
-  border-radius: 2px;
-  width: 25px;
-  height: 25px;
-  line-height: 28px;
-  font-size: 17px;
+  top: 10px;
+  right: 55px;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  line-height: 45px;
+  font-size: 25px;
   text-align: center;
   text-decoration: none;
   background-color: #7fcde3;
@@ -267,25 +256,13 @@ body {
 
 .App .place-list .basic .btn-save {
   position: absolute;
-  top: 45px;
+  top: 55px;
   right: 10px;
   border: none;
-  border-radius: 2px;
-  width: 55px;
-  height: 25px;
-  background: #6585f1;
-  outline: none;
-  color: #fff;
-}
-
-.App .place-list .basic .btn-detail {
-  position: absolute;
-  top: 45px;
-  right: 10px;
-  border: none;
-  border-radius: 2px;
-  width: 55px;
-  height: 25px;
+  border-radius: 3px;
+  width: 85px;
+  height: 55px;
+  font-size: 25px;
   background: #6585f1;
   outline: none;
   color: #fff;
@@ -319,7 +296,7 @@ body {
   display: inline-block;
   vertical-align:top;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 3px;
   margin-left: 2px;
   width: 300px;
   height: 200px;
@@ -336,19 +313,14 @@ body {
 
 .App .place-list .detail .introduction {
   margin-top: 10px;
-  font-weight: bold;
 }
 
 .App .place-list .detail .adress {
-  margin-top: 5px;
-}
-
-.App .place-list .detail .time {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .App .place-list .detail .time > span {
-  margin-right: 2px;
+  margin-right: 10px;
 }
 
 .App .place-list .detail .time > span:nth-child(3) {
@@ -361,25 +333,25 @@ body {
 .App .place-list .detail .score {
   position: relative;
   margin-top: 20px;
-  width: 120px;
+  width: 150px;
 }
 
 .App .place-list .detail .score .result {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 800;
 }
 
 .App .place-list .detail .score .people {
-  font-size: 11px;
+  font-size: 13px;
   color: #666;
 }
 
 .App .place-list .detail .frame {
   display: inline-block;
   position: relative;
-  margin-top: 5px;
+  margin-top: 10px;
   width: 100%;
-  height: 20px;
+  height: 30px;
   border-radius: 20px;
   background-color: #f1f5f7;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2) inset;
@@ -390,7 +362,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 20px;
+  height: 30px;
   border-radius: 20px;
   background: linear-gradient( 45deg, #7fcde3, #6585f1 );
 }
@@ -400,8 +372,8 @@ body {
 }
 
 .App .place-list .detail .menu .title {
-  margin-top: 20px;
-  font-size: 18px;
+  margin: 20px 0 10px;
+  font-size: 25px;
   font-weight: 800;
 }
 
@@ -446,19 +418,20 @@ body {
 }
 
 .App .place-list .detail .review .title {
-  padding: 10px 0;
-  font-size: 20px;
+  margin-bottom: 10px;
+  font-size: 25px;
   font-weight: 800;
 }
 
 .App .place-list .detail .review .item {
   border-top: 2px solid #e8edf0;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
 .App .place-list .detail .review .info {
   position: relative;
-  font-weight: 600;
+  padding-right: 60px;
+  font-weight: 800;
 }
 
 .App .place-list .detail .review .info span {
@@ -493,10 +466,13 @@ body {
   top: 0;
   right: 0;
   border: none;
-  border-radius: 2px;
-  font-size: 12px;
+  border-radius: 12.5px;
+  width: 55px;
+  height: 25px;
+  font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
-  background: #999;
+  background: linear-gradient( 45deg, #7fcde3, #6585f1 );
   outline: none;
   color: #fff;
 }
@@ -510,8 +486,8 @@ body {
   -webkit-box-orient: vertical;
   word-wrap:break-word;
   height: auto;
-  line-height: 20px;
-  font-size: 14px;
+  font-size: 18px;
+  line-height: 24px;
 }
 
 .App .place-list .detail .review .text.on {
@@ -524,6 +500,7 @@ body {
   z-index: 30;
   width: 100%;
   max-width: 600px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 .App .map-wrap .map {
@@ -537,11 +514,13 @@ body {
   right: 10px;
   z-index: 10;
   border: 5px solid #f1f5f7;
-  border-radius: 20px;
-  width: 40px;
-  height: 50px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  width: 60px;
+  height: 80px;
   background: none;
-  font-size: 20px;
+  font-size: 30px;
+  text-align: center;
   outline: none;
   background: linear-gradient( 45deg, #7fcde3, #6585f1 );
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
@@ -551,12 +530,50 @@ body {
 .App .intro {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   z-index: 50;
-  width: 100%;
+  transform: translateX(-50%);
+  width: 600px;
   height: 100%;
-  background-color: #ccc;
+  background-color: #fff;
   transition: opacity 0.5s;
+}
+
+.App .intro:before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0px;
+  height: 0px;
+  border-bottom: 600px solid transparent;
+  border-left: 600px solid #6585f1;
+}
+
+.App .intro:after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0px;
+  height: 0px;
+  border-top: 600px solid transparent;
+  border-right: 600px solid #7fcde3;
+}
+
+.App .intro .title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  line-height: 40px;
+  font-size: 30px;
+  font-weight: 200;
+  letter-spacing: 5px;
+  text-align: center;
 }
 
 .App .manual .info {
@@ -756,8 +773,8 @@ body {
 
 .App .place-save {
   position: relative;
-  border-top: 6px solid #d3dce1;
-  padding: 0 10px 20px;
+  border-top: 10px solid #d3dce1;
+  padding: 0 20px 20px;
 }
 
 .App .absence {
@@ -873,11 +890,11 @@ body {
 .App .place-save .btn-all-delete {
   position: absolute;
   top: 25px;
-  right: 10px;
+  right: 20px;
   border: none;
-  border-radius: 14px;
-  width: 50px;
-  height: 28px;
+  border-radius: 17.5px;
+  width: 80px;
+  height: 35px;
   font-size: 20px;
   background: linear-gradient( 45deg, #7fcde3, #6585f1 );
   outline: none;
