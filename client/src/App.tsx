@@ -48,7 +48,7 @@ class App extends Component<Props, State> {
       itemList: [],
       mapSize: 200,
       savePlaceData: savePlaceData,
-      result: '',
+      result: "",
     };
   }
 
@@ -121,7 +121,6 @@ class App extends Component<Props, State> {
 
   // 키워드 검색 완료 시 호출되는 콜백함수
   placesSearchCB = (data: any, status: any, pagination: any) => {
-
     let itemList: any = [];
 
     // 마커를 생성하고 지도에 표시
@@ -219,8 +218,8 @@ class App extends Component<Props, State> {
 
     // 검색 값 세팅
     this.setState({
-      result: keyword
-    })
+      result: keyword,
+    });
   };
 
   // 직접 입력으로 장소를 검색
@@ -232,8 +231,8 @@ class App extends Component<Props, State> {
 
     // 검색 값 세팅
     this.setState({
-      result: data
-    })
+      result: data,
+    });
   };
 
   // 맵 높이 변경
@@ -274,7 +273,7 @@ class App extends Component<Props, State> {
     this.setState({
       savePlaceData: savePlaceData,
     });
-  }
+  };
 
   // 현재 날짜 구하기
   getToday = (data: any) => {
@@ -353,12 +352,7 @@ class App extends Component<Props, State> {
           paddingTop: this.state.mapSize,
         }}
       >
-        {/* <MyPlaceIntro /> */}
-        {/* <MyPlaceSort
-          itemList={this.state.itemList}
-          setAlphabeticalSort={this.setAlphabeticalSort}
-          setScoreSort={this.setScoreSort}
-        /> */}
+        <MyPlaceIntro />
         <MyPlaceManual />
         <div className="map-wrap" style={{ height: this.state.mapSize }}>
           <div
@@ -384,7 +378,11 @@ class App extends Component<Props, State> {
           selectMarker={this.selectMarker}
           setSavePlace={this.setSavePlace}
         />
-        <div className="copy"></div>
+        {/* <MyPlaceSort
+          itemList={this.state.itemList}
+          setAlphabeticalSort={this.setAlphabeticalSort}
+          setScoreSort={this.setScoreSort}
+        /> */}
       </div>
     );
   }
