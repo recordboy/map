@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 
 const MyPlaceResize = (props: { setMapResize: (height: number) => void }) => {
   const { setMapResize } = props;
-  const [resize, setResize] = useState(75);
+  const [resize, setResize] = useState(70);
   const touchMove = (screenY: number) => {
     screenY = Math.floor(screenY);
     setMapResize(screenY * 2);
-    setResize(screenY - 25);
+    setResize(screenY - 40);
   };
   let btnResize: any;
 
