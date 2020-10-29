@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
   const MyPlaceIntro = () => {
   const [introType, setIntroType] = useState('show');
   const hideIntro = (): void => {
     setTimeout(() => {
       setIntroType('opacity');
-    }, 2000);
+    }, 1000);
     setTimeout(() => {
       setIntroType('none');
-    }, 2500);
+    }, 1500);
   };
 
-  hideIntro();
+  useEffect(() => {
+    hideIntro();
+  }, []);
 
   return (
     <div
@@ -20,7 +22,9 @@ import React, { useState } from "react";
         opacity: introType === "opacity" ? 0 : 1,
         display: introType === "none" ? "none" : "block",
       }}
-    ></div>
+    >
+      <div className="title">플레이스를<br />찾아보세요</div>
+    </div>
   );
 };
 
