@@ -127,7 +127,7 @@ const MyPlaceSearch = (props: {
         <div className="depth01">
           <div
             className="inner"
-            style={{ width: searchList.length * 110 + "px" }}
+            style={{ width: searchList.length * 140 + "px" }}
           >
             {searchList.map((item: any, idx: number) => {
               return (
