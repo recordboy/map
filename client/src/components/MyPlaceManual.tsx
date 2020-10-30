@@ -32,7 +32,6 @@ const MyPlaceManual = (props: {
         className="info"
         style={!isOnManual ? { display: "none" } : { display: "block" }}
       >
-        <div className="test"></div>
         <div className="balloon type01">
           드래그하여 지도 크기를<br />변경할 수 있어요!
           <div className="border">
