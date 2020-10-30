@@ -121,14 +121,14 @@ class App extends Component<Props, State> {
       const locPosition: any = new window.kakao.maps.LatLng(
           latitude,
           longitude
-        ),
-        message = `<div style="box-sizing: border-box; padding: 10px; width: 150px; text-align: center;">멋찐나!</div>`;
+        );
+      const message: string = '<div style="box-sizing: border-box; padding: 10px; width: 150px; text-align: center;">멋찐나!</div>';
       that.displayLocationMarker(locPosition, message);
     });
   };
 
   // 지도에 마커와 인포윈도우를 표시하는 함수
-  displayLocationMarker(locPosition: any, message: any) {
+  displayLocationMarker(locPosition: any, message: string) {
     // 마커 이미지 설정
     const imageSrc: string = "ico-address.png",
       imageSize: any = new window.kakao.maps.Size(24, 30);
@@ -146,13 +146,13 @@ class App extends Component<Props, State> {
       iwRemoveable = true;
 
     // 인포윈도우 생성
-    const infowindow: any = new window.kakao.maps.InfoWindow({
-      content: iwContent,
-      removable: iwRemoveable,
-    });
+    // const infowindow: any = new window.kakao.maps.InfoWindow({
+    //   content: iwContent,
+    //   removable: iwRemoveable,
+    // });
 
     // 인포윈도우를 마커위에 표시
-    infowindow.open(map, marker);
+    // infowindow.open(map, marker);
 
     // 지도 중심좌표를 접속위치로 변경
     map.setCenter(locPosition);
