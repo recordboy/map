@@ -31,7 +31,7 @@ const MyPlaceSave = (props: {
         <div className="inner">
           <div
             className="list"
-            style={{ width: savePlaceData.length * 180 + 5 + "px" }}
+            style={{ width: (savePlaceData.length * 260) + 15 + "px" }}
           >
             {savePlaceData.map((item: any, idx: number) => {
               return (
