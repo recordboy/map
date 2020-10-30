@@ -5,6 +5,7 @@ import MyPlaceResize from "./components/MyPlaceResize";
 import MyPlaceIntro from "./components/MyPlaceIntro";
 import MyPlaceManual from "./components/MyPlaceManual";
 import MyPlaceSave from "./components/MyPlaceSave";
+import MyPlaceAgree from "./components/MyPlaceAgree";
 import MyPlaceSort from "./components/MyPlaceSort";
 import "./App.css";
 
@@ -59,7 +60,7 @@ class App extends Component<Props, State> {
   }
 
   componentDidMount(): void {
-    this.setLocation((latitude: number, longitude: number) => {
+    this.setLocationInit((latitude: number, longitude: number) => {
       const options = {
         center: new window.kakao.maps.LatLng(latitude, longitude),
         level: 4,
@@ -100,16 +101,62 @@ class App extends Component<Props, State> {
     });
   }
 
-  // 현재 위치 좌표 세팅
-  setLocation = (callBack: any): void => {
-    const varUA: any = navigator.userAgent.toLowerCase();
+  // 첫 지도 서울역 좌표 세팅
+  setLocationInit = (callBack: any): void => {
+    latitude = 37.554071;
+    longitude = 126.96961;
+    callBack(37.554071, 126.96961);
+  };
 
+  // 현재 위치 좌표 세팅
+  setLocation = (): void => {
+    const that: any = this;
     navigator.geolocation.getCurrentPosition(function (pos) {
       latitude = pos.coords.latitude;
       longitude = pos.coords.longitude;
-      callBack(latitude, longitude);
+
+      const markerStyle: {} = {
+        padding: "10px",
+      };
+      const locPosition: any = new window.kakao.maps.LatLng(
+          latitude,
+          longitude
+        ),
+        message = `<div style="box-sizing: border-box; padding: 10px; width: 150px; text-align: center;">멋찐나!</div>`;
+      that.displayLocationMarker(locPosition, message);
     });
   };
+
+  // 지도에 마커와 인포윈도우를 표시하는 함수
+  displayLocationMarker(locPosition: any, message: any) {
+    // 마커 이미지 설정
+    const imageSrc: string = "ico-address.png",
+      imageSize: any = new window.kakao.maps.Size(24, 30);
+    const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
+
+    // 마커를 생성하고 지도에 표시
+    const marker = new window.kakao.maps.Marker({
+      map: map,
+      position: locPosition,
+      image: markerImage,
+    });
+
+    // 마커 생성
+    const iwContent: any = message, // 인포윈도우에 표시할 내용
+      iwRemoveable = true;
+
+    // 인포윈도우 생성
+    const infowindow: any = new window.kakao.maps.InfoWindow({
+      content: iwContent,
+      removable: iwRemoveable,
+    });
+
+    // 인포윈도우를 마커위에 표시
+    infowindow.open(map, marker);
+
+    // 지도 중심좌표를 접속위치로 변경
+    map.setCenter(locPosition);
+  }
 
   // 좌표로 주소 정보 요청
   searchAddrFromCoords = (coords: any, callback: any) => {
@@ -307,7 +354,7 @@ class App extends Component<Props, State> {
 
   setManualFixed = (res: string) => {
     this.setState({
-      isManualFixed: res
+      isManualFixed: res,
     });
   };
 
@@ -358,6 +405,7 @@ class App extends Component<Props, State> {
         }}
       >
         <MyPlaceIntro />
+        <MyPlaceAgree setLocation={this.setLocation} />
         <MyPlaceManual setManualFixed={this.setManualFixed} />
         <div className="map-wrap" style={{ height: this.state.mapSize }}>
           <div
