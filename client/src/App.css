@@ -532,7 +532,7 @@ body {
   position: fixed;
   top: 0;
   left: 50%;
-  z-index: 50;
+  z-index: 60;
   transform: translateX(-50%);
   width: 600px;
   height: 100%;
@@ -543,7 +543,7 @@ body {
 .App .intro:before {
   content: '';
   position: absolute;
-  top: -25%;
+  top: -20%;
   left: 50%;
   transform: translateX(-50%);
   width: 0px;
@@ -555,13 +555,23 @@ body {
 .App .intro:after {
   content: '';
   position: absolute;
-  bottom: -25%;
+  bottom: -20%;
   left: 50%;
   transform: translateX(-50%);
   width: 0px;
   height: 0px;
   border-top: 600px solid transparent;
   border-right: 600px solid #7fcde3;
+}
+
+.App .intro.step01:before {
+  top: -70%;
+  transition: top 0.5s;
+}
+
+.App .intro.step01:after {
+  bottom: -70%;
+  transition: bottom 0.5s;
 }
 
 .App .intro .title {
@@ -575,6 +585,55 @@ body {
   font-weight: 200;
   letter-spacing: 5px;
   text-align: center;
+}
+
+.App .agree {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 50;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 100%;
+  text-align: center;
+  background-color: #fff;
+  transition: opacity 0.5s;
+}
+
+.App .agree .info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.App .agree .info img {
+  width: 100px;
+}
+
+.App .agree .info .text {
+  overflow: hidden;
+  margin-top: 20px;
+  height: 0;
+  line-height: 28px;
+  transition: height 0.5s, opacity 0.5s;
+}
+
+.App .agree .info button {
+  overflow: hidden;
+  margin-top: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;;
+  width: 100px;
+  height: 0;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient( 45deg, #7fcde3, #6585f1 );
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: height 0.5s, opacity 0.5s;
+  outline: none;
+  color: #fff;
 }
 
 .App .manual .info {
