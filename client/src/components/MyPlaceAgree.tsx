@@ -60,4 +60,3 @@ const MyPlaceAgree = (props: {
 };
 
 export default MyPlaceAgree;
-MyPlaceAgree
