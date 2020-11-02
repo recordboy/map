@@ -868,7 +868,7 @@ body {
   box-sizing: border-box;
   padding: 15px;
   width: 250px;
-  height: 250px;
+  height: 200px;
 }
 
 .App .place-save .list > div:before {
@@ -878,7 +878,7 @@ body {
 .App .place-save .list .date {
   position: absolute;
   bottom: 10px;
-  font-size: 11px;
+  font-size: 13px;
   color: #999;
 }
 
@@ -933,9 +933,9 @@ body {
   right: 10px;
   border: none;
   border-radius: 5px;
-  width: 25px;
-  height: 25px;
-  font-size: 15px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
   background: linear-gradient( 45deg, #7fcde3, #6585f1 );
   outline: none;
   color: #fff;
