@@ -10,7 +10,7 @@ $ npm init -y
 $ npm install express nodemon cors node-fetch
 ```
 
-`index.js`폴더 생성 후 아래 내용 입력, 추후 수정 예정
+`index.js`폴더 생성 후 아래 코드 입력
 ```javascript
 const express = require('express');
 const path = require('path');
